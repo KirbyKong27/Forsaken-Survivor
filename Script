@@ -1,0 +1,3043 @@
+local ps = game:GetService("Players")
+local rs = game:GetService("RunService")
+local ds = game:GetService("Debris")
+local uis = game:GetService("UserInputService")
+local cp = game:GetService("ContentProvider")
+local ts = game:GetService("TweenService")
+local lp = ps.LocalPlayer
+local mouse = lp:GetMouse()
+local camera = workspace.CurrentCamera
+local ins = Instance.new
+local c3 = Color3.fromRGB
+local ud2 = UDim2.new
+local v2 = Vector2.new
+local v3 = Vector3.new
+if getgenv().forsakenthingyguys then return end
+getgenv().forsakenthingyguys = true
+
+-- ============================================================
+-- IDS TABLE – All animation IDs
+-- ============================================================
+local IDS = {
+	P_ID = "rbxassetid://80057445812313",
+	B_ID = "rbxassetid://105310177683245",
+	I_ID = "rbxassetid://98946450554814",
+	W_ID = "rbxassetid://119545916455209",
+	R_ID = "rbxassetid://108891884872744",
+	SL_ID = "rbxassetid://127436401745505",
+	E1_ID = "rbxassetid://76389296606994",
+	C_ID = "rbxassetid://126452924444711",
+	H_ID = "rbxassetid://74100161379681",
+	BU_ID = "rbxassetid://88570432473654",
+	MM_ID = "rbxassetid://93998638971828",
+	S3_ID = "rbxassetid://111993447655346",
+	CD_ID = "rbxassetid://102908521825429",
+	UN_ID = "rbxassetid://87033513223989",
+	DP_ID = "rbxassetid://129385001500617",
+	FACE_IDLE_ID = "rbxassetid://85031905464128",
+	FACE_EMOTE_ID = "rbxassetid://110732234823197",
+	CONGA_VAR1_ID = "rbxassetid://117506341081827",
+	CONGA_VAR2_ID = "rbxassetid://110955034311554",
+	CONGA_VAR3_ID = "rbxassetid://92873771577479",
+	SCHADEN_VAR1_ID = "rbxassetid://77737003924429",
+	SCHADEN_VAR2_ID = "rbxassetid://98252592747900",
+	SCHADEN_VAR3_ID = "rbxassetid://114126194173005",
+	SCHADEN_VAR4_ID = "rbxassetid://135922494842143",
+	JUNKY_DANCE_ID = "rbxassetid://86814544467194",
+	SO_RETRO_ID = "rbxassetid://104134515632649",
+	JERSEY_CLUB_ID = "rbxassetid://74594994292329",
+	SMUG_DANCE_ID = "rbxassetid://121934635382614",
+	ASSUMPTIONS_ID = "rbxassetid://113285790404555",
+	GRIZZLY_ID = "rbxassetid://107009143041355",
+	ANGELS_ID = "rbxassetid://99893613768286",
+	JACKPOT_ID = "rbxassetid://85510114879662",
+	CLOWN_DANCE_ID = "rbxassetid://138755180984581",
+	BLUE_SHIRT_STURDY_ID = "rbxassetid://76892786020048",
+	GANGNAM_STYLE_ID = "rbxassetid://98271205150099",
+	STURDY_ID = "rbxassetid://119641433612039",
+	AVGN_ID = "rbxassetid://73556554187770",
+	TOMODACHI_ID = "rbxassetid://86377688970477",
+	BOUNCE_DANCE_ID = "rbxassetid://111272262660539",
+	SHOWADO_ID = "rbxassetid://118305787208808",
+	CRYBALL_ID = "rbxassetid://132365556028541",
+	BANG_ID = "rbxassetid://87267348984534",
+	SCUBA_CAT_ID = "rbxassetid://80954025062546",
+	SPRINGTRAP_STURDY_ID = "rbxassetid://117503161941626",
+	INVINCIBLE_WOBBLE_ID = "rbxassetid://111808196256227",
+	PARTY_ROCK_ID = "rbxassetid://134459607456762",
+	CATGIRL_SIT_ID = "rbxassetid://89546868891758",
+	DANCING_WITH_EYES_CLOSED_ID = "rbxassetid://117991470645633",
+	HOPPIN_DIP_ID = "rbxassetid://83245110677797",
+	ALTER_EGO_ID = "rbxassetid://79384504031917",
+	WEARY_IDLE_ID = "rbxassetid://138324109649352",
+	JOG_ID = "rbxassetid://107994680200921",
+	GOOFY_ZOMBIE_ID = "rbxassetid://137251912093279",
+	WANNA_RUN_AWAY_ID = "rbxassetid://78510387198062",
+	OFFICER_EARL_ID = "rbxassetid://111126630007706",
+	TOOL_HOLD_ID = "rbxassetid://71856582851880",
+	REIMAGINED_IDLE_ID = "rbxassetid://138612360383511",
+	REIMAGINED_IDLE_VARIANT_ID = "rbxassetid://115638346642485",
+	REIMAGINED_WALK_ID = "rbxassetid://123533380863569",
+	REIMAGINED_RUN_ID = "rbxassetid://86653054358427",
+	CRAFTER_IDLE_ID = "rbxassetid://105514975554898",
+	CRAFTER_IDLE_VARIANT_ID = "rbxassetid://80873549026270",
+	CRAFTER_WALK_ID = "rbxassetid://82574126079642",
+	CRAFTER_RUN_ID = "rbxassetid://86028285109536",
+	SUSPICIOUS_IDLE_ID = "rbxassetid://73864652331450",
+	SUSPICIOUS_WALK_ID = "rbxassetid://72634644571992",
+	SUSPICIOUS_RUN_ID = "rbxassetid://80458837955374",
+	WHIMSY_IDLE_ID = "rbxassetid://120879126406241",
+	WHIMSY_IDLE_VARIANT_ID = "rbxassetid://90962592517596",
+	WHIMSY_WALK_ID = "rbxassetid://138468792534506",
+	WHIMSY_RUN_ID = "rbxassetid://94292858675799",
+	GARRY_IDLE_ID = "rbxassetid://116046577798344",
+	GARRY_IDLE_VARIANT_ID = "rbxassetid://75188008607623",
+	GARRY_WALK_ID = "rbxassetid://82277066511717",
+	GARRY_RUN_ID = "rbxassetid://132229099889671",
+	HALFLIFE_IDLE_ID = "rbxassetid://90722196582210",
+	HALFLIFE_IDLE_VARIANT_ID = "rbxassetid://128979790139496",
+	HALFLIFE_WALK_ID = "rbxassetid://77287055152482",
+	HALFLIFE_RUN_ID = "rbxassetid://102475592786769",
+	INVINCIBLE_IDLE_ID = "rbxassetid://109173169241795",
+	INVINCIBLE_IDLE_VARIANT_ID = "rbxassetid://87543964349991",
+	INVINCIBLE_WALK_ID = "rbxassetid://86663764744230",
+	INVINCIBLE_RUN_ID = "rbxassetid://99088298968820",
+	HONORED_IDLE_ID = "rbxassetid://132972132384031",
+	HONORED_IDLE_VARIANT_ID = "rbxassetid://126614275663887",
+	HONORED_WALK_ID = "rbxassetid://110581890588888",
+	HONORED_RUN_ID = "rbxassetid://125582828675515",
+	DJ_IDLE_ID = "rbxassetid://81493189609541",
+	DJ_IDLE_VARIANT_ID = "rbxassetid://71569970978771",
+	DJ_WALK_ID = "rbxassetid://139685260280568",
+	DJ_RUN_ID = "rbxassetid://110155211587083",
+	I_CAME_TO_GROOVE_ID = "rbxassetid://122707447789732",
+	SELF_PACED_ID = "rbxassetid://76168776374710",
+	MISS_ME_ID = "rbxassetid://80297412981245",
+	ONEYPLAYZ_ID = "rbxassetid://104693685027668",
+	YUTA_JUMPING_ID = "rbxassetid://105576523362700",
+	DEAD_MAN_STANDING_ID = "rbxassetid://94299283574571",
+	SIXTYFOUR_IDLE_ID = "rbxassetid://127032691162714",
+	SIXTYFOUR_IDLE_VARIANT_ID = "rbxassetid://98251522244132",
+	SIXTYFOUR_WALK_ID = "rbxassetid://88830965315353",
+	SIXTYFOUR_RUN_ID = "rbxassetid://129706643244921",
+	MODERNR6_IDLE_ID = "rbxassetid://101793141637116",
+	MODERNR6_IDLE_VARIANT_ID = "rbxassetid://125921160688941",
+	MODERNR6_WALK_ID = "rbxassetid://77528393221674",
+	MODERNR6_RUN_ID = "rbxassetid://86891955109302",
+	-- A-Pose Pack
+	APOSE_IDLE_ID = "rbxassetid://77491435683874",
+	APOSE_WALK_ID = "rbxassetid://124290108275158",
+	APOSE_RUN_ID = "rbxassetid://130290582963053",
+	-- R6-Advanced Pack
+	R6ADV_IDLE_ID = "rbxassetid://74283632231178",
+	R6ADV_IDLE_VARIANT_ID = "rbxassetid://119346075006114",
+	R6ADV_WALK_ID = "rbxassetid://76500598086794",
+	R6ADV_RUN_ID = "rbxassetid://79712477752764",
+	-- Tomodachi Alternative Pack
+	TOMODACHI_ALT_IDLE_ID = "rbxassetid://115679903167989",
+	TOMODACHI_ALT_IDLE_VARIANT_ID = "rbxassetid://93257653065353",
+	TOMODACHI_ALT_WALK_ID = "rbxassetid://73581349432506",
+	TOMODACHI_ALT_RUN_ID = "rbxassetid://105822713022374",
+	-- R6-Casual Pack
+	R6CASUAL_IDLE_ID = "rbxassetid://128910326086540",
+	R6CASUAL_IDLE_VARIANT_ID = "rbxassetid://136046163443702",
+	R6CASUAL_WALK_ID = "rbxassetid://76185822358642",
+	R6CASUAL_RUN_ID = "rbxassetid://84024147460900",
+	-- R6-Skipping Pack
+	R6SKIP_IDLE_ID = "rbxassetid://119516580072499",
+	R6SKIP_IDLE_VARIANT_ID = "rbxassetid://125496524928557",
+	R6SKIP_WALK_ID = "rbxassetid://79077799112295",
+	R6SKIP_RUN_ID = "rbxassetid://124830189264786",
+	-- R6-Kawai Pack
+	R6KAWAI_IDLE_ID = "rbxassetid://93684974089363",
+	R6KAWAI_IDLE_VARIANT_ID = "rbxassetid://126327589905721",
+	R6KAWAI_WALK_ID = "rbxassetid://134463434564992",
+	R6KAWAI_RUN_ID = "rbxassetid://108804196808089",
+	-- Civilian Pack
+	CIVILIAN_IDLE_ID = "rbxassetid://132410479050044",
+	CIVILIAN_IDLE_VARIANT_ID = "rbxassetid://139343341576322",
+	CIVILIAN_WALK_ID = "rbxassetid://109732897450318",
+	CIVILIAN_RUN_ID = "rbxassetid://82282200719741",
+	-- Gakuran Pack
+	GAKURAN_IDLE_ID = "rbxassetid://126729600538697",
+	GAKURAN_WALK_ID = "rbxassetid://84286431416863",
+	GAKURAN_RUN_ID = "rbxassetid://117024089293360",
+	-- TSB Pack
+	TSB_IDLE_ID = "rbxassetid://120981820197951",
+	TSB_WALK_ID = "rbxassetid://88476555270937",
+	TSB_RUN_ID = "rbxassetid://115262747964134",
+	-- Neutral Pack
+	NEUTRAL_IDLE_ID = "rbxassetid://134153668148454",
+	NEUTRAL_WALK_ID = "rbxassetid://118489787648873",
+	NEUTRAL_RUN_ID = "rbxassetid://109492899924947",
+	-- Dyna Pack
+	DYNA_IDLE_ID = "rbxassetid://109134950565365",
+	DYNA_IDLE_VARIANT_ID = "rbxassetid://139153670051528",
+	DYNA_WALK_ID = "rbxassetid://106287128480945",
+	DYNA_RUN_ID = "rbxassetid://125909668041520",
+	-- Noli Pack
+	NOLI_IDLE_ID = "rbxassetid://124860156114154",
+	NOLI_WALK_ID = "rbxassetid://106597026533246",
+	NOLI_RUN_ID = "rbxassetid://133382376250913",
+	-- 1x1x1x1 Pack
+	ONEX_IDLE_ID = "rbxassetid://103287865868698",
+	ONEX_WALK_ID = "rbxassetid://133439842309557",
+	ONEX_RUN_ID = "rbxassetid://87237043107505",
+	-- John Doe Pack
+	JOHNDOE_IDLE_ID = "rbxassetid://89979788176345",
+	JOHNDOE_WALK_ID = "rbxassetid://132258735583786",
+	JOHNDOE_RUN_ID = "rbxassetid://120189095601521",
+	-- Blue Blur Pack
+	BLUE_BLUR_IDLE_ID = "rbxassetid://137888559242342",
+	BLUE_BLUR_IDLE_VARIANT_ID = "rbxassetid://138572111742301",
+	BLUE_BLUR_WALK_ID = "rbxassetid://76230232889477",
+	BLUE_BLUR_RUN_ID = "rbxassetid://136286582256431",
+	-- Ultimate Life Form Pack
+	ULTIMATE_LIFE_FORM_IDLE_ID = "rbxassetid://105489916610475",
+	ULTIMATE_LIFE_FORM_IDLE_VARIANT_ID = "rbxassetid://137216043101721",
+	ULTIMATE_LIFE_FORM_WALK_ID = "rbxassetid://89867380686499",
+	ULTIMATE_LIFE_FORM_RUN_ID = "rbxassetid://135577109534379",
+	-- Super Sonic Pack
+	SUPER_SONIC_IDLE_ID = "rbxassetid://115431596215570",
+	SUPER_SONIC_IDLE_VARIANT_ID = "rbxassetid://109944951285018",
+	SUPER_SONIC_WALK_ID = "rbxassetid://76418754856166",
+	SUPER_SONIC_RUN_ID = "rbxassetid://120204714374022",
+	-- HedgeHog Pack
+	HEDGEHOG_IDLE_ID = "rbxassetid://139700208490626",
+	HEDGEHOG_IDLE_VARIANT_ID = "rbxassetid://117683970206530",
+	HEDGEHOG_WALK_ID = "rbxassetid://100773859228466",
+	HEDGEHOG_RUN_ID = "rbxassetid://78591897129495",
+	-- Realistic Male Pack
+	REALISTIC_MALE_IDLE_ID = "rbxassetid://128667162266929",
+	REALISTIC_MALE_IDLE_VARIANT_ID = "rbxassetid://124366149420254",
+	REALISTIC_MALE_WALK_ID = "rbxassetid://71715888050370",
+	REALISTIC_MALE_RUN_ID = "rbxassetid://125200286119976",
+	-- Realistic Female Pack
+	REALISTIC_FEMALE_IDLE_ID = "rbxassetid://95516227298535",
+	REALISTIC_FEMALE_IDLE_VARIANT_ID = "rbxassetid://122947249061829",
+	REALISTIC_FEMALE_WALK_ID = "rbxassetid://89162942305639",
+	REALISTIC_FEMALE_RUN_ID = "rbxassetid://122425131640709",
+	-- ShowOff Pack
+	SHOWOFF_IDLE_ID = "rbxassetid://96231620144931",
+	SHOWOFF_IDLE_VARIANT_ID = "rbxassetid://137095651055704",
+	SHOWOFF_WALK_ID = "rbxassetid://135735852965773",
+	SHOWOFF_RUN_ID = "rbxassetid://112510703419020",
+	-- Retro Pack
+	RETRO_IDLE_ID = "rbxassetid://91929470847088",
+	RETRO_IDLE_VARIANT_ID = "rbxassetid://133779289795398",
+	RETRO_WALK_ID = "rbxassetid://108215772754261",
+	RETRO_RUN_ID = "rbxassetid://139330487152019",
+	-- Ninja Pack (FIXED - swapped idle and idle variant)
+	NINJA_IDLE_ID = "rbxassetid://137099582859676",
+	NINJA_IDLE_VARIANT_ID = "rbxassetid://86295150787554",
+	NINJA_WALK_ID = "rbxassetid://110275663504820",
+	NINJA_RUN_ID = "rbxassetid://88468384129203",
+	-- Survivor Pack
+	SURVIVOR_IDLE_ID = "rbxassetid://76668955826653",
+	SURVIVOR_IDLE_VARIANT_ID = "rbxassetid://103608205797687",
+	SURVIVOR_WALK_ID = "rbxassetid://121737235176124",
+	SURVIVOR_RUN_ID = "rbxassetid://103091973161069",
+	-- Injured Animation Sets
+	INJURED_DEFAULT_IDLE_ID = "rbxassetid://86868181947908",
+	INJURED_DEFAULT_WALK_ID = "rbxassetid://130536500105872",
+	INJURED_DEFAULT_RUN_ID = "rbxassetid://84285879089698",
+	INJURED_DEFAULT2_IDLE_ID = "rbxassetid://114283190713488",
+	INJURED_DEFAULT2_IDLE_VARIANT_ID = "rbxassetid://133914174459829",
+	INJURED_DEFAULT2_WALK_ID = "rbxassetid://84984279653203",
+	INJURED_DEFAULT2_RUN_ID = "rbxassetid://80754539080332",
+	INJURED_DEFAULT3_IDLE_ID = "rbxassetid://102872401490936",
+	INJURED_DEFAULT3_IDLE_VARIANT_ID = "rbxassetid://113716324237332",
+	INJURED_DEFAULT3_WALK_ID = "rbxassetid://86616133821473",
+	INJURED_DEFAULT3_RUN_ID = "rbxassetid://88671719509233",
+	INJURED_DEFAULT4_IDLE_ID = "rbxassetid://138993822616461",
+	INJURED_DEFAULT4_IDLE_VARIANT_ID = "rbxassetid://80414683154479",
+	INJURED_DEFAULT4_WALK_ID = "rbxassetid://116592447518537",
+	INJURED_DEFAULT4_RUN_ID = "rbxassetid://131803659323126",
+	-- New Emotes
+	SQUINGLE_ID = "rbxassetid://137421579830901",
+	ADDENDUM_ID = "rbxassetid://121924019901219",
+	BOOGIE_DOWN_ID = "rbxassetid://105261207855400",
+	NAOYA_PARTY_ID = "rbxassetid://111778103423130",
+	SIT_VAR1_ID = "rbxassetid://124147048813016",
+	SIT_VAR2_ID = "rbxassetid://110267215709658",
+	SIT_VAR3_ID = "rbxassetid://76380058413667",
+	SIT_VAR4_ID = "rbxassetid://125264302028325",
+	SIT_VAR5_ID = "rbxassetid://71928524581848",
+	SIT_VAR6_ID = "rbxassetid://95825103583419",
+	SIT_VAR7_ID = "rbxassetid://135428534495602",
+	WALL_LEAN_VAR1_ID = "rbxassetid://106394178681320",
+	WALL_LEAN_VAR2_ID = "rbxassetid://109023823632297",
+	WALL_LEAN_VAR3_ID = "rbxassetid://136841080936511",
+	WALL_LEAN_VAR4_ID = "rbxassetid://110520509803491",
+	JAMAL_DANCE_ID = "rbxassetid://127823207582392",
+	FLARE_ID = "rbxassetid://91414599614401",
+	PBJ_ID = "rbxassetid://115764349136416",
+	BIRDBRAIN_ID = "rbxassetid://123471454475978",
+	WAVE_ID = "rbxassetid://83988109664343",
+	BECKON_ID = "rbxassetid://105788999573245",
+	DAP_UP_ID = "rbxassetid://74839406256285",
+	ORANGE_JUSTICE_ID = "rbxassetid://81292195847151",
+	POP_LOCK_ID = "rbxassetid://109351092282275",
+	MY_WORLD_ID = "rbxassetid://118710904417046",
+	TAKE_THE_L_ID = "rbxassetid://100598839310833",
+	DEFAULT_DANCE_ID = "rbxassetid://107266862552760",
+	SHOWTIME_SWING_ID = "rbxassetid://105825005569685",
+	MEGAPHONE_ID = "rbxassetid://131166373115033",
+	PARKER_PRIDE_ID = "rbxassetid://107943246605367",
+	PRINCE_OF_EGYPT_ID = "rbxassetid://133669151185294",
+	BODY_PHONE_ID = "rbxassetid://73390669780316",
+	CONGA_VAR3_NEW_ID = "rbxassetid://126452924444711",
+	RAMBUNCTIOUS_ID = "rbxassetid://81224135177975",
+	DANCE_IF_YOU_CARRIED_ID = "rbxassetid://85924918188334",
+	NEW_WALK_ID = "rbxassetid://79415540894036",
+	HYPE_ID = "rbxassetid://72075855775185",
+	LUXE_STEP_ID = "rbxassetid://72458847650460",
+	HYPNOTIC_DATA_ID = "rbxassetid://129050048487058",
+	WORM_ID = "rbxassetid://89593072932752",
+	ELECTRO_SHUFFLE_ID = "rbxassetid://115722479400858",
+	BILLY_BOUNCE_ID = "rbxassetid://128807957040123",
+	TUFF_DANCE_ID = "rbxassetid://102327672016629",
+	HEEL_HOP_ID = "rbxassetid://100416508747167",
+	SPLIT_DANCE_ID = "rbxassetid://134222816689544",
+	BASKETBALL_HEAD_ID = "rbxassetid://138243322520289",
+	POPULAR_VIBE_ID = "rbxassetid://93062298566806",
+	PEACE_SIGN_ID = "rbxassetid://115262232732736",
+	CAR_VAR1_ID = "rbxassetid://72382226286301",
+	CAR_VAR2_ID = "rbxassetid://76503595759461",
+	CAR_VAR3_ID = "rbxassetid://76961871758278",
+	CAR_VAR4_ID = "rbxassetid://89256675888646",
+	CAR_VAR5_ID = "rbxassetid://95123756079525",
+	POSE_VAR1_ID = "rbxassetid://93810591156861",
+	POSE_VAR2_ID = "rbxassetid://93106139772346",
+	POSE_VAR3_ID = "rbxassetid://129148098440909",
+	POSE_VAR4_ID = "rbxassetid://107112780597236",
+	POSE_VAR5_ID = "rbxassetid://130276846339108",
+	POSE_VAR6_ID = "rbxassetid://116505117247744",
+	POSE_VAR7_ID = "rbxassetid://93507119848388",
+	POSE_VAR8_ID = "rbxassetid://137985052211397",
+	CRY_ID = "rbxassetid://133541780143791",
+	B_HOP_ID = "rbxassetid://134484705368874",
+	CONFESS_YOUR_LOVE_ID = "rbxassetid://83490449557215",
+	GARRYS_DANCE_ID = "rbxassetid://111555607376454",
+	PHYSCO_TEDDY_ID = "rbxassetid://79508052726697",
+	MANNROBICS_ID = "rbxassetid://99805408085488",
+	BOPPIN_ID = "rbxassetid://118800950867852",
+	DAI_DAI_DAI_ID = "rbxassetid://94718844464478",
+	MELEE_FLOURISH_ID = "rbxassetid://104771812454967",
+	AIM_TEST_ID = "rbxassetid://84470135668108",
+	WAIT_ID = "rbxassetid://105005183316218",
+	FIREBALL_ID = "rbxassetid://102593046003485",
+	FOREIGN_SHUFFLE_ID = "rbxassetid://81217869654335",
+	I_SEE_KAREEM_ID = "rbxassetid://81912794236530",
+	GROOVE_OUT_ID = "rbxassetid://108748954547905",
+	MII_STREET_VAR1_ID = "rbxassetid://138807649249562",
+	MII_STREET_VAR2_ID = "rbxassetid://139287529330820",
+	CORY_DANCE_ID = "rbxassetid://95114672949685",
+	STREET_GUY_FIGHTING_ID = "rbxassetid://133864899504878",
+	SHERBET_LOBBY_ID = "rbxassetid://117518902080633",
+	TV_TIME_VAR1_ID = "rbxassetid://77984841414450",
+	TV_TIME_VAR2_ID = "rbxassetid://115605836623904",
+	PYT_ID = "rbxassetid://108374677470972",
+	MY_LIFE_IS_A_PARTY_ID = "rbxassetid://111475375762344",
+	JUMPSTYLE_ID = "rbxassetid://126588201825176",
+	BUGGIN_ID = "rbxassetid://131507580963734",
+	TORTURE_DANCE_ID = "rbxassetid://100784037937970",
+	GRIDDY_ID = "rbxassetid://89683244530713",
+	LATE_NIGHT_SHUFFLE_ID = "rbxassetid://127744968066540",
+	PIKU_DANCE_ID = "rbxassetid://121530643689363",
+	TRIP_OUT_ID = "rbxassetid://105930925220838",
+	FAZBEAR_DANCE_ID = "rbxassetid://90395099017767",
+	MONITO_RING_ID = "rbxassetid://119818376516492",
+	ITS_LIKE_IM_NOT_HERE_ID = "rbxassetid://130731157770034",
+	IN_HA_MOOD_ID = "rbxassetid://105892486621561",
+	RAT_DANCE_ID = "rbxassetid://79878714311433",
+	FOUR_LOKOS_ID = "rbxassetid://117420775806036",
+	OTSUKARE_SUMMER_ID = "rbxassetid://102662583709770",
+	LETHAL_DANCE_ID = "rbxassetid://114408299255221",
+}
+
+-- ============================================================
+-- PRELOAD LIST
+-- ============================================================
+local ids = {IDS.P_ID, IDS.B_ID, IDS.I_ID, IDS.W_ID, IDS.R_ID, IDS.E1_ID, IDS.C_ID, IDS.H_ID, IDS.BU_ID, IDS.MM_ID, IDS.S3_ID, IDS.CD_ID, IDS.UN_ID, IDS.DP_ID, IDS.FACE_IDLE_ID, IDS.FACE_EMOTE_ID, IDS.CONGA_VAR1_ID, IDS.CONGA_VAR2_ID, IDS.CONGA_VAR3_ID, IDS.SCHADEN_VAR1_ID, IDS.SCHADEN_VAR2_ID, IDS.SCHADEN_VAR3_ID, IDS.SCHADEN_VAR4_ID, IDS.JUNKY_DANCE_ID, IDS.SO_RETRO_ID, IDS.JERSEY_CLUB_ID, IDS.SMUG_DANCE_ID, IDS.ASSUMPTIONS_ID, IDS.GRIZZLY_ID, IDS.ANGELS_ID, IDS.JACKPOT_ID, IDS.CLOWN_DANCE_ID, IDS.BLUE_SHIRT_STURDY_ID, IDS.GANGNAM_STYLE_ID, IDS.STURDY_ID, IDS.AVGN_ID, IDS.TOMODACHI_ID, IDS.BOUNCE_DANCE_ID, IDS.SHOWADO_ID, IDS.CRYBALL_ID, IDS.BANG_ID, IDS.SCUBA_CAT_ID, IDS.SPRINGTRAP_STURDY_ID, IDS.INVINCIBLE_WOBBLE_ID, IDS.PARTY_ROCK_ID, IDS.CATGIRL_SIT_ID, IDS.DANCING_WITH_EYES_CLOSED_ID, IDS.HOPPIN_DIP_ID, IDS.ALTER_EGO_ID, IDS.WEARY_IDLE_ID, IDS.JOG_ID, IDS.GOOFY_ZOMBIE_ID, IDS.WANNA_RUN_AWAY_ID, IDS.OFFICER_EARL_ID, IDS.TOOL_HOLD_ID, IDS.REIMAGINED_IDLE_ID, IDS.REIMAGINED_IDLE_VARIANT_ID, IDS.REIMAGINED_WALK_ID, IDS.REIMAGINED_RUN_ID, IDS.CRAFTER_IDLE_ID, IDS.CRAFTER_IDLE_VARIANT_ID, IDS.CRAFTER_WALK_ID, IDS.CRAFTER_RUN_ID, IDS.SUSPICIOUS_IDLE_ID, IDS.SUSPICIOUS_WALK_ID, IDS.SUSPICIOUS_RUN_ID, IDS.WHIMSY_IDLE_ID, IDS.WHIMSY_IDLE_VARIANT_ID, IDS.WHIMSY_WALK_ID, IDS.WHIMSY_RUN_ID, IDS.GARRY_IDLE_ID, IDS.GARRY_IDLE_VARIANT_ID, IDS.GARRY_WALK_ID, IDS.GARRY_RUN_ID, IDS.HALFLIFE_IDLE_ID, IDS.HALFLIFE_IDLE_VARIANT_ID, IDS.HALFLIFE_WALK_ID, IDS.HALFLIFE_RUN_ID, IDS.INVINCIBLE_IDLE_ID, IDS.INVINCIBLE_IDLE_VARIANT_ID, IDS.INVINCIBLE_WALK_ID, IDS.INVINCIBLE_RUN_ID, IDS.HONORED_IDLE_ID, IDS.HONORED_IDLE_VARIANT_ID, IDS.HONORED_WALK_ID, IDS.HONORED_RUN_ID, IDS.DJ_IDLE_ID, IDS.DJ_IDLE_VARIANT_ID, IDS.DJ_WALK_ID, IDS.DJ_RUN_ID, IDS.I_CAME_TO_GROOVE_ID, IDS.SELF_PACED_ID, IDS.MISS_ME_ID, IDS.ONEYPLAYZ_ID, IDS.YUTA_JUMPING_ID, IDS.DEAD_MAN_STANDING_ID, IDS.SIXTYFOUR_IDLE_ID, IDS.SIXTYFOUR_IDLE_VARIANT_ID, IDS.SIXTYFOUR_WALK_ID, IDS.SIXTYFOUR_RUN_ID, IDS.MODERNR6_IDLE_ID, IDS.MODERNR6_IDLE_VARIANT_ID, IDS.MODERNR6_WALK_ID, IDS.MODERNR6_RUN_ID, IDS.APOSE_IDLE_ID, IDS.APOSE_WALK_ID, IDS.APOSE_RUN_ID, IDS.R6ADV_IDLE_ID, IDS.R6ADV_IDLE_VARIANT_ID, IDS.R6ADV_WALK_ID, IDS.R6ADV_RUN_ID, IDS.TOMODACHI_ALT_IDLE_ID, IDS.TOMODACHI_ALT_IDLE_VARIANT_ID, IDS.TOMODACHI_ALT_WALK_ID, IDS.TOMODACHI_ALT_RUN_ID, IDS.R6CASUAL_IDLE_ID, IDS.R6CASUAL_IDLE_VARIANT_ID, IDS.R6CASUAL_WALK_ID, IDS.R6CASUAL_RUN_ID, IDS.R6SKIP_IDLE_ID, IDS.R6SKIP_IDLE_VARIANT_ID, IDS.R6SKIP_WALK_ID, IDS.R6SKIP_RUN_ID, IDS.R6KAWAI_IDLE_ID, IDS.R6KAWAI_IDLE_VARIANT_ID, IDS.R6KAWAI_WALK_ID, IDS.R6KAWAI_RUN_ID, IDS.CIVILIAN_IDLE_ID, IDS.CIVILIAN_IDLE_VARIANT_ID, IDS.CIVILIAN_WALK_ID, IDS.CIVILIAN_RUN_ID, IDS.GAKURAN_IDLE_ID, IDS.GAKURAN_WALK_ID, IDS.GAKURAN_RUN_ID, IDS.TSB_IDLE_ID, IDS.TSB_WALK_ID, IDS.TSB_RUN_ID, IDS.NEUTRAL_IDLE_ID, IDS.NEUTRAL_WALK_ID, IDS.NEUTRAL_RUN_ID, IDS.DYNA_IDLE_ID, IDS.DYNA_IDLE_VARIANT_ID, IDS.DYNA_WALK_ID, IDS.DYNA_RUN_ID, IDS.NOLI_IDLE_ID, IDS.NOLI_WALK_ID, IDS.NOLI_RUN_ID, IDS.ONEX_IDLE_ID, IDS.ONEX_WALK_ID, IDS.ONEX_RUN_ID, IDS.JOHNDOE_IDLE_ID, IDS.JOHNDOE_WALK_ID, IDS.JOHNDOE_RUN_ID, IDS.BLUE_BLUR_IDLE_ID, IDS.BLUE_BLUR_IDLE_VARIANT_ID, IDS.BLUE_BLUR_WALK_ID, IDS.BLUE_BLUR_RUN_ID, IDS.ULTIMATE_LIFE_FORM_IDLE_ID, IDS.ULTIMATE_LIFE_FORM_IDLE_VARIANT_ID, IDS.ULTIMATE_LIFE_FORM_WALK_ID, IDS.ULTIMATE_LIFE_FORM_RUN_ID, IDS.SUPER_SONIC_IDLE_ID, IDS.SUPER_SONIC_IDLE_VARIANT_ID, IDS.SUPER_SONIC_WALK_ID, IDS.SUPER_SONIC_RUN_ID, IDS.HEDGEHOG_IDLE_ID, IDS.HEDGEHOG_IDLE_VARIANT_ID, IDS.HEDGEHOG_WALK_ID, IDS.HEDGEHOG_RUN_ID, IDS.REALISTIC_MALE_IDLE_ID, IDS.REALISTIC_MALE_IDLE_VARIANT_ID, IDS.REALISTIC_MALE_WALK_ID, IDS.REALISTIC_MALE_RUN_ID, IDS.REALISTIC_FEMALE_IDLE_ID, IDS.REALISTIC_FEMALE_IDLE_VARIANT_ID, IDS.REALISTIC_FEMALE_WALK_ID, IDS.REALISTIC_FEMALE_RUN_ID, IDS.SHOWOFF_IDLE_ID, IDS.SHOWOFF_IDLE_VARIANT_ID, IDS.SHOWOFF_WALK_ID, IDS.SHOWOFF_RUN_ID, IDS.RETRO_IDLE_ID, IDS.RETRO_IDLE_VARIANT_ID, IDS.RETRO_WALK_ID, IDS.RETRO_RUN_ID, IDS.NINJA_IDLE_ID, IDS.NINJA_IDLE_VARIANT_ID, IDS.NINJA_WALK_ID, IDS.NINJA_RUN_ID, IDS.SURVIVOR_IDLE_ID, IDS.SURVIVOR_IDLE_VARIANT_ID, IDS.SURVIVOR_WALK_ID, IDS.SURVIVOR_RUN_ID, IDS.INJURED_DEFAULT_IDLE_ID, IDS.INJURED_DEFAULT_WALK_ID, IDS.INJURED_DEFAULT_RUN_ID, IDS.INJURED_DEFAULT2_IDLE_ID, IDS.INJURED_DEFAULT2_IDLE_VARIANT_ID, IDS.INJURED_DEFAULT2_WALK_ID, IDS.INJURED_DEFAULT2_RUN_ID, IDS.INJURED_DEFAULT3_IDLE_ID, IDS.INJURED_DEFAULT3_IDLE_VARIANT_ID, IDS.INJURED_DEFAULT3_WALK_ID, IDS.INJURED_DEFAULT3_RUN_ID, IDS.INJURED_DEFAULT4_IDLE_ID, IDS.INJURED_DEFAULT4_IDLE_VARIANT_ID, IDS.INJURED_DEFAULT4_WALK_ID, IDS.INJURED_DEFAULT4_RUN_ID, IDS.SQUINGLE_ID, IDS.ADDENDUM_ID, IDS.BOOGIE_DOWN_ID, IDS.NAOYA_PARTY_ID, IDS.SIT_VAR1_ID, IDS.SIT_VAR2_ID, IDS.SIT_VAR3_ID, IDS.SIT_VAR4_ID, IDS.SIT_VAR5_ID, IDS.SIT_VAR6_ID, IDS.SIT_VAR7_ID, IDS.WALL_LEAN_VAR1_ID, IDS.WALL_LEAN_VAR2_ID, IDS.WALL_LEAN_VAR3_ID, IDS.WALL_LEAN_VAR4_ID, IDS.JAMAL_DANCE_ID, IDS.FLARE_ID, IDS.PBJ_ID, IDS.BIRDBRAIN_ID, IDS.WAVE_ID, IDS.BECKON_ID, IDS.DAP_UP_ID, IDS.ORANGE_JUSTICE_ID, IDS.POP_LOCK_ID, IDS.MY_WORLD_ID, IDS.TAKE_THE_L_ID, IDS.DEFAULT_DANCE_ID, IDS.SHOWTIME_SWING_ID, IDS.MEGAPHONE_ID, IDS.PARKER_PRIDE_ID, IDS.PRINCE_OF_EGYPT_ID, IDS.BODY_PHONE_ID, IDS.CONGA_VAR3_NEW_ID, IDS.RAMBUNCTIOUS_ID, IDS.DANCE_IF_YOU_CARRIED_ID, IDS.NEW_WALK_ID, IDS.HYPE_ID, IDS.LUXE_STEP_ID, IDS.HYPNOTIC_DATA_ID, IDS.WORM_ID, IDS.ELECTRO_SHUFFLE_ID, IDS.BILLY_BOUNCE_ID, IDS.TUFF_DANCE_ID, IDS.HEEL_HOP_ID, IDS.SPLIT_DANCE_ID, IDS.BASKETBALL_HEAD_ID, IDS.POPULAR_VIBE_ID, IDS.PEACE_SIGN_ID, IDS.CAR_VAR1_ID, IDS.CAR_VAR2_ID, IDS.CAR_VAR3_ID, IDS.CAR_VAR4_ID, IDS.CAR_VAR5_ID, IDS.POSE_VAR1_ID, IDS.POSE_VAR2_ID, IDS.POSE_VAR3_ID, IDS.POSE_VAR4_ID, IDS.POSE_VAR5_ID, IDS.POSE_VAR6_ID, IDS.POSE_VAR7_ID, IDS.POSE_VAR8_ID, IDS.CRY_ID, IDS.B_HOP_ID, IDS.CONFESS_YOUR_LOVE_ID, IDS.GARRYS_DANCE_ID, IDS.PHYSCO_TEDDY_ID, IDS.MANNROBICS_ID, IDS.BOPPIN_ID, IDS.DAI_DAI_DAI_ID, IDS.MELEE_FLOURISH_ID, IDS.AIM_TEST_ID, IDS.WAIT_ID, IDS.FIREBALL_ID, IDS.FOREIGN_SHUFFLE_ID, IDS.I_SEE_KAREEM_ID, IDS.GROOVE_OUT_ID, IDS.MII_STREET_VAR1_ID, IDS.MII_STREET_VAR2_ID, IDS.CORY_DANCE_ID, IDS.STREET_GUY_FIGHTING_ID, IDS.SHERBET_LOBBY_ID, IDS.TV_TIME_VAR1_ID, IDS.TV_TIME_VAR2_ID, IDS.PYT_ID, IDS.MY_LIFE_IS_A_PARTY_ID, IDS.JUMPSTYLE_ID, IDS.BUGGIN_ID, IDS.TORTURE_DANCE_ID, IDS.GRIDDY_ID, IDS.LATE_NIGHT_SHUFFLE_ID, IDS.PIKU_DANCE_ID, IDS.TRIP_OUT_ID, IDS.FAZBEAR_DANCE_ID, IDS.MONITO_RING_ID, IDS.ITS_LIKE_IM_NOT_HERE_ID, IDS.IN_HA_MOOD_ID, IDS.RAT_DANCE_ID, IDS.FOUR_LOKOS_ID, IDS.OTSUKARE_SUMMER_ID, IDS.LETHAL_DANCE_ID}
+
+-- ============================================================
+-- ANIMATION LIBRARY
+-- ============================================================
+local ANIM_LIBRARY = {
+	idle = {
+		{ name = "Default", id = "rbxassetid://98946450554814" },
+		{ name = "Thinker", id = "rbxassetid://134947274496123" },
+		{ name = "Salute", id = "rbxassetid://94066777876508" },
+		{ name = "Tweaker", id = "rbxassetid://78718423818649" },
+		{ name = "Shy", id = "rbxassetid://134305047738024" },
+		{ name = "C00LKIDD", id = "rbxassetid://92946600983329" },
+		{ name = "Old R15", id = "rbxassetid://119325894749018" },
+		{ name = "Noli", id = "rbxassetid://124860156114154" },
+		{ name = "Injured", id = "rbxassetid://90685886162807" },
+		{ name = "Two Time Crouching", id = "rbxassetid://120943636070660" },
+		{ name = "Nosferatu", id = "rbxassetid://129243618391641" },
+		{ name = "Mafioso", id = "rbxassetid://120527173641109" },
+		{ name = "Slasher/Jason", id = "rbxassetid://95612637518693" },
+		{ name = "1x1x1x1", id = "rbxassetid://103287865868698" },
+		{ name = "Retro", id = "rbxassetid://91929470847088" },
+		{ name = "Freddy", id = "rbxassetid://105174189783870" },
+		{ name = "Rewrite", id = "rbxassetid://135462734638074" },
+		{ name = "Rewrite 2", id = "rbxassetid://93819532575638" },
+		{ name = "Float", id = "rbxassetid://121210361161914" },
+		{ name = "Impatient", id = "rbxassetid://130912259300899" },
+		{ name = "2011x", id = "rbxassetid://80041404401815" },
+		{ name = "Tall", id = "rbxassetid://91348372558295" },
+		{ name = "Hyper", id = "rbxassetid://129026910898635" },
+		{ name = "Boss Aura", id = "rbxassetid://131065135134472" },
+		{ name = "Chill", id = "rbxassetid://80756565720188" },
+		{ name = "Weary", id = "rbxassetid://138324109649352" },
+		{ name = "Reimagined", id = "rbxassetid://138612360383511" },
+		{ name = "Crafter", id = "rbxassetid://105514975554898" },
+		{ name = "Suspicious", id = "rbxassetid://73864652331450" },
+		{ name = "Scared", id = "rbxassetid://120879126406241" },
+		{ name = "Garry", id = "rbxassetid://116046577798344" },
+		{ name = "Half Life", id = "rbxassetid://90722196582210" },
+		{ name = "Invincible", id = "rbxassetid://109173169241795" },
+		{ name = "Honored", id = "rbxassetid://132972132384031" },
+		{ name = "DJ", id = "rbxassetid://81493189609541" },
+		{ name = "64", id = "rbxassetid://127032691162714" },
+		{ name = "Modern R6", id = "rbxassetid://101793141637116" },
+		{ name = "A-Pose", id = "rbxassetid://77491435683874" },
+		{ name = "R6-Advanced", id = "rbxassetid://74283632231178" },
+		{ name = "Tomodachi (Alt)", id = "rbxassetid://115679903167989" },
+		{ name = "R6-Casual", id = "rbxassetid://128910326086540" },
+		{ name = "R6-Skipping", id = "rbxassetid://119516580072499" },
+		{ name = "R6-Kawai", id = "rbxassetid://93684974089363" },
+		{ name = "Civilian", id = "rbxassetid://132410479050044" },
+		{ name = "Gakuran", id = "rbxassetid://126729600538697" },
+		{ name = "TSB", id = "rbxassetid://120981820197951" },
+		{ name = "Neutral", id = "rbxassetid://134153668148454" },
+		{ name = "Dyna", id = "rbxassetid://109134950565365" },
+		{ name = "John Doe", id = "rbxassetid://89979788176345" },
+		{ name = "Blue Blur", id = "rbxassetid://137888559242342" },
+		{ name = "Ultimate Life Form", id = "rbxassetid://105489916610475" },
+		{ name = "Super Sonic", id = "rbxassetid://115431596215570" },
+		{ name = "HedgeHog", id = "rbxassetid://139700208490626" },
+		{ name = "Realistic Male", id = "rbxassetid://128667162266929" },
+		{ name = "Realistic Female", id = "rbxassetid://95516227298535" },
+		{ name = "ShowOff", id = "rbxassetid://96231620144931" },
+		{ name = "Ninja", id = "rbxassetid://137099582859676" },
+		{ name = "Survivor", id = "rbxassetid://76668955826653" },
+	},
+	walk = {
+		{ name = "Default", id = "rbxassetid://79415540894036" },
+		{ name = "Gangnam", id = "rbxassetid://112342491908786" },
+		{ name = "Livesey", id = "rbxassetid://126769395026240" },
+		{ name = "Zombie", id = "rbxassetid://140703855480494" },
+		{ name = "C00LKIDD", id = "rbxassetid://93206157668596" },
+		{ name = "Retro", id = "rbxassetid://108215772754261" },
+		{ name = "1x1x1x1", id = "rbxassetid://133439842309557" },
+		{ name = "Old R15", id = "rbxassetid://94436206974808" },
+		{ name = "Nonchalant", id = "rbxassetid://95970874156673" },
+		{ name = "Chud", id = "rbxassetid://85887415033585" },
+		{ name = "Float", id = "rbxassetid://84988218571738" },
+		{ name = "Tall", id = "rbxassetid://100019669366103" },
+		{ name = "John Doe", id = "rbxassetid://132258735583786" },
+		{ name = "Injured", id = "rbxassetid://101924559363550" },
+		{ name = "Noli", id = "rbxassetid://106597026533246", speed = 1.3 },
+		{ name = "Styleized", id = "rbxassetid://117819103741451" },
+		{ name = "Reimagined", id = "rbxassetid://123533380863569" },
+		{ name = "Crafter", id = "rbxassetid://82574126079642" },
+		{ name = "Suspicious", id = "rbxassetid://72634644571992" },
+		{ name = "Scared", id = "rbxassetid://138468792534506" },
+		{ name = "Garry", id = "rbxassetid://82277066511717" },
+		{ name = "Half Life", id = "rbxassetid://77287055152482" },
+		{ name = "Invincible", id = "rbxassetid://86663764744230" },
+		{ name = "Honored", id = "rbxassetid://110581890588888" },
+		{ name = "DJ", id = "rbxassetid://139685260280568" },
+		{ name = "64", id = "rbxassetid://88830965315353" },
+		{ name = "Modern R6", id = "rbxassetid://77528393221674", speed = 1.3 },
+		{ name = "A-Pose", id = "rbxassetid://124290108275158" },
+		{ name = "R6-Advanced", id = "rbxassetid://76500598086794" },
+		{ name = "Tomodachi (Alt)", id = "rbxassetid://73581349432506" },
+		{ name = "R6-Casual", id = "rbxassetid://76185822358642" },
+		{ name = "R6-Skipping", id = "rbxassetid://79077799112295" },
+		{ name = "R6-Kawai", id = "rbxassetid://134463434564992" },
+		{ name = "Civilian", id = "rbxassetid://109732897450318" },
+		{ name = "Gakuran", id = "rbxassetid://84286431416863" },
+		{ name = "TSB", id = "rbxassetid://88476555270937" },
+		{ name = "Neutral", id = "rbxassetid://118489787648873" },
+		{ name = "Dyna", id = "rbxassetid://106287128480945" },
+		{ name = "Blue Blur", id = "rbxassetid://76230232889477", speed = 1.3 },
+		{ name = "Ultimate Life Form", id = "rbxassetid://89867380686499", speed = 2 },
+		{ name = "Super Sonic", id = "rbxassetid://76418754856166" },
+		{ name = "HedgeHog", id = "rbxassetid://100773859228466" },
+		{ name = "Realistic Male", id = "rbxassetid://71715888050370" },
+		{ name = "Realistic Female", id = "rbxassetid://89162942305639" },
+		{ name = "ShowOff", id = "rbxassetid://135735852965773" },
+		{ name = "Ninja", id = "rbxassetid://110275663504820" },
+		{ name = "Survivor", id = "rbxassetid://121737235176124" },
+	},
+	run = {
+		{ name = "Default", id = "rbxassetid://108891884872744" },
+		{ name = "Scared", id = "rbxassetid://99823446208760" },
+		{ name = "Bird", id = "rbxassetid://115296225052210" },
+		{ name = "Old R15", id = "rbxassetid://94436206974808" },
+		{ name = "Void Rush", id = "rbxassetid://119380285634530" },
+		{ name = "Animal", id = "rbxassetid://102269417125238" },
+		{ name = "Retro", id = "rbxassetid://139330487152019", speed = 1.4 },
+		{ name = "1x1x1x1", id = "rbxassetid://87237043107505", speed = 1.5 },
+		{ name = "C00LKiDD", id = "rbxassetid://116229217913998" },
+		{ name = "Sonic", id = "rbxassetid://104074120169874" },
+		{ name = "Chud", id = "rbxassetid://85887415033585" },
+		{ name = "West", id = "rbxassetid://121350640829746" },
+		{ name = "Classic Sonic", id = "rbxassetid://137135247245806" },
+		{ name = "Freddy", id = "rbxassetid://70636286183373" },
+		{ name = "Rewrite", id = "rbxassetid://134540907860256" },
+		{ name = "Float", id = "rbxassetid://84988218571738" },
+		{ name = "Chase", id = "rbxassetid://82260970223217" },
+		{ name = "Tall", id = "rbxassetid://134010853417610" },
+		{ name = "John Doe", id = "rbxassetid://120189095601521", speed = 1.33 },
+		{ name = "Injured", id = "rbxassetid://101924559363550" },
+		{ name = "Noli", id = "rbxassetid://133382376250913", speed = 2 },
+		{ name = "Jog", id = "rbxassetid://107994680200921", speed = 2.3 },
+		{ name = "Goofy Zombie", id = "rbxassetid://137251912093279", speed = 3 },
+		{ name = "I WANNA RUN AWAY", id = "rbxassetid://78510387198062", speed = 2.6 },
+		{ name = "Officer Earl", id = "rbxassetid://111126630007706" },
+		{ name = "Reimagined", id = "rbxassetid://86653054358427", speed = 2.3 },
+		{ name = "Crafter", id = "rbxassetid://86028285109536", speed = 1.4 },
+		{ name = "Suspicious", id = "rbxassetid://80458837955374", speed = 2 },
+		{ name = "Scared", id = "rbxassetid://94292858675799", speed = 1.5 },
+		{ name = "Garry", id = "rbxassetid://132229099889671", speed = 1.3 },
+		{ name = "Half Life", id = "rbxassetid://102475592786769", speed = 1.5 },
+		{ name = "Invincible", id = "rbxassetid://99088298968820", speed = 1 },
+		{ name = "Honored", id = "rbxassetid://125582828675515", speed = 1.8 },
+		{ name = "DJ", id = "rbxassetid://110155211587083", speed = 1.3 },
+		{ name = "64", id = "rbxassetid://129706643244921", speed = 1.7 },
+		{ name = "Modern R6", id = "rbxassetid://86891955109302", speed = 1.3 },
+		{ name = "A-Pose", id = "rbxassetid://130290582963053" },
+		{ name = "R6-Advanced", id = "rbxassetid://79712477752764", speed = 1.3 },
+		{ name = "Tomodachi (Alt)", id = "rbxassetid://105822713022374", speed = 1.4 },
+		{ name = "R6-Casual", id = "rbxassetid://84024147460900", speed = 1.8 },
+		{ name = "R6-Skipping", id = "rbxassetid://124830189264786", speed = 1.3 },
+		{ name = "R6-Kawai", id = "rbxassetid://108804196808089", speed = 1.4 },
+		{ name = "Civilian", id = "rbxassetid://82282200719741", speed = 1.4 },
+		{ name = "Gakuran", id = "rbxassetid://117024089293360", speed = 1.5 },
+		{ name = "TSB", id = "rbxassetid://115262747964134", speed = 1.3 },
+		{ name = "Neutral", id = "rbxassetid://109492899924947", speed = 1.3 },
+		{ name = "Dyna", id = "rbxassetid://125909668041520", speed = 1.4 },
+		{ name = "Blue Blur", id = "rbxassetid://136286582256431", speed = 2 },
+		{ name = "Ultimate Life Form", id = "rbxassetid://135577109534379", speed = 1.5 },
+		{ name = "Super Sonic", id = "rbxassetid://120204714374022", speed = 1.3 },
+		{ name = "HedgeHog", id = "rbxassetid://78591897129495", speed = 1.7 },
+		{ name = "Realistic Male", id = "rbxassetid://125200286119976", speed = 1.7 },
+		{ name = "Realistic Female", id = "rbxassetid://122425131640709", speed = 1.7 },
+		{ name = "ShowOff", id = "rbxassetid://112510703419020", speed = 1.3 },
+		{ name = "Ninja", id = "rbxassetid://88468384129203", speed = 1.5 },
+		{ name = "Survivor", id = "rbxassetid://103091973161069", speed = 1.5 },
+	},
+}
+
+-- ============================================================
+-- INJURED SETS (full animation packs)
+-- ============================================================
+local INJURED_SETS = {
+	{
+		name = "Default",
+		idle = IDS.INJURED_DEFAULT_IDLE_ID,
+		idleVariant = nil,
+		walk = IDS.INJURED_DEFAULT_WALK_ID,
+		run = IDS.INJURED_DEFAULT_RUN_ID,
+		runSpeed = 1.6,
+	},
+	{
+		name = "Default 2",
+		idle = IDS.INJURED_DEFAULT2_IDLE_ID,
+		idleVariant = IDS.INJURED_DEFAULT2_IDLE_VARIANT_ID,
+		walk = IDS.INJURED_DEFAULT2_WALK_ID,
+		run = IDS.INJURED_DEFAULT2_RUN_ID,
+		runSpeed = 1.4,
+	},
+	{
+		name = "Default 3",
+		idle = IDS.INJURED_DEFAULT3_IDLE_ID,
+		idleVariant = IDS.INJURED_DEFAULT3_IDLE_VARIANT_ID,
+		walk = IDS.INJURED_DEFAULT3_WALK_ID,
+		run = IDS.INJURED_DEFAULT3_RUN_ID,
+		runSpeed = 1.3,
+	},
+	{
+		name = "Default 4",
+		idle = IDS.INJURED_DEFAULT4_IDLE_ID,
+		idleVariant = IDS.INJURED_DEFAULT4_IDLE_VARIANT_ID,
+		walk = IDS.INJURED_DEFAULT4_WALK_ID,
+		run = IDS.INJURED_DEFAULT4_RUN_ID,
+		runSpeed = 1.5,
+	},
+}
+
+local activeInjuredSet = 1 -- default set
+
+-- ============================================================
+-- GLOBAL SCRIPT VARIABLES
+-- ============================================================
+local active = true
+local isSL = false
+local ca, st, ir, isMovingEmote = nil, {}, false, false
+local headTrackRef = nil
+local faceTrackRef = nil
+local idleVariantTrack = nil
+local idleVariantTimer = nil
+local congaVariations = {IDS.CONGA_VAR1_ID, IDS.CONGA_VAR2_ID, IDS.CONGA_VAR3_NEW_ID}
+local schadenVariations = {IDS.SCHADEN_VAR1_ID, IDS.SCHADEN_VAR2_ID, IDS.SCHADEN_VAR3_ID, IDS.SCHADEN_VAR4_ID}
+local carVariations = {IDS.CAR_VAR1_ID, IDS.CAR_VAR2_ID, IDS.CAR_VAR3_ID, IDS.CAR_VAR4_ID, IDS.CAR_VAR5_ID}
+local poseVariations = {IDS.POSE_VAR1_ID, IDS.POSE_VAR2_ID, IDS.POSE_VAR3_ID, IDS.POSE_VAR4_ID, IDS.POSE_VAR5_ID, IDS.POSE_VAR6_ID, IDS.POSE_VAR7_ID, IDS.POSE_VAR8_ID}
+local miiStreetVariations = {IDS.MII_STREET_VAR1_ID, IDS.MII_STREET_VAR2_ID}
+local tvTimeVariations = {IDS.TV_TIME_VAR1_ID, IDS.TV_TIME_VAR2_ID}
+local currentVariation = nil
+local variationTimer = nil
+local currentEmoteThread = nil
+local walkSpeedSetting = 12
+local runSpeedSetting = 26
+
+-- Stamina variables
+local MAX_STAMINA = 100
+local stamina = 100
+local sprintToggle = false
+local staminaRegenDelay = 0
+local staminaDepletedDelay = 0
+local sprintHold = false
+local isStaminaDepleted = false
+
+-- Head Camera variables
+local headCamMode = 0
+local headCamEnabled = false
+
+-- Animation customizer variables
+local LIVE = { idle = IDS.I_ID, walk = IDS.W_ID, run = IDS.R_ID }
+local activeAnims = { idle = 1, walk = 1, run = 1 }
+
+-- Low‑health animation switch
+local lowHealthEnabled = false
+local lowHealthActive = false
+local savedLIVE = { idle = nil, walk = nil, run = nil }
+
+-- ============================================================
+-- LOADING SCREEN (unchanged)
+-- ============================================================
+local loadGui = ins("ScreenGui")
+loadGui.Name = "LoadingSystem"
+loadGui.DisplayOrder = 10
+loadGui.Parent = lp:WaitForChild("PlayerGui")
+local loadBg = ins("Frame")
+loadBg.Size = ud2(0, 200, 0, 70)
+loadBg.Position = ud2(0.5, 0, 0.5, 0)
+loadBg.AnchorPoint = v2(0.5, 0.5)
+loadBg.BackgroundColor3 = c3(15, 15, 15)
+loadBg.BorderSizePixel = 0
+loadBg.Parent = loadGui
+local loadLabel = ins("TextLabel")
+loadLabel.Size = ud2(1, 0, 0, 30)
+loadLabel.Position = ud2(0, 0, 0, 5)
+loadLabel.BackgroundTransparency = 1
+loadLabel.Text = "LOADING 007n7..."
+loadLabel.TextColor3 = c3(255, 255, 255)
+loadLabel.Font = Enum.Font.SourceSansBold
+loadLabel.TextSize = 14
+loadLabel.Parent = loadBg
+local barBack = ins("Frame")
+barBack.Size = ud2(0.8, 0, 0, 4)
+barBack.Position = ud2(0.5, 0, 0, 45)
+barBack.AnchorPoint = v2(0.5, 0.5)
+barBack.BackgroundColor3 = c3(40, 40, 40)
+barBack.BorderSizePixel = 0
+barBack.Parent = loadBg
+local barFill = ins("Frame")
+barFill.Size = ud2(0, 0, 1, 0)
+barFill.BackgroundColor3 = c3(0, 200, 255)
+barFill.BorderSizePixel = 0
+barFill.Parent = barBack
+local animObjects = {}
+for _, id in ipairs(ids) do
+	local a = ins("Animation")
+	a.AnimationId = id
+	table.insert(animObjects, a)
+end
+for i, animObj in ipairs(animObjects) do
+	cp:PreloadAsync({animObj})
+	local progress = i / #animObjects
+	ts:Create(barFill, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = ud2(progress, 0, 1, 0)}):Play()
+	loadLabel.Text = "LOADING: " .. math.floor(progress * 100) .. "%"
+	task.wait(0.01)
+end
+task.wait(0.2)
+loadGui:Destroy()
+
+-- ============================================================
+-- MAIN GUI (unchanged)
+-- ============================================================
+local sg = ins("ScreenGui")
+sg.Name = "ActionGui"
+sg.ResetOnSpawn = false
+sg.Parent = lp:WaitForChild("PlayerGui")
+
+-- ============================================================
+-- STAMINA HUD (unchanged)
+-- ============================================================
+local staminaGui = ins("ScreenGui")
+staminaGui.Name = "StaminaHUD"
+staminaGui.ResetOnSpawn = false
+staminaGui.Parent = lp:WaitForChild("PlayerGui")
+
+local hudHolder = ins("Frame")
+hudHolder.Size = ud2(0, 420, 0, 88)
+hudHolder.Position = ud2(0, 18, 1, -20)
+hudHolder.AnchorPoint = v2(0, 1)
+hudHolder.BackgroundTransparency = 1
+hudHolder.Parent = staminaGui
+
+local bg = ins("Frame")
+bg.Size = ud2(1, 0, 1, 0)
+bg.BackgroundColor3 = c3(8, 6, 14)
+bg.BackgroundTransparency = 0.25
+bg.BorderSizePixel = 0
+bg.Parent = hudHolder
+ins("UICorner", bg).CornerRadius = UDim.new(0, 10)
+
+local bgInner = ins("Frame")
+bgInner.Size = ud2(1, -4, 1, -4)
+bgInner.Position = ud2(0, 2, 0, 2)
+bgInner.BackgroundColor3 = c3(12, 10, 20)
+bgInner.BackgroundTransparency = 0.35
+bgInner.BorderSizePixel = 0
+bgInner.Parent = hudHolder
+ins("UICorner", bgInner).CornerRadius = UDim.new(0, 10)
+
+local portraitSize = 72
+local portraitHolder = ins("Frame")
+portraitHolder.Size = ud2(0, portraitSize, 0, portraitSize)
+portraitHolder.Position = ud2(0, 8, 0.5, -portraitSize/2)
+portraitHolder.BackgroundColor3 = c3(15, 12, 25)
+portraitHolder.BorderSizePixel = 0
+portraitHolder.Parent = hudHolder
+ins("UICorner", portraitHolder).CornerRadius = UDim.new(1, 0)
+
+local ring = ins("UIStroke")
+ring.Color = c3(100, 65, 190)
+ring.Thickness = 2.5
+ring.Parent = portraitHolder
+
+local avatar = ins("ImageLabel")
+avatar.BackgroundTransparency = 1
+avatar.Size = ud2(1, -6, 1, -6)
+avatar.Position = ud2(0, 3, 0, 3)
+avatar.Parent = portraitHolder
+ins("UICorner", avatar).CornerRadius = UDim.new(1, 0)
+
+local ok, thumb = pcall(function()
+	return ps:GetUserThumbnailAsync(lp.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size420x420)
+end)
+avatar.Image = ok and thumb or ""
+
+local nameLabel = ins("TextLabel")
+nameLabel.BackgroundTransparency = 1
+nameLabel.Position = ud2(0, 2, 0, portraitSize + 4)
+nameLabel.Size = ud2(0, portraitSize + 8, 0, 12)
+nameLabel.Font = Enum.Font.GothamBold
+nameLabel.Text = lp.DisplayName
+nameLabel.TextColor3 = c3(150, 120, 210)
+nameLabel.TextSize = 9
+nameLabel.TextXAlignment = Enum.TextXAlignment.Center
+nameLabel.Parent = hudHolder
+
+local healthIcon = ins("TextLabel")
+healthIcon.BackgroundTransparency = 1
+healthIcon.Position = ud2(0, portraitSize + 12, 0, 14)
+healthIcon.Size = ud2(0, 22, 0, 22)
+healthIcon.Text = "❤"
+healthIcon.TextScaled = true
+healthIcon.Font = Enum.Font.GothamBold
+healthIcon.TextColor3 = c3(220, 60, 80)
+healthIcon.Parent = hudHolder
+
+local healthTrack = ins("Frame")
+healthTrack.Size = ud2(0, 230, 0, 14)
+healthTrack.Position = ud2(0, portraitSize + 34, 0, 18)
+healthTrack.BackgroundColor3 = c3(35, 28, 50)
+healthTrack.BorderSizePixel = 0
+healthTrack.Parent = hudHolder
+ins("UICorner", healthTrack).CornerRadius = UDim.new(0, 2)
+
+local healthFill = ins("Frame")
+healthFill.Size = ud2(1, 0, 1, 0)
+healthFill.BackgroundColor3 = c3(200, 50, 70)
+healthFill.BorderSizePixel = 0
+healthFill.Parent = healthTrack
+ins("UICorner", healthFill).CornerRadius = UDim.new(0, 2)
+
+local healthShine = ins("Frame")
+healthShine.Size = ud2(1, 0, 0.35, 0)
+healthShine.BackgroundColor3 = c3(255, 255, 255)
+healthShine.BackgroundTransparency = 0.82
+healthShine.BorderSizePixel = 0
+healthShine.ZIndex = 2
+healthShine.Parent = healthFill
+ins("UICorner", healthShine).CornerRadius = UDim.new(0, 2)
+
+local healthText = ins("TextLabel")
+healthText.BackgroundTransparency = 1
+healthText.Position = ud2(1, 6, 0.5, -8)
+healthText.Size = ud2(0, 58, 0, 16)
+healthText.Font = Enum.Font.GothamBold
+healthText.TextSize = 13
+healthText.TextColor3 = c3(220, 210, 240)
+healthText.Text = "100/100"
+healthText.TextXAlignment = Enum.TextXAlignment.Left
+healthText.Parent = healthTrack
+
+local staminaIcon = ins("TextLabel")
+staminaIcon.BackgroundTransparency = 1
+staminaIcon.Position = ud2(0, portraitSize + 12, 0, 44)
+staminaIcon.Size = ud2(0, 22, 0, 22)
+staminaIcon.Text = "⚡"
+staminaIcon.TextScaled = true
+staminaIcon.Font = Enum.Font.GothamBold
+staminaIcon.TextColor3 = c3(200, 200, 200)
+staminaIcon.Parent = hudHolder
+
+local staminaTrack = ins("Frame")
+staminaTrack.Size = ud2(0, 230, 0, 14)
+staminaTrack.Position = ud2(0, portraitSize + 34, 0, 48)
+staminaTrack.BackgroundColor3 = c3(35, 28, 50)
+staminaTrack.BorderSizePixel = 0
+staminaTrack.Parent = hudHolder
+ins("UICorner", staminaTrack).CornerRadius = UDim.new(0, 2)
+
+local staminaFill = ins("Frame")
+staminaFill.Size = ud2(1, 0, 1, 0)
+staminaFill.BackgroundColor3 = c3(210, 210, 210)
+staminaFill.BorderSizePixel = 0
+staminaFill.Parent = staminaTrack
+ins("UICorner", staminaFill).CornerRadius = UDim.new(0, 2)
+
+local staminaShine = ins("Frame")
+staminaShine.Size = ud2(1, 0, 0.35, 0)
+staminaShine.BackgroundColor3 = c3(255, 255, 255)
+staminaShine.BackgroundTransparency = 0.82
+staminaShine.BorderSizePixel = 0
+staminaShine.ZIndex = 2
+staminaShine.Parent = staminaFill
+ins("UICorner", staminaShine).CornerRadius = UDim.new(0, 2)
+
+local staminaText = ins("TextLabel")
+staminaText.BackgroundTransparency = 1
+staminaText.Position = ud2(1, 6, 0.5, -8)
+staminaText.Size = ud2(0, 58, 0, 16)
+staminaText.Font = Enum.Font.GothamBold
+staminaText.TextSize = 13
+staminaText.TextColor3 = c3(220, 210, 240)
+staminaText.Text = "100/100"
+staminaText.TextXAlignment = Enum.TextXAlignment.Left
+staminaText.Parent = staminaTrack
+
+local hideBtn = ins("TextButton")
+hideBtn.Size = ud2(0, 100, 0, 30)
+hideBtn.Position = ud2(1, -110, 0.5, -15)
+hideBtn.BackgroundColor3 = c3(20, 18, 28)
+hideBtn.Text = "Hide HUD"
+hideBtn.TextColor3 = c3(210, 200, 240)
+hideBtn.Font = Enum.Font.GothamBold
+hideBtn.TextSize = 12
+hideBtn.BorderSizePixel = 0
+hideBtn.AutoButtonColor = false
+hideBtn.Parent = hudHolder
+ins("UICorner", hideBtn).CornerRadius = UDim.new(0, 8)
+
+local hudHidden = false
+hideBtn.MouseButton1Click:Connect(function()
+	hudHidden = not hudHidden
+	if hudHidden then
+		tw(hudHolder, 0.35, {Position = ud2(0, -500, 1, -20)})
+		hideBtn.Text = "Show HUD"
+	else
+		tw(hudHolder, 0.35, {Position = ud2(0, 18, 1, -20)})
+		hideBtn.Text = "Hide HUD"
+	end
+end)
+
+local function tw(obj, t, props)
+	ts:Create(obj, TweenInfo.new(t, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), props):Play()
+end
+
+-- ============================================================
+-- DRAGGABLE BUTTONS
+-- ============================================================
+local function makeDraggable(guiObject, dragButton)
+	local dragging = false
+	local dragInput, mousePos, framePos
+	dragButton.InputBegan:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 then
+			dragging = true
+			mousePos = input.Position
+			framePos = guiObject.Position
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragging = false
+				end
+			end)
+		end
+	end)
+	dragButton.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement then
+			dragInput = input
+		end
+	end)
+	uis.InputChanged:Connect(function(input)
+		if input == dragInput and dragging then
+			local delta = input.Position - mousePos
+			guiObject.Position = UDim2.new(
+				framePos.X.Scale,
+				framePos.X.Offset + delta.X,
+				framePos.Y.Scale,
+				framePos.Y.Offset + delta.Y
+			)
+		end
+	end)
+end
+
+local function hint(p, t)
+	local h = ins("TextLabel")
+	h.Size = ud2(1, 0, 0, 20)
+	h.Position = ud2(0, 0, 0, -25)
+	h.BackgroundTransparency = 1
+	h.Text = "[" .. t .. "]"
+	h.TextColor3 = c3(255, 255, 255)
+	h.TextStrokeTransparency = 0.5
+	h.Font = Enum.Font.SourceSansBold
+	h.TextSize = 20
+	h.Parent = p
+end
+
+local function btn(n, id, p, s, t)
+	local b = ins("ImageButton")
+	b.Name = n
+	b.Size = s
+	b.Position = p
+	b.Image = (typeof(id) == "string" and id:find("rbxassetid") and id) or "rbxassetid://" .. tostring(id)
+	b.BackgroundTransparency = 1
+	b.ImageColor3 = c3(255, 255, 255)
+	b.Parent = sg
+	if t then hint(b, t) end
+	return b
+end
+
+local sS = ud2(0, 150, 0, 150)
+local kS = ud2(0, 75, 0, 75)
+local rb = btn("Run", 89719285639088, ud2(1, -30, 1, -20), sS, "SHIFT")
+rb.AnchorPoint = v2(1, 1)
+local slb = btn("ShiftLock", IDS.SL_ID, ud2(1, -190, 1, -20), kS, "CTRL")
+slb.AnchorPoint = v2(1, 1)
+
+local eb = ins("TextButton")
+eb.Name = "EmoteToggle"
+eb.Size = kS
+eb.Position = ud2(0, 115, 1, -185)
+eb.AnchorPoint = v2(0, 1)
+eb.BackgroundColor3 = c3(30, 30, 30)
+eb.Text = "EMOTE"
+eb.TextColor3 = c3(255, 255, 255)
+eb.Font = Enum.Font.SourceSansBold
+eb.TextSize = 14
+eb.Parent = sg
+
+local sb = ins("TextButton")
+sb.Name = "SettingsToggle"
+sb.Size = kS
+sb.Position = ud2(0, 200, 1, -185)
+sb.AnchorPoint = v2(0, 1)
+sb.BackgroundColor3 = c3(30, 30, 30)
+sb.Text = "SETTINGS"
+sb.TextColor3 = c3(255, 255, 255)
+sb.Font = Enum.Font.SourceSansBold
+sb.TextSize = 14
+sb.Parent = sg
+
+local ulb = ins("TextButton")
+ulb.Name = "UpdateLogToggle"
+ulb.Size = kS
+ulb.Position = ud2(0, 285, 1, -185)
+ulb.AnchorPoint = v2(0, 1)
+ulb.BackgroundColor3 = c3(60, 80, 140)
+ulb.Text = "📋 LOG"
+ulb.TextColor3 = c3(255, 255, 255)
+ulb.Font = Enum.Font.SourceSansBold
+ulb.TextSize = 14
+ulb.Parent = sg
+
+makeDraggable(eb, eb)
+makeDraggable(sb, sb)
+makeDraggable(ulb, ulb)
+
+-- ============================================================
+-- EMOTE MENU (unchanged)
+-- ============================================================
+local ef = ins("Frame")
+ef.Name = "EmoteMenu"
+ef.Size = ud2(0, 300, 0, 550)
+ef.Position = ud2(0.5, 0, 0.5, 0)
+ef.AnchorPoint = v2(0.5, 0.5)
+ef.BackgroundColor3 = c3(15, 15, 15)
+ef.BorderSizePixel = 0
+ef.Visible = false
+ef.Parent = sg
+
+local searchBar = ins("TextBox")
+searchBar.Size = ud2(0.9, 0, 0, 30)
+searchBar.Position = ud2(0.05, 0, 0, 5)
+searchBar.BackgroundColor3 = c3(40, 40, 40)
+searchBar.Text = ""
+searchBar.PlaceholderText = "Search emotes..."
+searchBar.TextColor3 = c3(255, 255, 255)
+searchBar.PlaceholderColor3 = c3(150, 150, 150)
+searchBar.Font = Enum.Font.SourceSans
+searchBar.TextSize = 14
+searchBar.Parent = ef
+ins("UICorner", searchBar).CornerRadius = UDim.new(0, 4)
+
+local sf = ins("ScrollingFrame")
+sf.Size = ud2(1, -10, 1, -45)
+sf.Position = ud2(0, 5, 0, 40)
+sf.BackgroundTransparency = 1
+sf.CanvasSize = ud2(0, 0, 0, 0)
+sf.AutomaticCanvasSize = Enum.AutomaticSize.Y
+sf.ScrollBarThickness = 4
+sf.Parent = ef
+
+local stopE = ins("TextButton")
+stopE.Name = "StopEmote"
+stopE.Size = ud2(0, 120, 0, 40)
+stopE.Position = ud2(0.5, 0, 0.85, 0)
+stopE.AnchorPoint = v2(0.5, 0.5)
+stopE.BackgroundColor3 = c3(150, 0, 0)
+stopE.Text = "STOP EMOTE"
+stopE.TextColor3 = c3(255, 255, 255)
+stopE.Font = Enum.Font.SourceSansBold
+stopE.TextSize = 18
+stopE.Visible = false
+stopE.Parent = sg
+
+local uiList = ins("UIListLayout")
+uiList.Padding = UDim.new(0, 5)
+uiList.Parent = sf
+
+-- ============================================================
+-- SETTINGS MENU (unchanged)
+-- ============================================================
+local settingsFrame = ins("Frame")
+settingsFrame.Name = "SettingsMenu"
+settingsFrame.Size = ud2(0, 420, 0, 480)
+settingsFrame.Position = ud2(0.5, 0, 0.5, 0)
+settingsFrame.AnchorPoint = v2(0.5, 0.5)
+settingsFrame.BackgroundColor3 = c3(15, 15, 15)
+settingsFrame.BorderSizePixel = 0
+settingsFrame.Visible = false
+settingsFrame.Parent = sg
+
+local settingsTitle = ins("TextLabel")
+settingsTitle.Size = ud2(1, 0, 0, 40)
+settingsTitle.Position = ud2(0, 0, 0, 10)
+settingsTitle.BackgroundTransparency = 1
+settingsTitle.Text = "SETTINGS"
+settingsTitle.TextColor3 = c3(255, 255, 255)
+settingsTitle.Font = Enum.Font.SourceSansBold
+settingsTitle.TextSize = 20
+settingsTitle.Parent = settingsFrame
+
+-- Walk Speed
+local walkLabel = ins("TextLabel")
+walkLabel.Size = ud2(0.4, 0, 0, 30)
+walkLabel.Position = ud2(0.05, 0, 0, 55)
+walkLabel.BackgroundTransparency = 1
+walkLabel.Text = "Walk Speed:"
+walkLabel.TextColor3 = c3(200, 200, 200)
+walkLabel.Font = Enum.Font.SourceSans
+walkLabel.TextSize = 16
+walkLabel.TextXAlignment = Enum.TextXAlignment.Left
+walkLabel.Parent = settingsFrame
+
+local walkSlider = ins("TextBox")
+walkSlider.Size = ud2(0.3, 0, 0, 30)
+walkSlider.Position = ud2(0.5, 0, 0, 55)
+walkSlider.BackgroundColor3 = c3(40, 40, 40)
+walkSlider.Text = tostring(walkSpeedSetting)
+walkSlider.TextColor3 = c3(255, 255, 255)
+walkSlider.Font = Enum.Font.SourceSans
+walkSlider.TextSize = 16
+walkSlider.Parent = settingsFrame
+
+walkSlider.FocusLost:Connect(function()
+	local num = tonumber(walkSlider.Text)
+	if num and num > 0 and num < 100 then
+		walkSpeedSetting = num
+	else
+		walkSlider.Text = tostring(walkSpeedSetting)
+	end
+	local c = lp.Character
+	local h = c and c:FindFirstChildOfClass("Humanoid")
+	if h and not ir then
+		h.WalkSpeed = walkSpeedSetting
+	end
+end)
+
+-- Run Speed
+local runLabel = ins("TextLabel")
+runLabel.Size = ud2(0.4, 0, 0, 30)
+runLabel.Position = ud2(0.05, 0, 0, 95)
+runLabel.BackgroundTransparency = 1
+runLabel.Text = "Run Speed:"
+runLabel.TextColor3 = c3(200, 200, 200)
+runLabel.Font = Enum.Font.SourceSans
+runLabel.TextSize = 16
+runLabel.TextXAlignment = Enum.TextXAlignment.Left
+runLabel.Parent = settingsFrame
+
+local runSlider = ins("TextBox")
+runSlider.Size = ud2(0.3, 0, 0, 30)
+runSlider.Position = ud2(0.5, 0, 0, 95)
+runSlider.BackgroundColor3 = c3(40, 40, 40)
+runSlider.Text = tostring(runSpeedSetting)
+runSlider.TextColor3 = c3(255, 255, 255)
+runSlider.Font = Enum.Font.SourceSans
+runSlider.TextSize = 16
+runSlider.Parent = settingsFrame
+
+runSlider.FocusLost:Connect(function()
+	local num = tonumber(runSlider.Text)
+	if num and num > 0 and num < 100 then
+		runSpeedSetting = num
+	else
+		runSlider.Text = tostring(runSpeedSetting)
+	end
+	local c = lp.Character
+	local h = c and c:FindFirstChildOfClass("Humanoid")
+	if h and ir then
+		h.WalkSpeed = runSpeedSetting
+	end
+end)
+
+-- Sprint Toggle/Hold
+local sprintLabel = ins("TextLabel")
+sprintLabel.Size = ud2(0.4, 0, 0, 30)
+sprintLabel.Position = ud2(0.05, 0, 0, 135)
+sprintLabel.BackgroundTransparency = 1
+sprintLabel.Text = "Sprint Mode:"
+sprintLabel.TextColor3 = c3(200, 200, 200)
+sprintLabel.Font = Enum.Font.SourceSans
+sprintLabel.TextSize = 16
+sprintLabel.TextXAlignment = Enum.TextXAlignment.Left
+sprintLabel.Parent = settingsFrame
+
+local sprintModeBtn = ins("TextButton")
+sprintModeBtn.Size = ud2(0.3, 0, 0, 30)
+sprintModeBtn.Position = ud2(0.5, 0, 0, 135)
+sprintModeBtn.BackgroundColor3 = c3(40, 40, 40)
+sprintModeBtn.Text = "TOGGLE"
+sprintModeBtn.TextColor3 = c3(255, 255, 255)
+sprintModeBtn.Font = Enum.Font.SourceSansBold
+sprintModeBtn.TextSize = 14
+sprintModeBtn.Parent = settingsFrame
+
+sprintModeBtn.MouseButton1Click:Connect(function()
+	sprintToggle = not sprintToggle
+	sprintModeBtn.Text = sprintToggle and "HOLD" or "TOGGLE"
+end)
+
+-- Stamina Customizer
+local staminaCustomBtn = ins("TextButton")
+staminaCustomBtn.Size = ud2(0.8, 0, 0, 30)
+staminaCustomBtn.Position = ud2(0.1, 0, 0, 175)
+staminaCustomBtn.BackgroundColor3 = c3(120, 40, 60)
+staminaCustomBtn.Text = "STAMINA CUSTOMIZER"
+staminaCustomBtn.TextColor3 = c3(255, 255, 255)
+staminaCustomBtn.Font = Enum.Font.SourceSansBold
+staminaCustomBtn.TextSize = 14
+staminaCustomBtn.Parent = settingsFrame
+
+-- Animation Customizer
+local animCustomBtn = ins("TextButton")
+animCustomBtn.Size = ud2(0.8, 0, 0, 30)
+animCustomBtn.Position = ud2(0.1, 0, 0, 215)
+animCustomBtn.BackgroundColor3 = c3(40, 60, 120)
+animCustomBtn.Text = "ANIMATION CUSTOMIZER"
+animCustomBtn.TextColor3 = c3(255, 255, 255)
+animCustomBtn.Font = Enum.Font.SourceSansBold
+animCustomBtn.TextSize = 14
+animCustomBtn.Parent = settingsFrame
+
+-- Head Camera
+local headCamBtn = ins("TextButton")
+headCamBtn.Size = ud2(0.8, 0, 0, 30)
+headCamBtn.Position = ud2(0.1, 0, 0, 255)
+headCamBtn.BackgroundColor3 = c3(100, 140, 180)
+headCamBtn.Text = "HEAD CAMERA"
+headCamBtn.TextColor3 = c3(255, 255, 255)
+headCamBtn.Font = Enum.Font.SourceSansBold
+headCamBtn.TextSize = 14
+headCamBtn.Parent = settingsFrame
+
+-- Low Health Animation Toggle
+local lowHealthLabel = ins("TextLabel")
+lowHealthLabel.Size = ud2(0.6, 0, 0, 30)
+lowHealthLabel.Position = ud2(0.05, 0, 0, 295)
+lowHealthLabel.BackgroundTransparency = 1
+lowHealthLabel.Text = "Low Health Animations:"
+lowHealthLabel.TextColor3 = c3(200, 200, 200)
+lowHealthLabel.Font = Enum.Font.SourceSans
+lowHealthLabel.TextSize = 14
+lowHealthLabel.TextXAlignment = Enum.TextXAlignment.Left
+lowHealthLabel.Parent = settingsFrame
+
+local lowHealthToggle = ins("TextButton")
+lowHealthToggle.Size = ud2(0.3, 0, 0, 30)
+lowHealthToggle.Position = ud2(0.6, 0, 0, 295)
+lowHealthToggle.BackgroundColor3 = c3(40, 100, 40)
+lowHealthToggle.Text = "OFF"
+lowHealthToggle.TextColor3 = c3(255, 255, 255)
+lowHealthToggle.Font = Enum.Font.SourceSansBold
+lowHealthToggle.TextSize = 14
+lowHealthToggle.Parent = settingsFrame
+
+lowHealthToggle.MouseButton1Click:Connect(function()
+	lowHealthEnabled = not lowHealthEnabled
+	lowHealthToggle.Text = lowHealthEnabled and "ON" or "OFF"
+	lowHealthToggle.BackgroundColor3 = lowHealthEnabled and c3(40, 100, 40) or c3(100, 40, 40)
+	if not lowHealthEnabled and lowHealthActive then
+		lowHealthActive = false
+		LIVE.idle = savedLIVE.idle or IDS.I_ID
+		LIVE.walk = savedLIVE.walk or IDS.W_ID
+		LIVE.run = savedLIVE.run or IDS.R_ID
+		savedLIVE = { idle = nil, walk = nil, run = nil }
+		st = {}
+	end
+end)
+
+local closeSettings = ins("TextButton")
+closeSettings.Size = ud2(0, 80, 0, 30)
+closeSettings.Position = ud2(0.5, -40, 0.95, 0)
+closeSettings.BackgroundColor3 = c3(150, 0, 0)
+closeSettings.Text = "CLOSE"
+closeSettings.TextColor3 = c3(255, 255, 255)
+closeSettings.Font = Enum.Font.SourceSansBold
+closeSettings.TextSize = 14
+closeSettings.Parent = settingsFrame
+
+closeSettings.MouseButton1Click:Connect(function()
+	settingsFrame.Visible = false
+end)
+
+-- ============================================================
+-- UPDATE LOG PANEL (unchanged)
+-- ============================================================
+local updateLogFrame = ins("Frame")
+updateLogFrame.Name = "UpdateLogFrame"
+updateLogFrame.Size = ud2(0, 450, 0, 500)
+updateLogFrame.Position = ud2(0.5, 0, 0.5, 0)
+updateLogFrame.AnchorPoint = v2(0.5, 0.5)
+updateLogFrame.BackgroundColor3 = c3(15, 15, 15)
+updateLogFrame.BorderSizePixel = 0
+updateLogFrame.Visible = false
+updateLogFrame.Parent = sg
+
+local updateLogTitle = ins("TextLabel")
+updateLogTitle.Size = ud2(1, 0, 0, 40)
+updateLogTitle.Position = ud2(0, 0, 0, 10)
+updateLogTitle.BackgroundTransparency = 1
+updateLogTitle.Text = "📋 UPDATE LOG"
+updateLogTitle.TextColor3 = c3(255, 220, 100)
+updateLogTitle.Font = Enum.Font.SourceSansBold
+updateLogTitle.TextSize = 20
+updateLogTitle.Parent = updateLogFrame
+
+local updateLogClose = ins("TextButton")
+updateLogClose.Size = ud2(0, 40, 0, 40)
+updateLogClose.Position = ud2(1, -50, 0, 10)
+updateLogClose.BackgroundColor3 = c3(150, 0, 0)
+updateLogClose.Text = "X"
+updateLogClose.TextColor3 = c3(255, 255, 255)
+updateLogClose.Font = Enum.Font.SourceSansBold
+updateLogClose.TextSize = 18
+updateLogClose.Parent = updateLogFrame
+
+updateLogClose.MouseButton1Click:Connect(function()
+	updateLogFrame.Visible = false
+end)
+
+local updateLogScroll = ins("ScrollingFrame")
+updateLogScroll.Size = ud2(1, -20, 1, -70)
+updateLogScroll.Position = ud2(0, 10, 0, 55)
+updateLogScroll.BackgroundTransparency = 1
+updateLogScroll.CanvasSize = ud2(0, 0, 0, 0)
+updateLogScroll.AutomaticCanvasSize = Enum.AutomaticSize.Y
+updateLogScroll.ScrollBarThickness = 4
+updateLogScroll.Parent = updateLogFrame
+
+local updateLogContent = ins("Frame")
+updateLogContent.Size = ud2(1, 0, 0, 0)
+updateLogContent.BackgroundTransparency = 1
+updateLogContent.AutomaticSize = Enum.AutomaticSize.Y
+updateLogContent.Parent = updateLogScroll
+
+local updateLogLayout = ins("UIListLayout")
+updateLogLayout.Padding = UDim.new(0, 8)
+updateLogLayout.Parent = updateLogContent
+
+local function addLogEntry(title, text, color)
+	local entryFrame = ins("Frame")
+	entryFrame.Size = ud2(1, 0, 0, 0)
+	entryFrame.BackgroundColor3 = c3(25, 25, 35)
+	entryFrame.BorderSizePixel = 0
+	entryFrame.AutomaticSize = Enum.AutomaticSize.Y
+	entryFrame.Parent = updateLogContent
+	ins("UICorner", entryFrame).CornerRadius = UDim.new(0, 6)
+
+	local padding = ins("Frame")
+	padding.Size = ud2(1, 0, 0, 0)
+	padding.BackgroundTransparency = 1
+	padding.AutomaticSize = Enum.AutomaticSize.Y
+	padding.Parent = entryFrame
+
+	local titleLabel = ins("TextLabel")
+	titleLabel.Size = ud2(1, -10, 0, 20)
+	titleLabel.Position = ud2(0, 5, 0, 5)
+	titleLabel.BackgroundTransparency = 1
+	titleLabel.Text = title
+	titleLabel.TextColor3 = color or c3(255, 220, 100)
+	titleLabel.Font = Enum.Font.SourceSansBold
+	titleLabel.TextSize = 14
+	titleLabel.TextXAlignment = Enum.TextXAlignment.Left
+	titleLabel.Parent = padding
+
+	local textLabel = ins("TextLabel")
+	textLabel.Size = ud2(1, -10, 0, 0)
+	textLabel.Position = ud2(0, 5, 0, 28)
+	textLabel.BackgroundTransparency = 1
+	textLabel.Text = text
+	textLabel.TextColor3 = c3(200, 200, 220)
+	textLabel.Font = Enum.Font.SourceSans
+	textLabel.TextSize = 12
+	textLabel.TextWrapped = true
+	textLabel.TextXAlignment = Enum.TextXAlignment.Left
+	textLabel.AutomaticSize = Enum.AutomaticSize.Y
+	textLabel.Parent = padding
+
+	local bottomPad = ins("Frame")
+	bottomPad.Size = ud2(1, 0, 0, 5)
+	bottomPad.BackgroundTransparency = 1
+	bottomPad.Parent = padding
+end
+
+addLogEntry("🆕 v2.3 - New Emotes & Animation Packs", "Added 3 new emotes:\n• Four Lokos, Otsukare Summer, Lethal Dance\n\nAdded 3 new animation packs:\n• Retro (Idle, Idle Variant, Walk, Run speed 1.4)\n• Ninja (Idle, Idle Variant, Walk, Run speed 1.5) - FIXED idle/variant order\n• Survivor (Idle, Idle Variant, Walk, Run speed 1.5)\n\nAdded new injured set:\n• Default 4 (Idle, Idle Variant, Walk, Run speed 1.5)", c3(100, 200, 255))
+
+addLogEntry("🆕 v2.2 - Injured Animation Sets", "Added new 'Injured' tab in Animation Customizer:\n• Choose from different full injured animation sets\n• Default, Default 2, and Default 3 sets\n• Each set includes Idle, Idle Variant, Walk, and Run\n• Run speed varies per set (1.6, 1.4, 1.3)", c3(255, 150, 100))
+
+addLogEntry("🆕 v2.1 - New Animation Packs", "Added 3 new animation packs:\n• Realistic Male (Idle, Idle Variant, Walk, Run speed 1.7)\n• Realistic Female (Idle, Idle Variant, Walk, Run speed 1.7)\n• ShowOff (Idle, Idle Variant, Walk, Run speed 1.3)", c3(100, 255, 200))
+
+addLogEntry("🆕 v2.0 - Big Update!", "• Added 6 new emotes: Trip Out, Fazbear Dance, Monito Ring, It's Like I'm Not Here, In Ha Mood, Rat Dance\n• Added optional Low-Health Animation Switch (Settings)\n• Health bar now properly updates on respawn", c3(255, 220, 100))
+
+makeDraggable(updateLogFrame, updateLogTitle)
+
+ulb.MouseButton1Click:Connect(function()
+	updateLogFrame.Visible = not updateLogFrame.Visible
+	ef.Visible = false
+	settingsFrame.Visible = false
+	animPanel.Visible = false
+	staminaPanel.Visible = false
+	headCamPanel.Visible = false
+end)
+
+-- ============================================================
+-- STAMINA PANEL (unchanged)
+-- ============================================================
+local staminaPanel = ins("Frame")
+staminaPanel.Name = "StaminaPanel"
+staminaPanel.Size = ud2(0, 400, 0, 450)
+staminaPanel.Position = ud2(0.5, 0, 0.5, 0)
+staminaPanel.AnchorPoint = v2(0.5, 0.5)
+staminaPanel.BackgroundColor3 = c3(15, 15, 15)
+staminaPanel.BorderSizePixel = 0
+staminaPanel.Visible = false
+staminaPanel.Parent = sg
+
+local staminaTitle = ins("TextLabel")
+staminaTitle.Size = ud2(1, 0, 0, 40)
+staminaTitle.Position = ud2(0, 0, 0, 10)
+staminaTitle.BackgroundTransparency = 1
+staminaTitle.Text = "STAMINA CUSTOMIZER"
+staminaTitle.TextColor3 = c3(255, 255, 255)
+staminaTitle.Font = Enum.Font.SourceSansBold
+staminaTitle.TextSize = 20
+staminaTitle.Parent = staminaPanel
+
+local staminaClose = ins("TextButton")
+staminaClose.Size = ud2(0, 40, 0, 40)
+staminaClose.Position = ud2(1, -50, 0, 10)
+staminaClose.BackgroundColor3 = c3(150, 0, 0)
+staminaClose.Text = "X"
+staminaClose.TextColor3 = c3(255, 255, 255)
+staminaClose.Font = Enum.Font.SourceSansBold
+staminaClose.TextSize = 18
+staminaClose.Parent = staminaPanel
+
+staminaClose.MouseButton1Click:Connect(function()
+	staminaPanel.Visible = false
+end)
+
+local staminaEnabledLabel = ins("TextLabel")
+staminaEnabledLabel.Size = ud2(0.4, 0, 0, 30)
+staminaEnabledLabel.Position = ud2(0.05, 0, 0, 55)
+staminaEnabledLabel.BackgroundTransparency = 1
+staminaEnabledLabel.Text = "Enable Stamina:"
+staminaEnabledLabel.TextColor3 = c3(200, 200, 200)
+staminaEnabledLabel.Font = Enum.Font.SourceSans
+staminaEnabledLabel.TextSize = 14
+staminaEnabledLabel.TextXAlignment = Enum.TextXAlignment.Left
+staminaEnabledLabel.Parent = staminaPanel
+
+local staminaEnabledBtn = ins("TextButton")
+staminaEnabledBtn.Size = ud2(0.3, 0, 0, 30)
+staminaEnabledBtn.Position = ud2(0.55, 0, 0, 55)
+staminaEnabledBtn.BackgroundColor3 = c3(40, 100, 40)
+staminaEnabledBtn.Text = "ON"
+staminaEnabledBtn.TextColor3 = c3(255, 255, 255)
+staminaEnabledBtn.Font = Enum.Font.SourceSansBold
+staminaEnabledBtn.TextSize = 14
+staminaEnabledBtn.Parent = staminaPanel
+
+local staminaEnabled = true
+staminaEnabledBtn.MouseButton1Click:Connect(function()
+	staminaEnabled = not staminaEnabled
+	staminaEnabledBtn.Text = staminaEnabled and "ON" or "OFF"
+	staminaEnabledBtn.BackgroundColor3 = staminaEnabled and c3(40, 100, 40) or c3(100, 40, 40)
+end)
+
+local maxStaminaLabel = ins("TextLabel")
+maxStaminaLabel.Size = ud2(0.4, 0, 0, 30)
+maxStaminaLabel.Position = ud2(0.05, 0, 0, 95)
+maxStaminaLabel.BackgroundTransparency = 1
+maxStaminaLabel.Text = "Max Stamina:"
+maxStaminaLabel.TextColor3 = c3(200, 200, 200)
+maxStaminaLabel.Font = Enum.Font.SourceSans
+maxStaminaLabel.TextSize = 14
+maxStaminaLabel.TextXAlignment = Enum.TextXAlignment.Left
+maxStaminaLabel.Parent = staminaPanel
+
+local maxStaminaBox = ins("TextBox")
+maxStaminaBox.Size = ud2(0.3, 0, 0, 30)
+maxStaminaBox.Position = ud2(0.55, 0, 0, 95)
+maxStaminaBox.BackgroundColor3 = c3(40, 40, 40)
+maxStaminaBox.Text = tostring(MAX_STAMINA)
+maxStaminaBox.TextColor3 = c3(255, 255, 255)
+maxStaminaBox.Font = Enum.Font.SourceSans
+maxStaminaBox.TextSize = 14
+maxStaminaBox.Parent = staminaPanel
+
+maxStaminaBox.FocusLost:Connect(function()
+	local num = tonumber(maxStaminaBox.Text)
+	if num and num > 0 and num < 1000 then
+		MAX_STAMINA = num
+		stamina = math.min(stamina, MAX_STAMINA)
+		updateStaminaBar()
+	else
+		maxStaminaBox.Text = tostring(MAX_STAMINA)
+	end
+end)
+
+local drainRateLabel = ins("TextLabel")
+drainRateLabel.Size = ud2(0.4, 0, 0, 30)
+drainRateLabel.Position = ud2(0.05, 0, 0, 135)
+drainRateLabel.BackgroundTransparency = 1
+drainRateLabel.Text = "Drain Rate:"
+drainRateLabel.TextColor3 = c3(200, 200, 200)
+drainRateLabel.Font = Enum.Font.SourceSans
+drainRateLabel.TextSize = 14
+drainRateLabel.TextXAlignment = Enum.TextXAlignment.Left
+drainRateLabel.Parent = staminaPanel
+
+local drainRateBox = ins("TextBox")
+drainRateBox.Size = ud2(0.3, 0, 0, 30)
+drainRateBox.Position = ud2(0.55, 0, 0, 135)
+drainRateBox.BackgroundColor3 = c3(40, 40, 40)
+drainRateBox.Text = "12"
+drainRateBox.TextColor3 = c3(255, 255, 255)
+drainRateBox.Font = Enum.Font.SourceSans
+drainRateBox.TextSize = 14
+drainRateBox.Parent = staminaPanel
+
+local drainRate = 12
+drainRateBox.FocusLost:Connect(function()
+	local num = tonumber(drainRateBox.Text)
+	if num and num > 0 and num < 100 then
+		drainRate = num
+	else
+		drainRateBox.Text = tostring(drainRate)
+	end
+end)
+
+local regenRateLabel = ins("TextLabel")
+regenRateLabel.Size = ud2(0.4, 0, 0, 30)
+regenRateLabel.Position = ud2(0.05, 0, 0, 175)
+regenRateLabel.BackgroundTransparency = 1
+regenRateLabel.Text = "Regen Rate:"
+regenRateLabel.TextColor3 = c3(200, 200, 200)
+regenRateLabel.Font = Enum.Font.SourceSans
+regenRateLabel.TextSize = 14
+regenRateLabel.TextXAlignment = Enum.TextXAlignment.Left
+regenRateLabel.Parent = staminaPanel
+
+local regenRateBox = ins("TextBox")
+regenRateBox.Size = ud2(0.3, 0, 0, 30)
+regenRateBox.Position = ud2(0.55, 0, 0, 175)
+regenRateBox.BackgroundColor3 = c3(40, 40, 40)
+regenRateBox.Text = "20"
+regenRateBox.TextColor3 = c3(255, 255, 255)
+regenRateBox.Font = Enum.Font.SourceSans
+regenRateBox.TextSize = 14
+regenRateBox.Parent = staminaPanel
+
+local regenRate = 20
+regenRateBox.FocusLost:Connect(function()
+	local num = tonumber(regenRateBox.Text)
+	if num and num > 0 and num < 100 then
+		regenRate = num
+	else
+		regenRateBox.Text = tostring(regenRate)
+	end
+end)
+
+local regenDelayLabel = ins("TextLabel")
+regenDelayLabel.Size = ud2(0.4, 0, 0, 30)
+regenDelayLabel.Position = ud2(0.05, 0, 0, 215)
+regenDelayLabel.BackgroundTransparency = 1
+regenDelayLabel.Text = "Regen Delay:"
+regenDelayLabel.TextColor3 = c3(200, 200, 200)
+regenDelayLabel.Font = Enum.Font.SourceSans
+regenDelayLabel.TextSize = 14
+regenDelayLabel.TextXAlignment = Enum.TextXAlignment.Left
+regenDelayLabel.Parent = staminaPanel
+
+local regenDelayBox = ins("TextBox")
+regenDelayBox.Size = ud2(0.3, 0, 0, 30)
+regenDelayBox.Position = ud2(0.55, 0, 0, 215)
+regenDelayBox.BackgroundColor3 = c3(40, 40, 40)
+regenDelayBox.Text = "1"
+regenDelayBox.TextColor3 = c3(255, 255, 255)
+regenDelayBox.Font = Enum.Font.SourceSans
+regenDelayBox.TextSize = 14
+regenDelayBox.Parent = staminaPanel
+
+local regenDelay = 1
+regenDelayBox.FocusLost:Connect(function()
+	local num = tonumber(regenDelayBox.Text)
+	if num and num >= 0 and num < 100 then
+		regenDelay = num
+	else
+		regenDelayBox.Text = tostring(regenDelay)
+	end
+end)
+
+local descLabel = ins("TextLabel")
+descLabel.Size = ud2(0.9, 0, 0, 80)
+descLabel.Position = ud2(0.05, 0, 0, 260)
+descLabel.BackgroundTransparency = 1
+descLabel.Text = "Drain Rate: stamina per second while sprinting\nRegen Rate: stamina per second while resting\nRegen Delay: seconds to wait before regen starts"
+descLabel.TextColor3 = c3(150, 150, 180)
+descLabel.Font = Enum.Font.SourceSans
+descLabel.TextSize = 12
+descLabel.TextWrapped = true
+descLabel.TextXAlignment = Enum.TextXAlignment.Left
+descLabel.Parent = staminaPanel
+
+staminaCustomBtn.MouseButton1Click:Connect(function()
+	staminaPanel.Visible = not staminaPanel.Visible
+	settingsFrame.Visible = false
+	animPanel.Visible = false
+	updateLogFrame.Visible = false
+	headCamPanel.Visible = false
+end)
+
+-- ============================================================
+-- ANIMATION CUSTOMIZER PANEL (unchanged)
+-- ============================================================
+local animPanel = ins("Frame")
+animPanel.Name = "AnimPanel"
+animPanel.Size = ud2(0, 450, 0, 520)
+animPanel.Position = ud2(0.5, 0, 0.5, 0)
+animPanel.AnchorPoint = v2(0.5, 0.5)
+animPanel.BackgroundColor3 = c3(15, 15, 15)
+animPanel.BorderSizePixel = 0
+animPanel.Visible = false
+animPanel.Parent = sg
+
+local animTitle = ins("TextLabel")
+animTitle.Size = ud2(1, 0, 0, 40)
+animTitle.Position = ud2(0, 0, 0, 10)
+animTitle.BackgroundTransparency = 1
+animTitle.Text = "ANIMATION CUSTOMIZER"
+animTitle.TextColor3 = c3(255, 255, 255)
+animTitle.Font = Enum.Font.SourceSansBold
+animTitle.TextSize = 20
+animTitle.Parent = animPanel
+
+local animClose = ins("TextButton")
+animClose.Size = ud2(0, 40, 0, 40)
+animClose.Position = ud2(1, -50, 0, 10)
+animClose.BackgroundColor3 = c3(150, 0, 0)
+animClose.Text = "X"
+animClose.TextColor3 = c3(255, 255, 255)
+animClose.Font = Enum.Font.SourceSansBold
+animClose.TextSize = 18
+animClose.Parent = animPanel
+
+animClose.MouseButton1Click:Connect(function()
+	animPanel.Visible = false
+end)
+
+local tabHolder = ins("Frame")
+tabHolder.Size = ud2(1, -10, 0, 40)
+tabHolder.Position = ud2(0, 5, 0, 55)
+tabHolder.BackgroundTransparency = 1
+tabHolder.Parent = animPanel
+
+local tabLayout = ins("UIListLayout")
+tabLayout.FillDirection = Enum.FillDirection.Horizontal
+tabLayout.Padding = UDim.new(0, 5)
+tabLayout.Parent = tabHolder
+
+local function createAnimTab(text, slot)
+	local btn = ins("TextButton")
+	btn.Size = ud2(0, 100, 0, 35)
+	btn.BackgroundColor3 = c3(30, 30, 30)
+	btn.Text = text
+	btn.TextColor3 = c3(255, 255, 255)
+	btn.Font = Enum.Font.SourceSansBold
+	btn.TextSize = 13
+	btn.Parent = tabHolder
+	return btn
+end
+
+local idleTab = createAnimTab("IDLE", "idle")
+local walkTab = createAnimTab("WALK", "walk")
+local runTab = createAnimTab("RUN", "run")
+local injuredTab = createAnimTab("INJURED", "injured")
+
+local contentArea = ins("ScrollingFrame")
+contentArea.Size = ud2(1, -20, 1, -140)
+contentArea.Position = ud2(0, 10, 0, 105)
+contentArea.BackgroundTransparency = 1
+contentArea.CanvasSize = ud2(0, 0, 0, 0)
+contentArea.AutomaticCanvasSize = Enum.AutomaticSize.Y
+contentArea.ScrollBarThickness = 4
+contentArea.Parent = animPanel
+
+local function buildAnimList(slot)
+	local frame = ins("Frame")
+	frame.Size = ud2(1, 0, 0, 0)
+	frame.BackgroundTransparency = 1
+	frame.AutomaticSize = Enum.AutomaticSize.Y
+	frame.Visible = false
+	frame.Parent = contentArea
+
+	local layout = ins("UIListLayout")
+	layout.Padding = UDim.new(0, 4)
+	layout.Parent = frame
+
+	for idx, entry in ipairs(ANIM_LIBRARY[slot]) do
+		local btn = ins("TextButton")
+		btn.Size = ud2(1, 0, 0, 35)
+		btn.BackgroundColor3 = c3(25, 25, 25)
+		btn.Text = entry.name .. (activeAnims[slot] == idx and " ✓" or "")
+		btn.TextColor3 = activeAnims[slot] == idx and c3(0, 200, 255) or c3(200, 200, 200)
+		btn.Font = Enum.Font.SourceSans
+		btn.TextSize = 15
+		btn.Parent = frame
+
+		btn.MouseButton1Click:Connect(function()
+			activeAnims[slot] = idx
+			LIVE[slot] = entry.id
+			st = {}
+			for _, child in ipairs(frame:GetChildren()) do
+				if child:IsA("TextButton") then
+					local name = child.Text:gsub(" ✓", "")
+					local isActive = activeAnims[slot] == idx and name == entry.name
+					child.Text = name .. (isActive and " ✓" or "")
+					child.TextColor3 = isActive and c3(0, 200, 255) or c3(200, 200, 200)
+				end
+			end
+		end)
+	end
+
+	return frame
+end
+
+local function buildInjuredList()
+	local frame = ins("Frame")
+	frame.Size = ud2(1, 0, 0, 0)
+	frame.BackgroundTransparency = 1
+	frame.AutomaticSize = Enum.AutomaticSize.Y
+	frame.Visible = false
+	frame.Parent = contentArea
+
+	local layout = ins("UIListLayout")
+	layout.Padding = UDim.new(0, 4)
+	layout.Parent = frame
+
+	local desc = ins("TextLabel")
+	desc.Size = ud2(1, 0, 0, 30)
+	desc.BackgroundTransparency = 1
+	desc.Text = "Select a full injured animation set:"
+	desc.TextColor3 = c3(200, 200, 200)
+	desc.Font = Enum.Font.SourceSans
+	desc.TextSize = 13
+	desc.TextXAlignment = Enum.TextXAlignment.Center
+	desc.Parent = frame
+
+	for idx, set in ipairs(INJURED_SETS) do
+		local btn = ins("TextButton")
+		btn.Size = ud2(1, 0, 0, 35)
+		btn.BackgroundColor3 = c3(25, 25, 25)
+		btn.Text = set.name .. (activeInjuredSet == idx and " ✓" or "")
+		btn.TextColor3 = activeInjuredSet == idx and c3(0, 200, 255) or c3(200, 200, 200)
+		btn.Font = Enum.Font.SourceSans
+		btn.TextSize = 15
+		btn.Parent = frame
+
+		btn.MouseButton1Click:Connect(function()
+			activeInjuredSet = idx
+			for _, child in ipairs(frame:GetChildren()) do
+				if child:IsA("TextButton") then
+					local name = child.Text:gsub(" ✓", "")
+					local isActive = activeInjuredSet == idx and name == set.name
+					child.Text = name .. (isActive and " ✓" or "")
+					child.TextColor3 = isActive and c3(0, 200, 255) or c3(200, 200, 200)
+				end
+			end
+			if lowHealthActive then
+				local s = INJURED_SETS[activeInjuredSet]
+				LIVE.idle = s.idle
+				LIVE.walk = s.walk
+				LIVE.run = s.run
+				st = {}
+			end
+		end)
+	end
+
+	return frame
+end
+
+local idleList = buildAnimList("idle")
+local walkList = buildAnimList("walk")
+local runList = buildAnimList("run")
+local injuredList = buildInjuredList()
+
+local function showTab(slot)
+	idleList.Visible = slot == "idle"
+	walkList.Visible = slot == "walk"
+	runList.Visible = slot == "run"
+	injuredList.Visible = slot == "injured"
+	for _, tab in ipairs({idleTab, walkTab, runTab, injuredTab}) do
+		local isActive = (tab == idleTab and slot == "idle") or
+		                 (tab == walkTab and slot == "walk") or
+		                 (tab == runTab and slot == "run") or
+		                 (tab == injuredTab and slot == "injured")
+		tab.BackgroundColor3 = isActive and c3(50, 80, 150) or c3(30, 30, 30)
+	end
+end
+
+idleTab.MouseButton1Click:Connect(function() showTab("idle") end)
+walkTab.MouseButton1Click:Connect(function() showTab("walk") end)
+runTab.MouseButton1Click:Connect(function() showTab("run") end)
+injuredTab.MouseButton1Click:Connect(function() showTab("injured") end)
+showTab("idle")
+
+animCustomBtn.MouseButton1Click:Connect(function()
+	animPanel.Visible = not animPanel.Visible
+	settingsFrame.Visible = false
+	staminaPanel.Visible = false
+	updateLogFrame.Visible = false
+	headCamPanel.Visible = false
+end)
+
+-- ============================================================
+-- HEAD CAMERA PANEL (unchanged)
+-- ============================================================
+local headCamPanel = ins("Frame")
+headCamPanel.Name = "HeadCamPanel"
+headCamPanel.Size = ud2(0, 400, 0, 350)
+headCamPanel.Position = ud2(0.5, 0, 0.5, 0)
+headCamPanel.AnchorPoint = v2(0.5, 0.5)
+headCamPanel.BackgroundColor3 = c3(15, 15, 15)
+headCamPanel.BorderSizePixel = 0
+headCamPanel.Visible = false
+headCamPanel.Parent = sg
+
+local headCamTitle = ins("TextLabel")
+headCamTitle.Size = ud2(1, 0, 0, 40)
+headCamTitle.Position = ud2(0, 0, 0, 10)
+headCamTitle.BackgroundTransparency = 1
+headCamTitle.Text = "HEAD CAMERA SETTINGS"
+headCamTitle.TextColor3 = c3(255, 255, 255)
+headCamTitle.Font = Enum.Font.SourceSansBold
+headCamTitle.TextSize = 18
+headCamTitle.Parent = headCamPanel
+
+local headCamClose = ins("TextButton")
+headCamClose.Size = ud2(0, 40, 0, 40)
+headCamClose.Position = ud2(1, -50, 0, 10)
+headCamClose.BackgroundColor3 = c3(150, 0, 0)
+headCamClose.Text = "X"
+headCamClose.TextColor3 = c3(255, 255, 255)
+headCamClose.Font = Enum.Font.SourceSansBold
+headCamClose.TextSize = 18
+headCamClose.Parent = headCamPanel
+
+headCamClose.MouseButton1Click:Connect(function()
+	headCamPanel.Visible = false
+end)
+
+local function createHeadCamModeBtn(text, mode, ypos)
+	local btn = ins("TextButton")
+	btn.Size = ud2(0.8, 0, 0, 40)
+	btn.Position = ud2(0.1, 0, 0, ypos)
+	btn.BackgroundColor3 = headCamMode == mode and c3(80, 150, 100) or c3(40, 80, 60)
+	btn.Text = text
+	btn.TextColor3 = c3(255, 255, 255)
+	btn.Font = Enum.Font.SourceSansBold
+	btn.TextSize = 13
+	btn.Parent = headCamPanel
+
+	btn.MouseButton1Click:Connect(function()
+		headCamMode = mode
+		local parent = btn.Parent
+		for _, child in ipairs(parent:GetChildren()) do
+			if child:IsA("TextButton") and child ~= headCamClose and child.Name ~= "ModeBtn" then
+				if child == btn then
+					child.BackgroundColor3 = c3(80, 150, 100)
+				else
+					child.BackgroundColor3 = c3(40, 80, 60)
+				end
+			end
+		end
+	end)
+
+	btn.Name = "ModeBtn"
+	return btn
+end
+
+local headCamDesc = ins("TextLabel")
+headCamDesc.Size = ud2(0.9, 0, 0, 50)
+headCamDesc.Position = ud2(0.05, 0, 0, 60)
+headCamDesc.BackgroundTransparency = 1
+headCamDesc.Text = "Choose when camera follows your head:"
+headCamDesc.TextColor3 = c3(200, 200, 200)
+headCamDesc.Font = Enum.Font.SourceSans
+headCamDesc.TextSize = 12
+headCamDesc.TextWrapped = true
+headCamDesc.TextXAlignment = Enum.TextXAlignment.Left
+headCamDesc.Parent = headCamPanel
+
+createHeadCamModeBtn("OFF - Disabled", 0, 115)
+createHeadCamModeBtn("EMOTING ONLY - When playing emotes", 1, 165)
+createHeadCamModeBtn("NOT EMOTING - When idle/walking/running", 2, 215)
+createHeadCamModeBtn("ALWAYS ON - Always follows head", 3, 265)
+
+headCamBtn.MouseButton1Click:Connect(function()
+	headCamPanel.Visible = not headCamPanel.Visible
+	settingsFrame.Visible = false
+	staminaPanel.Visible = false
+	animPanel.Visible = false
+	updateLogFrame.Visible = false
+end)
+
+-- ============================================================
+-- STOP LARP BUTTON (unchanged)
+-- ============================================================
+local xb = ins("ImageButton")
+xb.Size = ud2(0, 40, 0, 40)
+xb.Position = ud2(0.5, 0, 0, 20)
+xb.AnchorPoint = v2(0.5, 0)
+xb.Image = "http://www.roblox.com/asset/?id=16201262"
+xb.BackgroundTransparency = 1
+xb.Parent = sg
+
+local cf = ins("Frame")
+cf.Size = ud2(0, 300, 0, 150)
+cf.Position = ud2(0.5, -150, 0.5, -75)
+cf.BackgroundColor3 = c3(15, 15, 15)
+cf.BorderSizePixel = 0
+cf.Visible = false
+cf.Parent = sg
+
+local cl = ins("TextLabel")
+cl.Size = ud2(1, -20, 0, 60)
+cl.Position = ud2(0, 10, 0, 10)
+cl.BackgroundTransparency = 1
+cl.Text = "do you want to stop larping as 007n7?"
+cl.TextColor3 = c3(255, 255, 255)
+cl.TextWrapped = true
+cl.Font = Enum.Font.SourceSans
+cl.TextSize = 18
+cl.Parent = cf
+
+local function sub(n, t, p, clr)
+	local b = ins("TextButton")
+	b.Name = n
+	b.Size = ud2(0, 100, 0, 40)
+	b.Position = p
+	b.BackgroundColor3 = clr
+	b.Text = t
+	b.TextColor3 = c3(255, 255, 255)
+	b.Font = Enum.Font.SourceSansBold
+	b.TextSize = 18
+	b.Parent = cf
+	return b
+end
+
+local bn = sub("No", "No", ud2(0, 40, 0, 85), c3(60, 60, 60))
+local by = sub("Yes", "Yes", ud2(0, 160, 0, 85), c3(150, 0, 0))
+
+-- ============================================================
+-- ANIMATION HELPER FUNCTIONS (unchanged)
+-- ============================================================
+local function stop_s(a)
+	for _, t in ipairs(a:GetPlayingAnimationTracks()) do
+		if t ~= headTrackRef and t ~= ca and t ~= faceTrackRef then
+			t:Stop(0.25)
+		end
+	end
+end
+
+local function stop_a()
+	if ca then
+		ca:Stop(0.25)
+		ca = nil
+	end
+	if variationTimer then
+		task.cancel(variationTimer)
+		variationTimer = nil
+	end
+	if currentEmoteThread then
+		task.cancel(currentEmoteThread)
+		currentEmoteThread = nil
+	end
+	currentVariation = nil
+	isMovingEmote = false
+end
+
+local function loadAnim(a, id)
+	local anim = ins("Animation")
+	anim.AnimationId = id
+	return a:LoadAnimation(anim)
+end
+
+local function updateFaceAnimation(isEmoting, a)
+	if not a then return end
+	if isEmoting then
+		if faceTrackRef and faceTrackRef.Animation.AnimationId == IDS.FACE_IDLE_ID then
+			faceTrackRef:AdjustWeight(0)
+			faceTrackRef = nil
+		end
+		if not faceTrackRef or faceTrackRef.Animation.AnimationId ~= IDS.FACE_EMOTE_ID then
+			local faceAnim = ins("Animation")
+			faceAnim.AnimationId = IDS.FACE_EMOTE_ID
+			faceTrackRef = a:LoadAnimation(faceAnim)
+			faceTrackRef.Priority = Enum.AnimationPriority.Action4
+			faceTrackRef.Looped = true
+			faceTrackRef:Play(0.25)
+		end
+	else
+		if faceTrackRef and faceTrackRef.Animation.AnimationId == IDS.FACE_EMOTE_ID then
+			faceTrackRef:AdjustWeight(0)
+			faceTrackRef = nil
+		end
+		if not faceTrackRef or faceTrackRef.Animation.AnimationId ~= IDS.FACE_IDLE_ID then
+			local faceAnim = ins("Animation")
+			faceAnim.AnimationId = IDS.FACE_IDLE_ID
+			faceTrackRef = a:LoadAnimation(faceAnim)
+			faceTrackRef.Priority = Enum.AnimationPriority.Action4
+			faceTrackRef.Looped = true
+			faceTrackRef:Play(0.25)
+		end
+	end
+end
+
+-- ============================================================
+-- UPD FUNCTION (with fixed Ninja variant handling)
+-- ============================================================
+local function upd(c, h, a)
+	if not active or not c or not h or not a then return end
+	if ca and ca.IsPlaying then return end
+	local rp = c:FindFirstChild("HumanoidRootPart")
+	if not rp then return end
+	local v = v3(rp.AssemblyLinearVelocity.X, 0, rp.AssemblyLinearVelocity.Z)
+	local m = v.Magnitude > 0.5
+	local s = "idle"
+	if m then s = ir and "run" or "walk" end
+
+	local currentLIVE = LIVE
+
+	for k, t in pairs(st) do
+		if k ~= s and t and t.IsPlaying then t:Stop(0.25) end
+	end
+
+	if s == "idle" then
+		if not st.idle or not st.idle.IsPlaying or st.idle.Animation.AnimationId ~= currentLIVE.idle then
+			stop_s(a)
+			if st.idle then st.idle:Stop(0.25) end
+			st.idle = loadAnim(a, currentLIVE.idle)
+			st.idle.Priority = Enum.AnimationPriority.Idle
+			st.idle:Play(0.25)
+
+			local hasVariant = false
+			local variantId = nil
+			
+			if lowHealthActive and lowHealthEnabled then
+				local set = INJURED_SETS[activeInjuredSet]
+				if set and set.idleVariant then
+					hasVariant = true
+					variantId = set.idleVariant
+				end
+			end
+			
+			if not hasVariant then
+				hasVariant = currentLIVE.idle == IDS.REIMAGINED_IDLE_ID or currentLIVE.idle == IDS.CRAFTER_IDLE_ID or currentLIVE.idle == IDS.WHIMSY_IDLE_ID or currentLIVE.idle == IDS.GARRY_IDLE_ID or currentLIVE.idle == IDS.HALFLIFE_IDLE_ID or currentLIVE.idle == IDS.INVINCIBLE_IDLE_ID or currentLIVE.idle == IDS.HONORED_IDLE_ID or currentLIVE.idle == IDS.DJ_IDLE_ID or currentLIVE.idle == IDS.SIXTYFOUR_IDLE_ID or currentLIVE.idle == IDS.MODERNR6_IDLE_ID or currentLIVE.idle == IDS.R6ADV_IDLE_ID or currentLIVE.idle == IDS.TOMODACHI_ALT_IDLE_ID or currentLIVE.idle == IDS.R6CASUAL_IDLE_ID or currentLIVE.idle == IDS.R6SKIP_IDLE_ID or currentLIVE.idle == IDS.R6KAWAI_IDLE_ID or currentLIVE.idle == IDS.CIVILIAN_IDLE_ID or currentLIVE.idle == IDS.DYNA_IDLE_ID or currentLIVE.idle == IDS.BLUE_BLUR_IDLE_ID or currentLIVE.idle == IDS.ULTIMATE_LIFE_FORM_IDLE_ID or currentLIVE.idle == IDS.SUPER_SONIC_IDLE_ID or currentLIVE.idle == IDS.HEDGEHOG_IDLE_ID or currentLIVE.idle == IDS.REALISTIC_MALE_IDLE_ID or currentLIVE.idle == IDS.REALISTIC_FEMALE_IDLE_ID or currentLIVE.idle == IDS.SHOWOFF_IDLE_ID or currentLIVE.idle == IDS.RETRO_IDLE_ID or currentLIVE.idle == IDS.NINJA_IDLE_ID or currentLIVE.idle == IDS.SURVIVOR_IDLE_ID
+				if hasVariant then
+					if currentLIVE.idle == IDS.REIMAGINED_IDLE_ID then
+						variantId = IDS.REIMAGINED_IDLE_VARIANT_ID
+					elseif currentLIVE.idle == IDS.CRAFTER_IDLE_ID then
+						variantId = IDS.CRAFTER_IDLE_VARIANT_ID
+					elseif currentLIVE.idle == IDS.WHIMSY_IDLE_ID then
+						variantId = IDS.WHIMSY_IDLE_VARIANT_ID
+					elseif currentLIVE.idle == IDS.GARRY_IDLE_ID then
+						variantId = IDS.GARRY_IDLE_VARIANT_ID
+					elseif currentLIVE.idle == IDS.HALFLIFE_IDLE_ID then
+						variantId = IDS.HALFLIFE_IDLE_VARIANT_ID
+					elseif currentLIVE.idle == IDS.INVINCIBLE_IDLE_ID then
+						variantId = IDS.INVINCIBLE_IDLE_VARIANT_ID
+					elseif currentLIVE.idle == IDS.HONORED_IDLE_ID then
+						variantId = IDS.HONORED_IDLE_VARIANT_ID
+					elseif currentLIVE.idle == IDS.DJ_IDLE_ID then
+						variantId = IDS.DJ_IDLE_VARIANT_ID
+					elseif currentLIVE.idle == IDS.SIXTYFOUR_IDLE_ID then
+						variantId = IDS.SIXTYFOUR_IDLE_VARIANT_ID
+					elseif currentLIVE.idle == IDS.MODERNR6_IDLE_ID then
+						variantId = IDS.MODERNR6_IDLE_VARIANT_ID
+					elseif currentLIVE.idle == IDS.R6ADV_IDLE_ID then
+						variantId = IDS.R6ADV_IDLE_VARIANT_ID
+					elseif currentLIVE.idle == IDS.TOMODACHI_ALT_IDLE_ID then
+						variantId = IDS.TOMODACHI_ALT_IDLE_VARIANT_ID
+					elseif currentLIVE.idle == IDS.R6CASUAL_IDLE_ID then
+						variantId = IDS.R6CASUAL_IDLE_VARIANT_ID
+					elseif currentLIVE.idle == IDS.R6SKIP_IDLE_ID then
+						variantId = IDS.R6SKIP_IDLE_VARIANT_ID
+					elseif currentLIVE.idle == IDS.R6KAWAI_IDLE_ID then
+						variantId = IDS.R6KAWAI_IDLE_VARIANT_ID
+					elseif currentLIVE.idle == IDS.CIVILIAN_IDLE_ID then
+						variantId = IDS.CIVILIAN_IDLE_VARIANT_ID
+					elseif currentLIVE.idle == IDS.DYNA_IDLE_ID then
+						variantId = IDS.DYNA_IDLE_VARIANT_ID
+					elseif currentLIVE.idle == IDS.BLUE_BLUR_IDLE_ID then
+						variantId = IDS.BLUE_BLUR_IDLE_VARIANT_ID
+					elseif currentLIVE.idle == IDS.ULTIMATE_LIFE_FORM_IDLE_ID then
+						variantId = IDS.ULTIMATE_LIFE_FORM_IDLE_VARIANT_ID
+					elseif currentLIVE.idle == IDS.SUPER_SONIC_IDLE_ID then
+						variantId = IDS.SUPER_SONIC_IDLE_VARIANT_ID
+					elseif currentLIVE.idle == IDS.HEDGEHOG_IDLE_ID then
+						variantId = IDS.HEDGEHOG_IDLE_VARIANT_ID
+					elseif currentLIVE.idle == IDS.REALISTIC_MALE_IDLE_ID then
+						variantId = IDS.REALISTIC_MALE_IDLE_VARIANT_ID
+					elseif currentLIVE.idle == IDS.REALISTIC_FEMALE_IDLE_ID then
+						variantId = IDS.REALISTIC_FEMALE_IDLE_VARIANT_ID
+					elseif currentLIVE.idle == IDS.SHOWOFF_IDLE_ID then
+						variantId = IDS.SHOWOFF_IDLE_VARIANT_ID
+					elseif currentLIVE.idle == IDS.RETRO_IDLE_ID then
+						variantId = IDS.RETRO_IDLE_VARIANT_ID
+					elseif currentLIVE.idle == IDS.NINJA_IDLE_ID then
+						variantId = IDS.NINJA_IDLE_VARIANT_ID
+					elseif currentLIVE.idle == IDS.SURVIVOR_IDLE_ID then
+						variantId = IDS.SURVIVOR_IDLE_VARIANT_ID
+					end
+				end
+			end
+
+			if hasVariant and variantId then
+				if idleVariantTimer then task.cancel(idleVariantTimer) end
+				idleVariantTimer = task.spawn(function()
+					while true do
+						local shouldContinue = false
+						if lowHealthActive and lowHealthEnabled then
+							local set = INJURED_SETS[activeInjuredSet]
+							if set and set.idleVariant then
+								shouldContinue = currentLIVE.idle == set.idle
+							end
+						end
+						if not shouldContinue then
+							shouldContinue = currentLIVE.idle == IDS.REIMAGINED_IDLE_ID or currentLIVE.idle == IDS.CRAFTER_IDLE_ID or currentLIVE.idle == IDS.WHIMSY_IDLE_ID or currentLIVE.idle == IDS.GARRY_IDLE_ID or currentLIVE.idle == IDS.HALFLIFE_IDLE_ID or currentLIVE.idle == IDS.INVINCIBLE_IDLE_ID or currentLIVE.idle == IDS.HONORED_IDLE_ID or currentLIVE.idle == IDS.DJ_IDLE_ID or currentLIVE.idle == IDS.SIXTYFOUR_IDLE_ID or currentLIVE.idle == IDS.MODERNR6_IDLE_ID or currentLIVE.idle == IDS.R6ADV_IDLE_ID or currentLIVE.idle == IDS.TOMODACHI_ALT_IDLE_ID or currentLIVE.idle == IDS.R6CASUAL_IDLE_ID or currentLIVE.idle == IDS.R6SKIP_IDLE_ID or currentLIVE.idle == IDS.R6KAWAI_IDLE_ID or currentLIVE.idle == IDS.CIVILIAN_IDLE_ID or currentLIVE.idle == IDS.DYNA_IDLE_ID or currentLIVE.idle == IDS.BLUE_BLUR_IDLE_ID or currentLIVE.idle == IDS.ULTIMATE_LIFE_FORM_IDLE_ID or currentLIVE.idle == IDS.SUPER_SONIC_IDLE_ID or currentLIVE.idle == IDS.HEDGEHOG_IDLE_ID or currentLIVE.idle == IDS.REALISTIC_MALE_IDLE_ID or currentLIVE.idle == IDS.REALISTIC_FEMALE_IDLE_ID or currentLIVE.idle == IDS.SHOWOFF_IDLE_ID or currentLIVE.idle == IDS.RETRO_IDLE_ID or currentLIVE.idle == IDS.NINJA_IDLE_ID or currentLIVE.idle == IDS.SURVIVOR_IDLE_ID
+						end
+						if not shouldContinue then break end
+						
+						local idleStartTime = tick()
+						while tick() - idleStartTime < math.random(30, 50) / 10 do
+							task.wait(0.1)
+							if h.MoveDirection.Magnitude > 0.5 then
+								if idleVariantTrack and idleVariantTrack.IsPlaying then
+									idleVariantTrack:Stop(0.25)
+									idleVariantTrack = nil
+								end
+								break
+							end
+							if not st.idle or not st.idle.IsPlaying then
+								break
+							end
+						end
+						if st.idle and st.idle.IsPlaying and h.MoveDirection.Magnitude < 0.5 and shouldContinue then
+							if idleVariantTrack then
+								idleVariantTrack:Stop(0.25)
+							end
+							idleVariantTrack = loadAnim(a, variantId)
+							idleVariantTrack.Priority = Enum.AnimationPriority.Movement
+							idleVariantTrack:Play(0.25)
+							while idleVariantTrack and idleVariantTrack.IsPlaying do
+								task.wait(0.1)
+								if h.MoveDirection.Magnitude > 0.5 then
+									if idleVariantTrack then
+										idleVariantTrack:Stop(0.25)
+										idleVariantTrack = nil
+									end
+									break
+								end
+								if not st.idle or not st.idle.IsPlaying then
+									if idleVariantTrack then
+										idleVariantTrack:Stop(0.25)
+										idleVariantTrack = nil
+									end
+									break
+								end
+							end
+						else
+							break
+						end
+					end
+				end)
+			else
+				if idleVariantTimer then
+					task.cancel(idleVariantTimer)
+					idleVariantTimer = nil
+				end
+				if idleVariantTrack then
+					idleVariantTrack:Stop(0.25)
+					idleVariantTrack = nil
+				end
+			end
+		end
+		h.WalkSpeed = 16
+	elseif s == "walk" then
+		if not st.walk or not st.walk.IsPlaying or st.walk.Animation.AnimationId ~= currentLIVE.walk then
+			stop_s(a)
+			if st.walk then st.walk:Stop(0.25) end
+			st.walk = loadAnim(a, currentLIVE.walk)
+			st.walk.Priority = Enum.AnimationPriority.Movement
+			st.walk:Play(0.1)
+		end
+		st.walk:AdjustSpeed(1.2)
+		h.WalkSpeed = walkSpeedSetting
+	elseif s == "run" then
+		if not st.run or not st.run.IsPlaying or st.run.Animation.AnimationId ~= currentLIVE.run then
+			stop_s(a)
+			if st.run then st.run:Stop(0.25) end
+			st.run = loadAnim(a, currentLIVE.run)
+			st.run.Priority = Enum.AnimationPriority.Movement
+			st.run:Play(0.25)
+			local animSpeed = 3
+			if lowHealthActive and lowHealthEnabled then
+				local set = INJURED_SETS[activeInjuredSet]
+				if set and set.runSpeed then
+					animSpeed = set.runSpeed
+				end
+			else
+				for _, entry in ipairs(ANIM_LIBRARY.run) do
+					if entry.id == currentLIVE.run and entry.speed then
+						animSpeed = entry.speed
+						break
+					end
+				end
+			end
+			st.run:AdjustSpeed(animSpeed)
+		end
+		h.WalkSpeed = runSpeedSetting
+	end
+end
+
+-- ============================================================
+-- CLEAR CA (unchanged)
+-- ============================================================
+local function clearCa()
+	stop_a()
+	isMovingEmote = false
+	stopE.Visible = false
+	local c = lp.Character
+	local h = c and c:FindFirstChildOfClass("Humanoid")
+	local a = h and h:FindFirstChildOfClass("Animator")
+	if h then
+		h.WalkSpeed = ir and runSpeedSetting or walkSpeedSetting
+		h.JumpPower = 0
+	end
+	if a then
+		updateFaceAnimation(false, a)
+	end
+	if idleVariantTimer then
+		task.cancel(idleVariantTimer)
+		idleVariantTimer = nil
+	end
+	if idleVariantTrack then
+		idleVariantTrack:Stop(0.25)
+		idleVariantTrack = nil
+	end
+end
+
+-- ============================================================
+-- EMOTE PLAY FUNCTIONS (unchanged)
+-- ============================================================
+local function playEmoteWithVariations(animId, variations, interval, isCar)
+	local c = lp.Character
+	local h = c and c:FindFirstChildOfClass("Humanoid")
+	local a = h and h:FindFirstChildOfClass("Animator")
+	if not a then return end
+	clearCa()
+	ef.Visible = false
+	stop_s(a)
+	local emoteId = animId
+	if variations and #variations > 0 then
+		emoteId = variations[math.random(1, #variations)]
+	end
+	local t = loadAnim(a, emoteId)
+	ca = t
+	t.Looped = true
+	t.Priority = Enum.AnimationPriority.Action3
+	if isCar then
+		isMovingEmote = true
+		h.WalkSpeed = 8
+		currentVariation = emoteId
+		if variationTimer then task.cancel(variationTimer) end
+		variationTimer = task.spawn(function()
+			while ca == t and t.IsPlaying do
+				task.wait(interval or 4)
+				if ca == t and t.IsPlaying and a then
+					local newId = variations[math.random(1, #variations)]
+					if newId ~= currentVariation then
+						local newTrack = loadAnim(a, newId)
+						newTrack.Looped = true
+						newTrack.Priority = Enum.AnimationPriority.Action3
+						newTrack:Play(0.25)
+						t:Stop(0.25)
+						ca = newTrack
+						t = newTrack
+						currentVariation = newId
+					end
+				end
+			end
+		end)
+	else
+		isMovingEmote = false
+		h.WalkSpeed = 0
+	end
+	t:Play(0.25)
+	stopE.Visible = true
+	updateFaceAnimation(true, a)
+	if currentEmoteThread then task.cancel(currentEmoteThread) end
+	currentEmoteThread = task.spawn(function()
+		while ca == t and t.IsPlaying do
+			stop_s(a)
+			task.wait(0.1)
+		end
+	end)
+end
+
+local function playEmoteWithVariationsNoMove(animId, variations, interval)
+	local c = lp.Character
+	local h = c and c:FindFirstChildOfClass("Humanoid")
+	local a = h and h:FindFirstChildOfClass("Animator")
+	if not a then return end
+	clearCa()
+	ef.Visible = false
+	stop_s(a)
+	local emoteId = animId
+	if variations and #variations > 0 then
+		emoteId = variations[math.random(1, #variations)]
+	end
+	local t = loadAnim(a, emoteId)
+	ca = t
+	t.Looped = true
+	t.Priority = Enum.AnimationPriority.Action3
+	isMovingEmote = false
+	h.WalkSpeed = 0
+	t:Play(0.25)
+	stopE.Visible = true
+	updateFaceAnimation(true, a)
+	if currentEmoteThread then task.cancel(currentEmoteThread) end
+	currentEmoteThread = task.spawn(function()
+		while ca == t and t.IsPlaying do
+			stop_s(a)
+			task.wait(0.1)
+		end
+	end)
+end
+
+local function playEmoteWithSlowMove(animId, speed)
+	local c = lp.Character
+	local h = c and c:FindFirstChildOfClass("Humanoid")
+	local a = h and h:FindFirstChildOfClass("Animator")
+	if not a then return end
+	clearCa()
+	ef.Visible = false
+	stop_s(a)
+	local t = loadAnim(a, animId)
+	ca = t
+	t.Looped = true
+	t.Priority = Enum.AnimationPriority.Action3
+	isMovingEmote = true
+	h.WalkSpeed = 2.5
+	t:Play(0.25)
+	if speed then
+		t:AdjustSpeed(speed)
+	end
+	stopE.Visible = true
+	updateFaceAnimation(true, a)
+	if currentEmoteThread then task.cancel(currentEmoteThread) end
+	currentEmoteThread = task.spawn(function()
+		while ca == t and t.IsPlaying do
+			stop_s(a)
+			task.wait(0.1)
+		end
+	end)
+end
+
+local function playSimpleEmote(animId, speed)
+	local c = lp.Character
+	local h = c and c:FindFirstChildOfClass("Humanoid")
+	local a = h and h:FindFirstChildOfClass("Animator")
+	if not a then return end
+	clearCa()
+	ef.Visible = false
+	stop_s(a)
+	local t = loadAnim(a, animId)
+	ca = t
+	t.Looped = true
+	t.Priority = Enum.AnimationPriority.Action3
+	isMovingEmote = false
+	h.WalkSpeed = 0
+	t:Play(0.25)
+	if speed then
+		t:AdjustSpeed(speed)
+	end
+	stopE.Visible = true
+	updateFaceAnimation(true, a)
+	if currentEmoteThread then task.cancel(currentEmoteThread) end
+	currentEmoteThread = task.spawn(function()
+		while ca == t and t.IsPlaying do
+			stop_s(a)
+			task.wait(0.1)
+		end
+	end)
+end
+
+-- ============================================================
+-- SPRINT FUNCTIONS (unchanged)
+-- ============================================================
+local function stopSprinting()
+	ir = false
+	isStaminaDepleted = false
+	rb.ImageColor3 = stamina <= 0 and c3(100, 100, 100) or c3(255, 255, 255)
+	local c = lp.Character
+	local h = c and c:FindFirstChildOfClass("Humanoid")
+	if h and not (ca and ca.IsPlaying) then
+		h.WalkSpeed = walkSpeedSetting
+	end
+end
+
+local function startSprinting()
+	if stamina <= 0 then
+		isStaminaDepleted = true
+		return
+	end
+	isStaminaDepleted = false
+	ir = true
+	rb.ImageColor3 = c3(0, 255, 100)
+	local c = lp.Character
+	local h = c and c:FindFirstChildOfClass("Humanoid")
+	if h and not (ca and ca.IsPlaying) then
+		h.WalkSpeed = runSpeedSetting
+	end
+end
+
+local function run()
+	if stamina <= 0 then
+		stopSprinting()
+		return
+	end
+	ir = not ir
+	if ir then
+		rb.ImageColor3 = c3(0, 255, 100)
+	else
+		rb.ImageColor3 = c3(255, 255, 255)
+	end
+	local c = lp.Character
+	local h = c and c:FindFirstChildOfClass("Humanoid")
+	if h and not (ca and ca.IsPlaying) then
+		h.WalkSpeed = ir and runSpeedSetting or walkSpeedSetting
+	end
+end
+
+local function toggleShiftLock()
+	isSL = not isSL
+	slb.ImageColor3 = isSL and c3(0, 200, 255) or c3(255, 255, 255)
+end
+
+-- ============================================================
+-- EMOTE BUTTONS (unchanged)
+-- ============================================================
+local emoteButtons = {}
+
+local function addEmoteBtn(name, id, variations, interval, speed, isCar, isBHop, isSlowMove, isVariationNoMove)
+	local b = ins("TextButton")
+	b.Size = ud2(1, 0, 0, 35)
+	b.BackgroundColor3 = c3(40, 40, 40)
+	b.Text = name
+	b.TextColor3 = c3(255, 255, 255)
+	b.Font = Enum.Font.SourceSans
+	b.TextSize = 16
+	b.Parent = sf
+	b.Name = name
+	if variations then
+		if isVariationNoMove then
+			b.MouseButton1Click:Connect(function() playEmoteWithVariationsNoMove(id, variations, interval) end)
+		else
+			b.MouseButton1Click:Connect(function() playEmoteWithVariations(id, variations, interval, isCar) end)
+		end
+	else
+		b.MouseButton1Click:Connect(function()
+			if isBHop then
+				local c = lp.Character
+				local h = c and c:FindFirstChildOfClass("Humanoid")
+				local a = h and h:FindFirstChildOfClass("Animator")
+				if not a then return end
+				clearCa()
+				ef.Visible = false
+				stop_s(a)
+				local t = loadAnim(a, id)
+				ca = t
+				t.Looped = true
+				t.Priority = Enum.AnimationPriority.Action3
+				isMovingEmote = true
+				h.WalkSpeed = 17
+				t:Play(0.25)
+				if speed then
+					t:AdjustSpeed(speed)
+				end
+				stopE.Visible = true
+				updateFaceAnimation(true, a)
+				if currentEmoteThread then task.cancel(currentEmoteThread) end
+				currentEmoteThread = task.spawn(function()
+					while ca == t and t.IsPlaying do
+						stop_s(a)
+						task.wait(0.1)
+					end
+				end)
+			elseif isSlowMove then
+				playEmoteWithSlowMove(id, speed)
+			else
+				playSimpleEmote(id, speed)
+			end
+		end)
+	end
+	table.insert(emoteButtons, {button = b, name = name})
+end
+
+searchBar:GetPropertyChangedSignal("Text"):Connect(function()
+	local query = searchBar.Text:lower()
+	for _, data in ipairs(emoteButtons) do
+		if query == "" or data.name:lower():find(query) then
+			data.button.Visible = true
+		else
+			data.button.Visible = false
+		end
+	end
+end)
+
+-- ============================================================
+-- ADD ALL EMOTES
+-- ============================================================
+addEmoteBtn("California Girls", IDS.E1_ID)
+addEmoteBtn("Conga!", IDS.C_ID, congaVariations, 5, nil, true)
+addEmoteBtn("Schadenfreude", nil, schadenVariations, 4)
+addEmoteBtn("Junky Dance", IDS.JUNKY_DANCE_ID)
+addEmoteBtn("So Retro", IDS.SO_RETRO_ID)
+addEmoteBtn("Jersey Club", IDS.JERSEY_CLUB_ID)
+addEmoteBtn("Smug Dance", IDS.SMUG_DANCE_ID)
+addEmoteBtn("Assumptions", IDS.ASSUMPTIONS_ID)
+addEmoteBtn("Grizzly", IDS.GRIZZLY_ID)
+addEmoteBtn("Angels of Delusions", IDS.ANGELS_ID)
+addEmoteBtn("I JUST HIT THE JACKPOT!!!", IDS.JACKPOT_ID)
+addEmoteBtn("Clown Dance", IDS.CLOWN_DANCE_ID)
+addEmoteBtn("Blue Shirt Sturdy", IDS.BLUE_SHIRT_STURDY_ID)
+addEmoteBtn("Gangnam Style", IDS.GANGNAM_STYLE_ID)
+addEmoteBtn("Sturdy", IDS.STURDY_ID)
+addEmoteBtn("AVGN", IDS.AVGN_ID)
+addEmoteBtn("Tomodachi", IDS.TOMODACHI_ID)
+addEmoteBtn("Bounce Dance", IDS.BOUNCE_DANCE_ID)
+addEmoteBtn("ShowAdo", IDS.SHOWADO_ID)
+addEmoteBtn("CryBall", IDS.CRYBALL_ID)
+addEmoteBtn("BANG", IDS.BANG_ID)
+addEmoteBtn("Scuba Cat", IDS.SCUBA_CAT_ID)
+addEmoteBtn("Springtrap Sturdy", IDS.SPRINGTRAP_STURDY_ID)
+addEmoteBtn("Invincible Wobble", IDS.INVINCIBLE_WOBBLE_ID)
+addEmoteBtn("Party Rock", IDS.PARTY_ROCK_ID)
+addEmoteBtn("CatGirl Sit", IDS.CATGIRL_SIT_ID)
+addEmoteBtn("Dancing With Your Eyes Closed", IDS.DANCING_WITH_EYES_CLOSED_ID)
+addEmoteBtn("Hoppin Dip", IDS.HOPPIN_DIP_ID)
+addEmoteBtn("Alter Ego", IDS.ALTER_EGO_ID)
+addEmoteBtn("Bag Up", IDS.BU_ID)
+addEmoteBtn("Metro Man", IDS.MM_ID)
+addEmoteBtn("Subject Three", IDS.S3_ID)
+addEmoteBtn("Caramelldansen", IDS.CD_ID)
+addEmoteBtn("Unemployment", IDS.UN_ID)
+addEmoteBtn("Dance Potion", IDS.DP_ID)
+addEmoteBtn("I CAME TO GROOVE!", IDS.I_CAME_TO_GROOVE_ID, nil, nil, 1.2)
+addEmoteBtn("Self Paced", IDS.SELF_PACED_ID)
+addEmoteBtn("Miss Me?", IDS.MISS_ME_ID, nil, nil, 1.12)
+addEmoteBtn("OneyPlayz", IDS.ONEYPLAYZ_ID, nil, nil, 1.3)
+addEmoteBtn("Yuta Jumping", IDS.YUTA_JUMPING_ID)
+addEmoteBtn("Dead Man Standing", IDS.DEAD_MAN_STANDING_ID)
+addEmoteBtn("Squingle", IDS.SQUINGLE_ID)
+addEmoteBtn("Addendum", IDS.ADDENDUM_ID, nil, nil, 2)
+addEmoteBtn("Boogie Down", IDS.BOOGIE_DOWN_ID)
+addEmoteBtn("Naoya Party", IDS.NAOYA_PARTY_ID)
+addEmoteBtn("Sit", nil, {IDS.SIT_VAR1_ID, IDS.SIT_VAR2_ID, IDS.SIT_VAR3_ID, IDS.SIT_VAR4_ID, IDS.SIT_VAR5_ID, IDS.SIT_VAR6_ID, IDS.SIT_VAR7_ID}, 4, nil, false, false, false, true)
+addEmoteBtn("Wall Lean", nil, {IDS.WALL_LEAN_VAR1_ID, IDS.WALL_LEAN_VAR2_ID, IDS.WALL_LEAN_VAR3_ID, IDS.WALL_LEAN_VAR4_ID}, 5, nil, false, false, false, true)
+addEmoteBtn("Jamal Dance", IDS.JAMAL_DANCE_ID)
+addEmoteBtn("Flare", IDS.FLARE_ID)
+addEmoteBtn("PBJ", IDS.PBJ_ID)
+addEmoteBtn("BirdBrain", IDS.BIRDBRAIN_ID)
+addEmoteBtn("Wave", IDS.WAVE_ID)
+addEmoteBtn("Beckon", IDS.BECKON_ID)
+addEmoteBtn("Dap-Up", IDS.DAP_UP_ID)
+addEmoteBtn("Orange Justice", IDS.ORANGE_JUSTICE_ID)
+addEmoteBtn("Pop-Lock", IDS.POP_LOCK_ID)
+addEmoteBtn("MY WORLD", IDS.MY_WORLD_ID)
+addEmoteBtn("Take The L", IDS.TAKE_THE_L_ID)
+addEmoteBtn("Default Dance", IDS.DEFAULT_DANCE_ID)
+addEmoteBtn("ShowTime Swing", IDS.SHOWTIME_SWING_ID)
+addEmoteBtn("MegaPhone", IDS.MEGAPHONE_ID)
+addEmoteBtn("Parker Pride", IDS.PARKER_PRIDE_ID)
+addEmoteBtn("Prince of Egypt", IDS.PRINCE_OF_EGYPT_ID)
+addEmoteBtn("Body Phone", IDS.BODY_PHONE_ID)
+addEmoteBtn("Rambunctious", IDS.RAMBUNCTIOUS_ID)
+addEmoteBtn("Dance If You Carried", IDS.DANCE_IF_YOU_CARRIED_ID)
+addEmoteBtn("Hype", IDS.HYPE_ID)
+addEmoteBtn("Luxe Step", IDS.LUXE_STEP_ID)
+addEmoteBtn("Hypnotic Data", IDS.HYPNOTIC_DATA_ID)
+addEmoteBtn("Worm", IDS.WORM_ID)
+addEmoteBtn("Electro Shuffle", IDS.ELECTRO_SHUFFLE_ID)
+addEmoteBtn("Billy Bounce", IDS.BILLY_BOUNCE_ID)
+addEmoteBtn("Tuff Dance", IDS.TUFF_DANCE_ID)
+addEmoteBtn("Heel Hop", IDS.HEEL_HOP_ID)
+addEmoteBtn("Split Dance", IDS.SPLIT_DANCE_ID)
+addEmoteBtn("Basketball Head", IDS.BASKETBALL_HEAD_ID)
+addEmoteBtn("Popular Vibe", IDS.POPULAR_VIBE_ID)
+addEmoteBtn("Peace Sign", IDS.PEACE_SIGN_ID)
+addEmoteBtn("Car", nil, carVariations, 4, nil, true)
+addEmoteBtn("Pose", nil, poseVariations, 4, nil, false, false, false, true)
+addEmoteBtn("Cry", IDS.CRY_ID)
+addEmoteBtn("B-hop", IDS.B_HOP_ID, nil, nil, 1.8, false, true)
+addEmoteBtn("Confess Your Love", IDS.CONFESS_YOUR_LOVE_ID)
+addEmoteBtn("Garry's Dance", IDS.GARRYS_DANCE_ID)
+addEmoteBtn("Physco Teddy", IDS.PHYSCO_TEDDY_ID)
+addEmoteBtn("Mannrobics", IDS.MANNROBICS_ID)
+addEmoteBtn("Boppin", IDS.BOPPIN_ID)
+addEmoteBtn("DAI DAI DAI", IDS.DAI_DAI_DAI_ID)
+addEmoteBtn("Melee Flourish", IDS.MELEE_FLOURISH_ID)
+addEmoteBtn("Aim Test", IDS.AIM_TEST_ID)
+addEmoteBtn("Wait!", IDS.WAIT_ID)
+addEmoteBtn("Fireball", IDS.FIREBALL_ID)
+addEmoteBtn("Foreign Shuffle", IDS.FOREIGN_SHUFFLE_ID)
+addEmoteBtn("I See Kareem Groove", IDS.I_SEE_KAREEM_ID)
+addEmoteBtn("Groove Out", IDS.GROOVE_OUT_ID)
+addEmoteBtn("Mii Street Dance", nil, miiStreetVariations, 4, nil, false, false, false, true)
+addEmoteBtn("Cory Dance", IDS.CORY_DANCE_ID)
+addEmoteBtn("Street Guy Fighting", IDS.STREET_GUY_FIGHTING_ID)
+addEmoteBtn("Sherbet Lobby", IDS.SHERBET_LOBBY_ID)
+addEmoteBtn("TV Time", nil, tvTimeVariations, 4, nil, false, false, false, true)
+addEmoteBtn("P.Y.T", IDS.PYT_ID)
+addEmoteBtn("My Life is a Party", IDS.MY_LIFE_IS_A_PARTY_ID)
+addEmoteBtn("Jumpstyle", IDS.JUMPSTYLE_ID)
+addEmoteBtn("Buggin", IDS.BUGGIN_ID)
+addEmoteBtn("Torture Dance", IDS.TORTURE_DANCE_ID)
+addEmoteBtn("Griddy", IDS.GRIDDY_ID, nil, nil, nil, false, false, true)
+addEmoteBtn("Late Night Shuffle", IDS.LATE_NIGHT_SHUFFLE_ID)
+addEmoteBtn("Piku Dance", IDS.PIKU_DANCE_ID)
+addEmoteBtn("Trip Out", IDS.TRIP_OUT_ID)
+addEmoteBtn("Fazbear Dance", IDS.FAZBEAR_DANCE_ID)
+addEmoteBtn("Monito Ring", IDS.MONITO_RING_ID)
+addEmoteBtn("It's Like I'm Not Here", IDS.ITS_LIKE_IM_NOT_HERE_ID, nil, nil, 1.2)
+addEmoteBtn("In Ha Mood", IDS.IN_HA_MOOD_ID)
+addEmoteBtn("Rat Dance", IDS.RAT_DANCE_ID)
+addEmoteBtn("Four Lokos", IDS.FOUR_LOKOS_ID)
+addEmoteBtn("Otsukare Summer", IDS.OTSUKARE_SUMMER_ID)
+addEmoteBtn("Lethal Dance", IDS.LETHAL_DANCE_ID)
+
+-- ============================================================
+-- UI EVENT CONNECTIONS
+-- ============================================================
+eb.MouseButton1Click:Connect(function()
+	ef.Visible = not ef.Visible
+	settingsFrame.Visible = false
+	animPanel.Visible = false
+	updateLogFrame.Visible = false
+	staminaPanel.Visible = false
+	headCamPanel.Visible = false
+	if ef.Visible then
+		searchBar.Text = ""
+		for _, data in ipairs(emoteButtons) do
+			data.button.Visible = true
+		end
+	end
+end)
+
+sb.MouseButton1Click:Connect(function()
+	settingsFrame.Visible = not settingsFrame.Visible
+	ef.Visible = false
+	animPanel.Visible = false
+	updateLogFrame.Visible = false
+	staminaPanel.Visible = false
+	headCamPanel.Visible = false
+end)
+
+stopE.MouseButton1Click:Connect(clearCa)
+
+-- ============================================================
+-- SPRINT BUTTON HANDLING (unchanged)
+-- ============================================================
+local sprintActive = false
+rb.MouseButton1Down:Connect(function()
+	if sprintToggle then
+		if stamina > 0 then
+			run()
+		else
+			stopSprinting()
+		end
+	else
+		if stamina > 0 then
+			sprintActive = true
+			startSprinting()
+		else
+			stopSprinting()
+		end
+	end
+end)
+rb.MouseButton1Up:Connect(function()
+	if not sprintToggle then
+		sprintActive = false
+		stopSprinting()
+	end
+end)
+rb.MouseLeave:Connect(function()
+	if not sprintToggle and sprintActive then
+		sprintActive = false
+		stopSprinting()
+	end
+end)
+slb.MouseButton1Click:Connect(toggleShiftLock)
+
+-- ============================================================
+-- KEYBINDS (unchanged)
+-- ============================================================
+uis.InputBegan:Connect(function(i, g)
+	if g or not active then return end
+	if i.KeyCode == Enum.KeyCode.LeftShift then
+		if sprintToggle then
+			if stamina > 0 then
+				run()
+			else
+				stopSprinting()
+			end
+		else
+			if stamina > 0 then
+				sprintActive = true
+				startSprinting()
+			else
+				stopSprinting()
+			end
+		end
+	elseif i.KeyCode == Enum.KeyCode.LeftControl then
+		toggleShiftLock()
+	end
+end)
+
+uis.InputEnded:Connect(function(i, g)
+	if g or not active then return end
+	if i.KeyCode == Enum.KeyCode.LeftShift and not sprintToggle then
+		sprintActive = false
+		stopSprinting()
+	end
+end)
+
+-- ============================================================
+-- STOP LARP BUTTONS (unchanged)
+-- ============================================================
+xb.MouseButton1Click:Connect(function() cf.Visible = true end)
+bn.MouseButton1Click:Connect(function() cf.Visible = false end)
+
+by.MouseButton1Click:Connect(function()
+	active = false
+	getgenv().forsakenthingyguys = nil
+	clearCa()
+	local char = lp.Character
+	if char then
+		local hum = char:FindFirstChildOfClass("Humanoid")
+		local animator = hum and hum:FindFirstChildOfClass("Animator")
+		if animator then
+			for _, track in ipairs(animator:GetPlayingAnimationTracks()) do
+				track:Stop(0)
+			end
+		end
+		if hum then
+			hum.WalkSpeed = 16
+			hum.JumpPower = 50
+			hum:SetStateEnabled(Enum.HumanoidStateType.Seated, true)
+		end
+		for _, scriptObj in ipairs(char:GetDescendants()) do
+			if scriptObj:IsA("Script") and scriptObj.Name == "Animate" then
+				scriptObj.Disabled = false
+				scriptObj.Enabled = false
+				scriptObj.Enabled = true
+				break
+			end
+		end
+	end
+	sg:Destroy()
+	staminaGui:Destroy()
+end)
+
+-- ============================================================
+-- MAIN SCRIPT (unchanged)
+-- ============================================================
+local animateConns = {}
+local charAddedConn
+local renderConn = nil
+local healthCheckConnection = nil
+
+local function updateHealthBar()
+	local char = lp.Character
+	local hum = char and char:FindFirstChildOfClass("Humanoid")
+	if not hum then return end
+	local hp, max = hum.Health, hum.MaxHealth
+	local pct = hp / max
+	ts:Create(healthFill, TweenInfo.new(0.13, Enum.EasingStyle.Sine), {Size = ud2(pct, 0, 1, 0)}):Play()
+	healthText.Text = math.floor(hp) .. "/" .. math.floor(max)
+	if pct < 0.3 then
+		healthFill.BackgroundColor3 = c3(255, 30, 30)
+	else
+		healthFill.BackgroundColor3 = c3(200, 50, 70)
+	end
+end
+
+local function updateStaminaBar()
+	local pct = stamina / MAX_STAMINA
+	ts:Create(staminaFill, TweenInfo.new(0.13, Enum.EasingStyle.Sine), {Size = ud2(pct, 0, 1, 0)}):Play()
+	staminaText.Text = math.floor(stamina) .. "/" .. MAX_STAMINA
+	if pct < 0.15 then
+		staminaFill.BackgroundColor3 = c3(255, 80, 80)
+	else
+		staminaFill.BackgroundColor3 = c3(210, 210, 210)
+	end
+end
+
+local function checkLowHealth()
+	if not lowHealthEnabled then
+		if lowHealthActive then
+			lowHealthActive = false
+			LIVE.idle = savedLIVE.idle or IDS.I_ID
+			LIVE.walk = savedLIVE.walk or IDS.W_ID
+			LIVE.run = savedLIVE.run or IDS.R_ID
+			savedLIVE = { idle = nil, walk = nil, run = nil }
+			st = {}
+		end
+		return
+	end
+
+	local char = lp.Character
+	if not char then return end
+	local hum = char:FindFirstChildOfClass("Humanoid")
+	if not hum then return end
+	local hp = hum.Health
+	local maxHp = hum.MaxHealth
+	local half = maxHp / 2
+
+	if hp <= half and hp > 0 then
+		if not lowHealthActive then
+			lowHealthActive = true
+			savedLIVE.idle = LIVE.idle
+			savedLIVE.walk = LIVE.walk
+			savedLIVE.run = LIVE.run
+			local set = INJURED_SETS[activeInjuredSet]
+			LIVE.idle = set.idle
+			LIVE.walk = set.walk
+			LIVE.run = set.run
+			st = {}
+		end
+	elseif hp > half then
+		if lowHealthActive then
+			lowHealthActive = false
+			LIVE.idle = savedLIVE.idle or IDS.I_ID
+			LIVE.walk = savedLIVE.walk or IDS.W_ID
+			LIVE.run = savedLIVE.run or IDS.R_ID
+			savedLIVE = { idle = nil, walk = nil, run = nil }
+			st = {}
+		end
+	end
+end
+
+local function main(c)
+	local h = c:WaitForChild("Humanoid")
+	if h.RigType == Enum.HumanoidRigType.R6 then
+		sg.Enabled = false
+		local oldWarn = lp.PlayerGui:FindFirstChild("R6Warning")
+		if oldWarn then oldWarn:Destroy() end
+		local wGui = ins("ScreenGui")
+		wGui.Name = "R6Warning"
+		wGui.Parent = lp:WaitForChild("PlayerGui")
+		local wBg = ins("Frame")
+		wBg.Size = ud2(0, 300, 0, 75)
+		wBg.Position = ud2(0.5, 0, 0.15, 0)
+		wBg.AnchorPoint = v2(0.5, 0.5)
+		wBg.BackgroundColor3 = c3(15, 15, 15)
+		wBg.BorderSizePixel = 0
+		wBg.Parent = wGui
+		local wTxt = ins("TextLabel")
+		wTxt.Size = ud2(1, 0, 1, 0)
+		wTxt.BackgroundTransparency = 1
+		wTxt.Text = "R15 REQUIRED. R6 IS NOT SUPPORTED."
+		wTxt.TextColor3 = c3(255, 50, 50)
+		wTxt.Font = Enum.Font.SourceSansBold
+		wTxt.TextSize = 18
+		wTxt.Parent = wBg
+		task.spawn(function()
+			task.wait(3)
+			local tInfo = TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+			local tweenBg = ts:Create(wBg, tInfo, {BackgroundTransparency = 1})
+			local tweenTxt = ts:Create(wTxt, tInfo, {TextTransparency = 1})
+			tweenBg:Play()
+			tweenTxt:Play()
+			tweenTxt.Completed:Wait()
+			wGui:Destroy()
+		end)
+		return
+	else
+		sg.Enabled = true
+		local oldWarn = lp.PlayerGui:FindFirstChild("R6Warning")
+		if oldWarn then oldWarn:Destroy() end
+	end
+
+	local a = h:WaitForChild("Animator")
+
+	for _, o in ipairs(c:GetDescendants()) do
+		if o:IsA("Script") and o.Name == "Animate" then
+			o.Disabled = true
+			break
+		end
+	end
+
+	for _, t in ipairs(a:GetPlayingAnimationTracks()) do t:Stop(0) end
+	for _, t in ipairs(h:GetPlayingAnimationTracks()) do t:Stop(0) end
+
+	h.JumpPower = 0
+	h:SetStateEnabled(Enum.HumanoidStateType.Seated, false)
+
+	st, ca, isMovingEmote = {}, nil, false
+	stamina = MAX_STAMINA
+	staminaRegenDelay = 0
+	staminaDepletedDelay = 0
+	isStaminaDepleted = false
+
+	local it = loadAnim(a, LIVE.idle)
+	it.Priority = Enum.AnimationPriority.Idle
+	it:Play(0.25)
+	st.idle = it
+
+	local headAnim = ins("Animation")
+	headAnim.AnimationId = IDS.H_ID
+	local headTrack = a:LoadAnimation(headAnim)
+	headTrackRef = headTrack
+	headTrack.Priority = Enum.AnimationPriority.Action4
+	headTrack:Play(0, 1, 0)
+	headTrack:AdjustWeight(0.2)
+
+	updateFaceAnimation(false, a)
+
+	local currentYaw = 0
+	local targetYaw = 0
+	local yawVelocity = 0
+	local yawAccel = 0
+	local prevTargetYaw = 0
+
+	if renderConn then renderConn:Disconnect() end
+	if healthCheckConnection then
+		task.cancel(healthCheckConnection)
+		healthCheckConnection = nil
+	end
+
+	healthCheckConnection = task.spawn(function()
+		while active and lp.Character do
+			task.wait(0.5)
+			checkLowHealth()
+		end
+	end)
+
+	renderConn = rs.RenderStepped:Connect(function(dt)
+		if not active or not c or not c.Parent then
+			if renderConn then renderConn:Disconnect() end
+			renderConn = nil
+			return
+		end
+
+		upd(c, h, a)
+
+		local isMoving = h.MoveDirection.Magnitude > 0
+		if staminaEnabled then
+			if ir and isMoving then
+				stamina = stamina - drainRate * dt
+				staminaRegenDelay = 0
+				if stamina <= 0 then
+					stamina = 0
+					staminaDepletedDelay = staminaDepletedDelay + dt
+					if ir then
+						stopSprinting()
+					end
+				end
+			else
+				staminaDepletedDelay = 0
+				if stamina < MAX_STAMINA then
+					staminaRegenDelay = staminaRegenDelay + dt
+					if staminaRegenDelay >= regenDelay then
+						stamina = math.min(stamina + regenRate * dt, MAX_STAMINA)
+					end
+				end
+			end
+		else
+			stamina = MAX_STAMINA
+		end
+
+		updateStaminaBar()
+		updateHealthBar()
+
+		if stamina <= 0 then
+			rb.ImageColor3 = c3(100, 100, 100)
+		elseif ir then
+			rb.ImageColor3 = c3(0, 255, 100)
+		else
+			rb.ImageColor3 = c3(255, 255, 255)
+		end
+
+		local isEmoting = ca and ca.IsPlaying
+		if headCamMode == 1 then
+			headCamEnabled = isEmoting
+		elseif headCamMode == 2 then
+			headCamEnabled = not isEmoting
+		elseif headCamMode == 3 then
+			headCamEnabled = true
+		else
+			headCamEnabled = false
+		end
+
+		if headCamEnabled then
+			local head = c:FindFirstChild("Head")
+			if head then
+				local hrp = c:FindFirstChild("HumanoidRootPart")
+				if hrp then
+					local headPos = (hrp.CFrame + v3(0, 1.5, 0)):PointToObjectSpace(head.Position)
+					h.CameraOffset = h.CameraOffset:Lerp(headPos, math.min(dt * 5, 1))
+				end
+			end
+		else
+			h.CameraOffset = h.CameraOffset:Lerp(v3(0, 0, 0), math.min(dt * 5, 1))
+		end
+
+		local rp = c:FindFirstChild("HumanoidRootPart")
+		if rp and h then
+			local moveDir = h.MoveDirection
+			local targetFov = 70
+			if ir and moveDir.Magnitude > 0 then
+				targetFov = 80
+			end
+			camera.FieldOfView = camera.FieldOfView + (targetFov - camera.FieldOfView) * math.min(dt * 2, 1)
+
+			if isSL then
+				local camLook = camera.CFrame.LookVector
+				local targetCF = CFrame.lookAt(rp.Position, rp.Position + v3(camLook.X, 0, camLook.Z))
+				rp.CFrame = rp.CFrame:Lerp(targetCF, 0.5)
+			elseif moveDir.Magnitude > 0 then
+				local targetCF = CFrame.lookAt(rp.Position, rp.Position + moveDir)
+				rp.CFrame = rp.CFrame:Lerp(targetCF, 0.1)
+			end
+
+			if isMovingEmote then
+				h:Move(rp.CFrame.LookVector)
+			end
+
+			if not (ca and ca.IsPlaying) then
+				local camDirObjSpace = rp.CFrame:VectorToObjectSpace(camera.CFrame.LookVector)
+				targetYaw = -math.atan2(camDirObjSpace.X, -camDirObjSpace.Z)
+				local maxRotation = math.rad(75)
+				targetYaw = math.clamp(targetYaw, -maxRotation, maxRotation)
+				local targetDelta = targetYaw - prevTargetYaw
+				prevTargetYaw = targetYaw
+				local delta = targetYaw - currentYaw
+				local k = 12
+				local d = 0.92
+				local pred = targetDelta * 8
+				yawAccel = yawAccel + (delta + pred) * k * dt
+				yawAccel = yawAccel * d
+				yawVelocity = yawVelocity + yawAccel * dt
+				yawVelocity = yawVelocity * 0.98
+				currentYaw = currentYaw + yawVelocity * dt
+				currentYaw = currentYaw + (targetYaw - currentYaw) * math.min(dt * 3, 0.15)
+				local yawMapped = currentYaw
+				if yawMapped < 0 then
+					yawMapped = yawMapped + (math.pi * 2)
+				end
+				if headTrack.Length > 0 then
+					headTrack.TimePosition = (yawMapped / (math.pi * 2)) * headTrack.Length
+				end
+			end
+		end
+	end)
+end
+
+local function watchForAnimate(c)
+	local conn = c.DescendantAdded:Connect(function(d)
+		if d:IsA("Script") and d.Name == "Animate" then
+			d.Disabled = true
+		end
+	end)
+	table.insert(animateConns, conn)
+	for _, o in ipairs(c:GetDescendants()) do
+		if o:IsA("Script") and o.Name == "Animate" then
+			o.Disabled = true
+		end
+	end
+end
+
+charAddedConn = lp.CharacterAdded:Connect(function(c)
+	watchForAnimate(c)
+	main(c)
+end)
+
+if lp.Character then
+	watchForAnimate(lp.Character)
+	task.spawn(main, lp.Character)
+end
