@@ -237,6 +237,10 @@ local IDS = {
 	SURVIVOR_IDLE_VARIANT_ID = "rbxassetid://103608205797687",
 	SURVIVOR_WALK_ID = "rbxassetid://121737235176124",
 	SURVIVOR_RUN_ID = "rbxassetid://103091973161069",
+	-- Azure Pack
+	AZURE_IDLE_ID = "rbxassetid://74443937226830",
+	AZURE_WALK_ID = "rbxassetid://74007452122320",
+	AZURE_RUN_ID = "rbxassetid://111311479373350",
 	-- Injured Animation Sets
 	INJURED_DEFAULT_IDLE_ID = "rbxassetid://86868181947908",
 	INJURED_DEFAULT_WALK_ID = "rbxassetid://130536500105872",
@@ -354,7 +358,7 @@ local IDS = {
 	FOUR_LOKOS_ID = "rbxassetid://117420775806036",
 	OTSUKARE_SUMMER_ID = "rbxassetid://102662583709770",
 	LETHAL_DANCE_ID = "rbxassetid://114408299255221",
-	-- New Emotes (this update)
+	-- New Emotes (v2.4)
 	GET_JIGGY_ID = "rbxassetid://95553508202355",
 	AURA_MONSTER_ID = "rbxassetid://91039645890556",
 	BLUE_TOP_ROCK_ID = "rbxassetid://79304757249067",
@@ -363,10 +367,11 @@ local IDS = {
 	OSHI_NO_KO_ID = "rbxassetid://104814587445643",
 	MII_CHEERING_ID = "rbxassetid://140122299835469",
 	FACT_ATTACK_ID = "rbxassetid://74770054214962",
-	DANCE1_ID = "rbxassetid://89676212115777",
-	DANCE2_ID = "rbxassetid://116571017721759",
-	DANCE3_ID = "rbxassetid://78240649545370",
-	DANCE4_ID = "rbxassetid://91867154217166",
+	-- /e Dance variants (grouped)
+	E_DANCE_VAR1_ID = "rbxassetid://89676212115777",
+	E_DANCE_VAR2_ID = "rbxassetid://116571017721759",
+	E_DANCE_VAR3_ID = "rbxassetid://78240649545370",
+	E_DANCE_VAR4_ID = "rbxassetid://91867154217166",
 	SNOOP_DANCE_ID = "rbxassetid://107759404982778",
 	RAKAI_ID = "rbxassetid://116624474530947",
 	HAMSTER_DANCE_ID = "rbxassetid://138667496817464",
@@ -378,10 +383,10 @@ local IDS = {
 -- ============================================================
 -- PRELOAD LIST
 -- ============================================================
-local ids = {IDS.P_ID, IDS.B_ID, IDS.I_ID, IDS.W_ID, IDS.R_ID, IDS.E1_ID, IDS.C_ID, IDS.H_ID, IDS.BU_ID, IDS.MM_ID, IDS.S3_ID, IDS.CD_ID, IDS.UN_ID, IDS.DP_ID, IDS.FACE_IDLE_ID, IDS.FACE_EMOTE_ID, IDS.CONGA_VAR1_ID, IDS.CONGA_VAR2_ID, IDS.CONGA_VAR3_ID, IDS.SCHADEN_VAR1_ID, IDS.SCHADEN_VAR2_ID, IDS.SCHADEN_VAR3_ID, IDS.SCHADEN_VAR4_ID, IDS.JUNKY_DANCE_ID, IDS.SO_RETRO_ID, IDS.JERSEY_CLUB_ID, IDS.SMUG_DANCE_ID, IDS.ASSUMPTIONS_ID, IDS.GRIZZLY_ID, IDS.ANGELS_ID, IDS.JACKPOT_ID, IDS.CLOWN_DANCE_ID, IDS.BLUE_SHIRT_STURDY_ID, IDS.GANGNAM_STYLE_ID, IDS.STURDY_ID, IDS.AVGN_ID, IDS.TOMODACHI_ID, IDS.BOUNCE_DANCE_ID, IDS.SHOWADO_ID, IDS.CRYBALL_ID, IDS.BANG_ID, IDS.SCUBA_CAT_ID, IDS.SPRINGTRAP_STURDY_ID, IDS.INVINCIBLE_WOBBLE_ID, IDS.PARTY_ROCK_ID, IDS.CATGIRL_SIT_ID, IDS.DANCING_WITH_EYES_CLOSED_ID, IDS.HOPPIN_DIP_ID, IDS.ALTER_EGO_ID, IDS.WEARY_IDLE_ID, IDS.JOG_ID, IDS.GOOFY_ZOMBIE_ID, IDS.WANNA_RUN_AWAY_ID, IDS.OFFICER_EARL_ID, IDS.TOOL_HOLD_ID, IDS.REIMAGINED_IDLE_ID, IDS.REIMAGINED_IDLE_VARIANT_ID, IDS.REIMAGINED_WALK_ID, IDS.REIMAGINED_RUN_ID, IDS.CRAFTER_IDLE_ID, IDS.CRAFTER_IDLE_VARIANT_ID, IDS.CRAFTER_WALK_ID, IDS.CRAFTER_RUN_ID, IDS.SUSPICIOUS_IDLE_ID, IDS.SUSPICIOUS_WALK_ID, IDS.SUSPICIOUS_RUN_ID, IDS.WHIMSY_IDLE_ID, IDS.WHIMSY_IDLE_VARIANT_ID, IDS.WHIMSY_WALK_ID, IDS.WHIMSY_RUN_ID, IDS.GARRY_IDLE_ID, IDS.GARRY_IDLE_VARIANT_ID, IDS.GARRY_WALK_ID, IDS.GARRY_RUN_ID, IDS.HALFLIFE_IDLE_ID, IDS.HALFLIFE_IDLE_VARIANT_ID, IDS.HALFLIFE_WALK_ID, IDS.HALFLIFE_RUN_ID, IDS.INVINCIBLE_IDLE_ID, IDS.INVINCIBLE_IDLE_VARIANT_ID, IDS.INVINCIBLE_WALK_ID, IDS.INVINCIBLE_RUN_ID, IDS.HONORED_IDLE_ID, IDS.HONORED_IDLE_VARIANT_ID, IDS.HONORED_WALK_ID, IDS.HONORED_RUN_ID, IDS.DJ_IDLE_ID, IDS.DJ_IDLE_VARIANT_ID, IDS.DJ_WALK_ID, IDS.DJ_RUN_ID, IDS.I_CAME_TO_GROOVE_ID, IDS.SELF_PACED_ID, IDS.MISS_ME_ID, IDS.ONEYPLAYZ_ID, IDS.YUTA_JUMPING_ID, IDS.DEAD_MAN_STANDING_ID, IDS.SIXTYFOUR_IDLE_ID, IDS.SIXTYFOUR_IDLE_VARIANT_ID, IDS.SIXTYFOUR_WALK_ID, IDS.SIXTYFOUR_RUN_ID, IDS.MODERNR6_IDLE_ID, IDS.MODERNR6_IDLE_VARIANT_ID, IDS.MODERNR6_WALK_ID, IDS.MODERNR6_RUN_ID, IDS.APOSE_IDLE_ID, IDS.APOSE_WALK_ID, IDS.APOSE_RUN_ID, IDS.R6ADV_IDLE_ID, IDS.R6ADV_IDLE_VARIANT_ID, IDS.R6ADV_WALK_ID, IDS.R6ADV_RUN_ID, IDS.TOMODACHI_ALT_IDLE_ID, IDS.TOMODACHI_ALT_IDLE_VARIANT_ID, IDS.TOMODACHI_ALT_WALK_ID, IDS.TOMODACHI_ALT_RUN_ID, IDS.R6CASUAL_IDLE_ID, IDS.R6CASUAL_IDLE_VARIANT_ID, IDS.R6CASUAL_WALK_ID, IDS.R6CASUAL_RUN_ID, IDS.R6SKIP_IDLE_ID, IDS.R6SKIP_IDLE_VARIANT_ID, IDS.R6SKIP_WALK_ID, IDS.R6SKIP_RUN_ID, IDS.R6KAWAI_IDLE_ID, IDS.R6KAWAI_IDLE_VARIANT_ID, IDS.R6KAWAI_WALK_ID, IDS.R6KAWAI_RUN_ID, IDS.CIVILIAN_IDLE_ID, IDS.CIVILIAN_IDLE_VARIANT_ID, IDS.CIVILIAN_WALK_ID, IDS.CIVILIAN_RUN_ID, IDS.GAKURAN_IDLE_ID, IDS.GAKURAN_WALK_ID, IDS.GAKURAN_RUN_ID, IDS.TSB_IDLE_ID, IDS.TSB_WALK_ID, IDS.TSB_RUN_ID, IDS.NEUTRAL_IDLE_ID, IDS.NEUTRAL_WALK_ID, IDS.NEUTRAL_RUN_ID, IDS.DYNA_IDLE_ID, IDS.DYNA_IDLE_VARIANT_ID, IDS.DYNA_WALK_ID, IDS.DYNA_RUN_ID, IDS.NOLI_IDLE_ID, IDS.NOLI_WALK_ID, IDS.NOLI_RUN_ID, IDS.ONEX_IDLE_ID, IDS.ONEX_WALK_ID, IDS.ONEX_RUN_ID, IDS.JOHNDOE_IDLE_ID, IDS.JOHNDOE_WALK_ID, IDS.JOHNDOE_RUN_ID, IDS.BLUE_BLUR_IDLE_ID, IDS.BLUE_BLUR_IDLE_VARIANT_ID, IDS.BLUE_BLUR_WALK_ID, IDS.BLUE_BLUR_RUN_ID, IDS.ULTIMATE_LIFE_FORM_IDLE_ID, IDS.ULTIMATE_LIFE_FORM_IDLE_VARIANT_ID, IDS.ULTIMATE_LIFE_FORM_WALK_ID, IDS.ULTIMATE_LIFE_FORM_RUN_ID, IDS.SUPER_SONIC_IDLE_ID, IDS.SUPER_SONIC_IDLE_VARIANT_ID, IDS.SUPER_SONIC_WALK_ID, IDS.SUPER_SONIC_RUN_ID, IDS.HEDGEHOG_IDLE_ID, IDS.HEDGEHOG_IDLE_VARIANT_ID, IDS.HEDGEHOG_WALK_ID, IDS.HEDGEHOG_RUN_ID, IDS.REALISTIC_MALE_IDLE_ID, IDS.REALISTIC_MALE_IDLE_VARIANT_ID, IDS.REALISTIC_MALE_WALK_ID, IDS.REALISTIC_MALE_RUN_ID, IDS.REALISTIC_FEMALE_IDLE_ID, IDS.REALISTIC_FEMALE_IDLE_VARIANT_ID, IDS.REALISTIC_FEMALE_WALK_ID, IDS.REALISTIC_FEMALE_RUN_ID, IDS.SHOWOFF_IDLE_ID, IDS.SHOWOFF_IDLE_VARIANT_ID, IDS.SHOWOFF_WALK_ID, IDS.SHOWOFF_RUN_ID, IDS.RETRO_IDLE_ID, IDS.RETRO_IDLE_VARIANT_ID, IDS.RETRO_WALK_ID, IDS.RETRO_RUN_ID, IDS.NINJA_IDLE_ID, IDS.NINJA_IDLE_VARIANT_ID, IDS.NINJA_WALK_ID, IDS.NINJA_RUN_ID, IDS.SURVIVOR_IDLE_ID, IDS.SURVIVOR_IDLE_VARIANT_ID, IDS.SURVIVOR_WALK_ID, IDS.SURVIVOR_RUN_ID, IDS.INJURED_DEFAULT_IDLE_ID, IDS.INJURED_DEFAULT_WALK_ID, IDS.INJURED_DEFAULT_RUN_ID, IDS.INJURED_DEFAULT2_IDLE_ID, IDS.INJURED_DEFAULT2_IDLE_VARIANT_ID, IDS.INJURED_DEFAULT2_WALK_ID, IDS.INJURED_DEFAULT2_RUN_ID, IDS.INJURED_DEFAULT3_IDLE_ID, IDS.INJURED_DEFAULT3_IDLE_VARIANT_ID, IDS.INJURED_DEFAULT3_WALK_ID, IDS.INJURED_DEFAULT3_RUN_ID, IDS.INJURED_DEFAULT4_IDLE_ID, IDS.INJURED_DEFAULT4_IDLE_VARIANT_ID, IDS.INJURED_DEFAULT4_WALK_ID, IDS.INJURED_DEFAULT4_RUN_ID, IDS.SQUINGLE_ID, IDS.ADDENDUM_ID, IDS.BOOGIE_DOWN_ID, IDS.NAOYA_PARTY_ID, IDS.SIT_VAR1_ID, IDS.SIT_VAR2_ID, IDS.SIT_VAR3_ID, IDS.SIT_VAR4_ID, IDS.SIT_VAR5_ID, IDS.SIT_VAR6_ID, IDS.SIT_VAR7_ID, IDS.WALL_LEAN_VAR1_ID, IDS.WALL_LEAN_VAR2_ID, IDS.WALL_LEAN_VAR3_ID, IDS.WALL_LEAN_VAR4_ID, IDS.JAMAL_DANCE_ID, IDS.FLARE_ID, IDS.PBJ_ID, IDS.BIRDBRAIN_ID, IDS.WAVE_ID, IDS.BECKON_ID, IDS.DAP_UP_ID, IDS.ORANGE_JUSTICE_ID, IDS.POP_LOCK_ID, IDS.MY_WORLD_ID, IDS.TAKE_THE_L_ID, IDS.DEFAULT_DANCE_ID, IDS.SHOWTIME_SWING_ID, IDS.MEGAPHONE_ID, IDS.PARKER_PRIDE_ID, IDS.PRINCE_OF_EGYPT_ID, IDS.BODY_PHONE_ID, IDS.CONGA_VAR3_NEW_ID, IDS.RAMBUNCTIOUS_ID, IDS.DANCE_IF_YOU_CARRIED_ID, IDS.NEW_WALK_ID, IDS.HYPE_ID, IDS.LUXE_STEP_ID, IDS.HYPNOTIC_DATA_ID, IDS.WORM_ID, IDS.ELECTRO_SHUFFLE_ID, IDS.BILLY_BOUNCE_ID, IDS.TUFF_DANCE_ID, IDS.HEEL_HOP_ID, IDS.SPLIT_DANCE_ID, IDS.BASKETBALL_HEAD_ID, IDS.POPULAR_VIBE_ID, IDS.PEACE_SIGN_ID, IDS.CAR_VAR1_ID, IDS.CAR_VAR2_ID, IDS.CAR_VAR3_ID, IDS.CAR_VAR4_ID, IDS.CAR_VAR5_ID, IDS.POSE_VAR1_ID, IDS.POSE_VAR2_ID, IDS.POSE_VAR3_ID, IDS.POSE_VAR4_ID, IDS.POSE_VAR5_ID, IDS.POSE_VAR6_ID, IDS.POSE_VAR7_ID, IDS.POSE_VAR8_ID, IDS.CRY_ID, IDS.B_HOP_ID, IDS.CONFESS_YOUR_LOVE_ID, IDS.GARRYS_DANCE_ID, IDS.PHYSCO_TEDDY_ID, IDS.MANNROBICS_ID, IDS.BOPPIN_ID, IDS.DAI_DAI_DAI_ID, IDS.MELEE_FLOURISH_ID, IDS.AIM_TEST_ID, IDS.WAIT_ID, IDS.FIREBALL_ID, IDS.FOREIGN_SHUFFLE_ID, IDS.I_SEE_KAREEM_ID, IDS.GROOVE_OUT_ID, IDS.MII_STREET_VAR1_ID, IDS.MII_STREET_VAR2_ID, IDS.CORY_DANCE_ID, IDS.STREET_GUY_FIGHTING_ID, IDS.SHERBET_LOBBY_ID, IDS.TV_TIME_VAR1_ID, IDS.TV_TIME_VAR2_ID, IDS.PYT_ID, IDS.MY_LIFE_IS_A_PARTY_ID, IDS.JUMPSTYLE_ID, IDS.BUGGIN_ID, IDS.TORTURE_DANCE_ID, IDS.GRIDDY_ID, IDS.LATE_NIGHT_SHUFFLE_ID, IDS.PIKU_DANCE_ID, IDS.TRIP_OUT_ID, IDS.FAZBEAR_DANCE_ID, IDS.MONITO_RING_ID, IDS.ITS_LIKE_IM_NOT_HERE_ID, IDS.IN_HA_MOOD_ID, IDS.RAT_DANCE_ID, IDS.FOUR_LOKOS_ID, IDS.OTSUKARE_SUMMER_ID, IDS.LETHAL_DANCE_ID, IDS.GET_JIGGY_ID, IDS.AURA_MONSTER_ID, IDS.BLUE_TOP_ROCK_ID, IDS.SHUFFLING_ID, IDS.TIKI_DANCE_ID, IDS.OSHI_NO_KO_ID, IDS.MII_CHEERING_ID, IDS.FACT_ATTACK_ID, IDS.DANCE1_ID, IDS.DANCE2_ID, IDS.DANCE3_ID, IDS.DANCE4_ID, IDS.SNOOP_DANCE_ID, IDS.RAKAI_ID, IDS.HAMSTER_DANCE_ID, IDS.MAJI_ID, IDS.CALL_MY_NAME_ID, IDS.WORK_TO_THE_BEAT_ID}
+local ids = {IDS.P_ID, IDS.B_ID, IDS.I_ID, IDS.W_ID, IDS.R_ID, IDS.E1_ID, IDS.C_ID, IDS.H_ID, IDS.BU_ID, IDS.MM_ID, IDS.S3_ID, IDS.CD_ID, IDS.UN_ID, IDS.DP_ID, IDS.FACE_IDLE_ID, IDS.FACE_EMOTE_ID, IDS.CONGA_VAR1_ID, IDS.CONGA_VAR2_ID, IDS.CONGA_VAR3_ID, IDS.SCHADEN_VAR1_ID, IDS.SCHADEN_VAR2_ID, IDS.SCHADEN_VAR3_ID, IDS.SCHADEN_VAR4_ID, IDS.JUNKY_DANCE_ID, IDS.SO_RETRO_ID, IDS.JERSEY_CLUB_ID, IDS.SMUG_DANCE_ID, IDS.ASSUMPTIONS_ID, IDS.GRIZZLY_ID, IDS.ANGELS_ID, IDS.JACKPOT_ID, IDS.CLOWN_DANCE_ID, IDS.BLUE_SHIRT_STURDY_ID, IDS.GANGNAM_STYLE_ID, IDS.STURDY_ID, IDS.AVGN_ID, IDS.TOMODACHI_ID, IDS.BOUNCE_DANCE_ID, IDS.SHOWADO_ID, IDS.CRYBALL_ID, IDS.BANG_ID, IDS.SCUBA_CAT_ID, IDS.SPRINGTRAP_STURDY_ID, IDS.INVINCIBLE_WOBBLE_ID, IDS.PARTY_ROCK_ID, IDS.CATGIRL_SIT_ID, IDS.DANCING_WITH_EYES_CLOSED_ID, IDS.HOPPIN_DIP_ID, IDS.ALTER_EGO_ID, IDS.WEARY_IDLE_ID, IDS.JOG_ID, IDS.GOOFY_ZOMBIE_ID, IDS.WANNA_RUN_AWAY_ID, IDS.OFFICER_EARL_ID, IDS.TOOL_HOLD_ID, IDS.REIMAGINED_IDLE_ID, IDS.REIMAGINED_IDLE_VARIANT_ID, IDS.REIMAGINED_WALK_ID, IDS.REIMAGINED_RUN_ID, IDS.CRAFTER_IDLE_ID, IDS.CRAFTER_IDLE_VARIANT_ID, IDS.CRAFTER_WALK_ID, IDS.CRAFTER_RUN_ID, IDS.SUSPICIOUS_IDLE_ID, IDS.SUSPICIOUS_WALK_ID, IDS.SUSPICIOUS_RUN_ID, IDS.WHIMSY_IDLE_ID, IDS.WHIMSY_IDLE_VARIANT_ID, IDS.WHIMSY_WALK_ID, IDS.WHIMSY_RUN_ID, IDS.GARRY_IDLE_ID, IDS.GARRY_IDLE_VARIANT_ID, IDS.GARRY_WALK_ID, IDS.GARRY_RUN_ID, IDS.HALFLIFE_IDLE_ID, IDS.HALFLIFE_IDLE_VARIANT_ID, IDS.HALFLIFE_WALK_ID, IDS.HALFLIFE_RUN_ID, IDS.INVINCIBLE_IDLE_ID, IDS.INVINCIBLE_IDLE_VARIANT_ID, IDS.INVINCIBLE_WALK_ID, IDS.INVINCIBLE_RUN_ID, IDS.HONORED_IDLE_ID, IDS.HONORED_IDLE_VARIANT_ID, IDS.HONORED_WALK_ID, IDS.HONORED_RUN_ID, IDS.DJ_IDLE_ID, IDS.DJ_IDLE_VARIANT_ID, IDS.DJ_WALK_ID, IDS.DJ_RUN_ID, IDS.I_CAME_TO_GROOVE_ID, IDS.SELF_PACED_ID, IDS.MISS_ME_ID, IDS.ONEYPLAYZ_ID, IDS.YUTA_JUMPING_ID, IDS.DEAD_MAN_STANDING_ID, IDS.SIXTYFOUR_IDLE_ID, IDS.SIXTYFOUR_IDLE_VARIANT_ID, IDS.SIXTYFOUR_WALK_ID, IDS.SIXTYFOUR_RUN_ID, IDS.MODERNR6_IDLE_ID, IDS.MODERNR6_IDLE_VARIANT_ID, IDS.MODERNR6_WALK_ID, IDS.MODERNR6_RUN_ID, IDS.APOSE_IDLE_ID, IDS.APOSE_WALK_ID, IDS.APOSE_RUN_ID, IDS.R6ADV_IDLE_ID, IDS.R6ADV_IDLE_VARIANT_ID, IDS.R6ADV_WALK_ID, IDS.R6ADV_RUN_ID, IDS.TOMODACHI_ALT_IDLE_ID, IDS.TOMODACHI_ALT_IDLE_VARIANT_ID, IDS.TOMODACHI_ALT_WALK_ID, IDS.TOMODACHI_ALT_RUN_ID, IDS.R6CASUAL_IDLE_ID, IDS.R6CASUAL_IDLE_VARIANT_ID, IDS.R6CASUAL_WALK_ID, IDS.R6CASUAL_RUN_ID, IDS.R6SKIP_IDLE_ID, IDS.R6SKIP_IDLE_VARIANT_ID, IDS.R6SKIP_WALK_ID, IDS.R6SKIP_RUN_ID, IDS.R6KAWAI_IDLE_ID, IDS.R6KAWAI_IDLE_VARIANT_ID, IDS.R6KAWAI_WALK_ID, IDS.R6KAWAI_RUN_ID, IDS.CIVILIAN_IDLE_ID, IDS.CIVILIAN_IDLE_VARIANT_ID, IDS.CIVILIAN_WALK_ID, IDS.CIVILIAN_RUN_ID, IDS.GAKURAN_IDLE_ID, IDS.GAKURAN_WALK_ID, IDS.GAKURAN_RUN_ID, IDS.TSB_IDLE_ID, IDS.TSB_WALK_ID, IDS.TSB_RUN_ID, IDS.NEUTRAL_IDLE_ID, IDS.NEUTRAL_WALK_ID, IDS.NEUTRAL_RUN_ID, IDS.DYNA_IDLE_ID, IDS.DYNA_IDLE_VARIANT_ID, IDS.DYNA_WALK_ID, IDS.DYNA_RUN_ID, IDS.NOLI_IDLE_ID, IDS.NOLI_WALK_ID, IDS.NOLI_RUN_ID, IDS.ONEX_IDLE_ID, IDS.ONEX_WALK_ID, IDS.ONEX_RUN_ID, IDS.JOHNDOE_IDLE_ID, IDS.JOHNDOE_WALK_ID, IDS.JOHNDOE_RUN_ID, IDS.BLUE_BLUR_IDLE_ID, IDS.BLUE_BLUR_IDLE_VARIANT_ID, IDS.BLUE_BLUR_WALK_ID, IDS.BLUE_BLUR_RUN_ID, IDS.ULTIMATE_LIFE_FORM_IDLE_ID, IDS.ULTIMATE_LIFE_FORM_IDLE_VARIANT_ID, IDS.ULTIMATE_LIFE_FORM_WALK_ID, IDS.ULTIMATE_LIFE_FORM_RUN_ID, IDS.SUPER_SONIC_IDLE_ID, IDS.SUPER_SONIC_IDLE_VARIANT_ID, IDS.SUPER_SONIC_WALK_ID, IDS.SUPER_SONIC_RUN_ID, IDS.HEDGEHOG_IDLE_ID, IDS.HEDGEHOG_IDLE_VARIANT_ID, IDS.HEDGEHOG_WALK_ID, IDS.HEDGEHOG_RUN_ID, IDS.REALISTIC_MALE_IDLE_ID, IDS.REALISTIC_MALE_IDLE_VARIANT_ID, IDS.REALISTIC_MALE_WALK_ID, IDS.REALISTIC_MALE_RUN_ID, IDS.REALISTIC_FEMALE_IDLE_ID, IDS.REALISTIC_FEMALE_IDLE_VARIANT_ID, IDS.REALISTIC_FEMALE_WALK_ID, IDS.REALISTIC_FEMALE_RUN_ID, IDS.SHOWOFF_IDLE_ID, IDS.SHOWOFF_IDLE_VARIANT_ID, IDS.SHOWOFF_WALK_ID, IDS.SHOWOFF_RUN_ID, IDS.RETRO_IDLE_ID, IDS.RETRO_IDLE_VARIANT_ID, IDS.RETRO_WALK_ID, IDS.RETRO_RUN_ID, IDS.NINJA_IDLE_ID, IDS.NINJA_IDLE_VARIANT_ID, IDS.NINJA_WALK_ID, IDS.NINJA_RUN_ID, IDS.SURVIVOR_IDLE_ID, IDS.SURVIVOR_IDLE_VARIANT_ID, IDS.SURVIVOR_WALK_ID, IDS.SURVIVOR_RUN_ID, IDS.AZURE_IDLE_ID, IDS.AZURE_WALK_ID, IDS.AZURE_RUN_ID, IDS.INJURED_DEFAULT_IDLE_ID, IDS.INJURED_DEFAULT_WALK_ID, IDS.INJURED_DEFAULT_RUN_ID, IDS.INJURED_DEFAULT2_IDLE_ID, IDS.INJURED_DEFAULT2_IDLE_VARIANT_ID, IDS.INJURED_DEFAULT2_WALK_ID, IDS.INJURED_DEFAULT2_RUN_ID, IDS.INJURED_DEFAULT3_IDLE_ID, IDS.INJURED_DEFAULT3_IDLE_VARIANT_ID, IDS.INJURED_DEFAULT3_WALK_ID, IDS.INJURED_DEFAULT3_RUN_ID, IDS.INJURED_DEFAULT4_IDLE_ID, IDS.INJURED_DEFAULT4_IDLE_VARIANT_ID, IDS.INJURED_DEFAULT4_WALK_ID, IDS.INJURED_DEFAULT4_RUN_ID, IDS.SQUINGLE_ID, IDS.ADDENDUM_ID, IDS.BOOGIE_DOWN_ID, IDS.NAOYA_PARTY_ID, IDS.SIT_VAR1_ID, IDS.SIT_VAR2_ID, IDS.SIT_VAR3_ID, IDS.SIT_VAR4_ID, IDS.SIT_VAR5_ID, IDS.SIT_VAR6_ID, IDS.SIT_VAR7_ID, IDS.WALL_LEAN_VAR1_ID, IDS.WALL_LEAN_VAR2_ID, IDS.WALL_LEAN_VAR3_ID, IDS.WALL_LEAN_VAR4_ID, IDS.JAMAL_DANCE_ID, IDS.FLARE_ID, IDS.PBJ_ID, IDS.BIRDBRAIN_ID, IDS.WAVE_ID, IDS.BECKON_ID, IDS.DAP_UP_ID, IDS.ORANGE_JUSTICE_ID, IDS.POP_LOCK_ID, IDS.MY_WORLD_ID, IDS.TAKE_THE_L_ID, IDS.DEFAULT_DANCE_ID, IDS.SHOWTIME_SWING_ID, IDS.MEGAPHONE_ID, IDS.PARKER_PRIDE_ID, IDS.PRINCE_OF_EGYPT_ID, IDS.BODY_PHONE_ID, IDS.CONGA_VAR3_NEW_ID, IDS.RAMBUNCTIOUS_ID, IDS.DANCE_IF_YOU_CARRIED_ID, IDS.NEW_WALK_ID, IDS.HYPE_ID, IDS.LUXE_STEP_ID, IDS.HYPNOTIC_DATA_ID, IDS.WORM_ID, IDS.ELECTRO_SHUFFLE_ID, IDS.BILLY_BOUNCE_ID, IDS.TUFF_DANCE_ID, IDS.HEEL_HOP_ID, IDS.SPLIT_DANCE_ID, IDS.BASKETBALL_HEAD_ID, IDS.POPULAR_VIBE_ID, IDS.PEACE_SIGN_ID, IDS.CAR_VAR1_ID, IDS.CAR_VAR2_ID, IDS.CAR_VAR3_ID, IDS.CAR_VAR4_ID, IDS.CAR_VAR5_ID, IDS.POSE_VAR1_ID, IDS.POSE_VAR2_ID, IDS.POSE_VAR3_ID, IDS.POSE_VAR4_ID, IDS.POSE_VAR5_ID, IDS.POSE_VAR6_ID, IDS.POSE_VAR7_ID, IDS.POSE_VAR8_ID, IDS.CRY_ID, IDS.B_HOP_ID, IDS.CONFESS_YOUR_LOVE_ID, IDS.GARRYS_DANCE_ID, IDS.PHYSCO_TEDDY_ID, IDS.MANNROBICS_ID, IDS.BOPPIN_ID, IDS.DAI_DAI_DAI_ID, IDS.MELEE_FLOURISH_ID, IDS.AIM_TEST_ID, IDS.WAIT_ID, IDS.FIREBALL_ID, IDS.FOREIGN_SHUFFLE_ID, IDS.I_SEE_KAREEM_ID, IDS.GROOVE_OUT_ID, IDS.MII_STREET_VAR1_ID, IDS.MII_STREET_VAR2_ID, IDS.CORY_DANCE_ID, IDS.STREET_GUY_FIGHTING_ID, IDS.SHERBET_LOBBY_ID, IDS.TV_TIME_VAR1_ID, IDS.TV_TIME_VAR2_ID, IDS.PYT_ID, IDS.MY_LIFE_IS_A_PARTY_ID, IDS.JUMPSTYLE_ID, IDS.BUGGIN_ID, IDS.TORTURE_DANCE_ID, IDS.GRIDDY_ID, IDS.LATE_NIGHT_SHUFFLE_ID, IDS.PIKU_DANCE_ID, IDS.TRIP_OUT_ID, IDS.FAZBEAR_DANCE_ID, IDS.MONITO_RING_ID, IDS.ITS_LIKE_IM_NOT_HERE_ID, IDS.IN_HA_MOOD_ID, IDS.RAT_DANCE_ID, IDS.FOUR_LOKOS_ID, IDS.OTSUKARE_SUMMER_ID, IDS.LETHAL_DANCE_ID, IDS.GET_JIGGY_ID, IDS.AURA_MONSTER_ID, IDS.BLUE_TOP_ROCK_ID, IDS.SHUFFLING_ID, IDS.TIKI_DANCE_ID, IDS.OSHI_NO_KO_ID, IDS.MII_CHEERING_ID, IDS.FACT_ATTACK_ID, IDS.E_DANCE_VAR1_ID, IDS.E_DANCE_VAR2_ID, IDS.E_DANCE_VAR3_ID, IDS.E_DANCE_VAR4_ID, IDS.SNOOP_DANCE_ID, IDS.RAKAI_ID, IDS.HAMSTER_DANCE_ID, IDS.MAJI_ID, IDS.CALL_MY_NAME_ID, IDS.WORK_TO_THE_BEAT_ID}
 
 -- ============================================================
--- ANIMATION LIBRARY (unchanged)
+-- ANIMATION LIBRARY
 -- ============================================================
 local ANIM_LIBRARY = {
 	idle = {
@@ -443,6 +448,7 @@ local ANIM_LIBRARY = {
 		{ name = "ShowOff", id = "rbxassetid://96231620144931" },
 		{ name = "Ninja", id = "rbxassetid://137099582859676" },
 		{ name = "Survivor", id = "rbxassetid://76668955826653" },
+		{ name = "Azure", id = "rbxassetid://74443937226830" },
 	},
 	walk = {
 		{ name = "Default", id = "rbxassetid://79415540894036" },
@@ -492,6 +498,7 @@ local ANIM_LIBRARY = {
 		{ name = "ShowOff", id = "rbxassetid://135735852965773" },
 		{ name = "Ninja", id = "rbxassetid://110275663504820" },
 		{ name = "Survivor", id = "rbxassetid://121737235176124" },
+		{ name = "Azure", id = "rbxassetid://74007452122320" },
 	},
 	run = {
 		{ name = "Default", id = "rbxassetid://108891884872744" },
@@ -550,6 +557,7 @@ local ANIM_LIBRARY = {
 		{ name = "ShowOff", id = "rbxassetid://112510703419020", speed = 1.3 },
 		{ name = "Ninja", id = "rbxassetid://88468384129203", speed = 1.5 },
 		{ name = "Survivor", id = "rbxassetid://103091973161069", speed = 1.5 },
+		{ name = "Azure", id = "rbxassetid://111311479373350", speed = 1.5 },
 	},
 }
 
@@ -591,7 +599,7 @@ local INJURED_SETS = {
 	},
 }
 
-local activeInjuredSet = 1 -- default set
+local activeInjuredSet = 1
 
 -- ============================================================
 -- GLOBAL SCRIPT VARIABLES
@@ -609,6 +617,7 @@ local carVariations = {IDS.CAR_VAR1_ID, IDS.CAR_VAR2_ID, IDS.CAR_VAR3_ID, IDS.CA
 local poseVariations = {IDS.POSE_VAR1_ID, IDS.POSE_VAR2_ID, IDS.POSE_VAR3_ID, IDS.POSE_VAR4_ID, IDS.POSE_VAR5_ID, IDS.POSE_VAR6_ID, IDS.POSE_VAR7_ID, IDS.POSE_VAR8_ID}
 local miiStreetVariations = {IDS.MII_STREET_VAR1_ID, IDS.MII_STREET_VAR2_ID}
 local tvTimeVariations = {IDS.TV_TIME_VAR1_ID, IDS.TV_TIME_VAR2_ID}
+local eDanceVariations = {IDS.E_DANCE_VAR1_ID, IDS.E_DANCE_VAR2_ID, IDS.E_DANCE_VAR3_ID, IDS.E_DANCE_VAR4_ID}
 local currentVariation = nil
 local variationTimer = nil
 local currentEmoteThread = nil
@@ -638,7 +647,7 @@ local lowHealthActive = false
 local savedLIVE = { idle = nil, walk = nil, run = nil }
 
 -- ============================================================
--- LOADING SCREEN (unchanged)
+-- LOADING SCREEN
 -- ============================================================
 local loadGui = ins("ScreenGui")
 loadGui.Name = "LoadingSystem"
@@ -675,8 +684,7 @@ barFill.Parent = barBack
 local animObjects = {}
 for _, id in ipairs(ids) do
 	local a = ins("Animation")
-	a.AnimationId = id
-	table.insert(animObjects, a)
+	a.AnimationId = id	table.insert(animObjects, a)
 end
 for i, animObj in ipairs(animObjects) do
 	cp:PreloadAsync({animObj})
@@ -689,7 +697,7 @@ task.wait(0.2)
 loadGui:Destroy()
 
 -- ============================================================
--- MAIN GUI (unchanged)
+-- MAIN GUI
 -- ============================================================
 local sg = ins("ScreenGui")
 sg.Name = "ActionGui"
@@ -697,7 +705,7 @@ sg.ResetOnSpawn = false
 sg.Parent = lp:WaitForChild("PlayerGui")
 
 -- ============================================================
--- STAMINA HUD (unchanged)
+-- STAMINA HUD
 -- ============================================================
 local staminaGui = ins("ScreenGui")
 staminaGui.Name = "StaminaHUD"
@@ -885,7 +893,7 @@ local function tw(obj, t, props)
 end
 
 -- ============================================================
--- DRAGGABLE BUTTONS (unchanged)
+-- DRAGGABLE BUTTONS
 -- ============================================================
 local function makeDraggable(guiObject, dragButton)
 	local dragging = false
@@ -994,7 +1002,7 @@ makeDraggable(sb, sb)
 makeDraggable(ulb, ulb)
 
 -- ============================================================
--- EMOTE MENU (unchanged)
+-- EMOTE MENU
 -- ============================================================
 local ef = ins("Frame")
 ef.Name = "EmoteMenu"
@@ -1046,7 +1054,7 @@ uiList.Padding = UDim.new(0, 5)
 uiList.Parent = sf
 
 -- ============================================================
--- SETTINGS MENU (unchanged)
+-- SETTINGS MENU
 -- ============================================================
 local settingsFrame = ins("Frame")
 settingsFrame.Name = "SettingsMenu"
@@ -1251,7 +1259,7 @@ closeSettings.MouseButton1Click:Connect(function()
 end)
 
 -- ============================================================
--- UPDATE LOG PANEL (unchanged)
+-- UPDATE LOG PANEL
 -- ============================================================
 local updateLogFrame = ins("Frame")
 updateLogFrame.Name = "UpdateLogFrame"
@@ -1351,15 +1359,13 @@ local function addLogEntry(title, text, color)
 	bottomPad.Parent = padding
 end
 
-addLogEntry("🆕 v2.4 - Massive Emote Update!", "Added 19 new emotes:\n• Get Jiggy, Aura Monster, Blue Top Rock, Shuffling\n• Tiki Dance, Oshi No Ko, MII Cheering, Fact Attack\n• /e Dance (4 variants), Snoop Dance, Rakai\n• Hamster Dance, Maji, Call My Name, Work To The Beat\n\nUpdated Gangnam Style with new ID!", c3(100, 200, 255))
+addLogEntry("🆕 v2.5 - Azure Pack & Fixes", "Added new Azure animation pack:\n• Idle: 74443937226830\n• Walk: 74007452122320\n• Run: 111311479373350 (speed 1.5)\n\nFixed /e Dance emotes:\n• Combined 4 variants into one emote with random variation selection", c3(100, 200, 255))
 
-addLogEntry("🆕 v2.3 - New Emotes & Animation Packs", "Added 3 new emotes:\n• Four Lokos, Otsukare Summer, Lethal Dance\n\nAdded 3 new animation packs:\n• Retro (Idle, Idle Variant, Walk, Run speed 1.4)\n• Ninja (Idle, Idle Variant, Walk, Run speed 1.5)\n• Survivor (Idle, Idle Variant, Walk, Run speed 1.5)\n\nAdded new injured set:\n• Default 4 (Idle, Idle Variant, Walk, Run speed 1.5)", c3(255, 150, 100))
+addLogEntry("🆕 v2.4 - Massive Emote Update!", "Added 19 new emotes:\n• Get Jiggy, Aura Monster, Blue Top Rock, Shuffling\n• Tiki Dance, Oshi No Ko, MII Cheering, Fact Attack\n• /e Dance (4 variants), Snoop Dance, Rakai\n• Hamster Dance, Maji, Call My Name, Work To The Beat\n\nUpdated Gangnam Style with new ID!", c3(100, 255, 200))
 
-addLogEntry("🆕 v2.2 - Injured Animation Sets", "Added new 'Injured' tab in Animation Customizer:\n• Choose from different full injured animation sets\n• Default, Default 2, Default 3, and Default 4 sets\n• Each set includes Idle, Idle Variant, Walk, and Run\n• Run speed varies per set", c3(255, 220, 100))
+addLogEntry("🆕 v2.3 - New Emotes & Animation Packs", "Added 3 new emotes:\n• Four Lokos, Otsukare Summer, Lethal Dance\n\nAdded 3 new animation packs:\n• Retro (Idle, Idle Variant, Walk, Run speed 1.4)\n• Ninja (Idle, Idle Variant, Walk, Run speed 1.5)\n• Survivor (Idle, Idle Variant, Walk, Run speed 1.5)", c3(255, 150, 100))
 
-addLogEntry("🆕 v2.1 - New Animation Packs", "Added 3 new animation packs:\n• Realistic Male (Idle, Idle Variant, Walk, Run speed 1.7)\n• Realistic Female (Idle, Idle Variant, Walk, Run speed 1.7)\n• ShowOff (Idle, Idle Variant, Walk, Run speed 1.3)", c3(100, 255, 200))
-
-addLogEntry("🆕 v2.0 - Big Update!", "• Added 6 new emotes: Trip Out, Fazbear Dance, Monito Ring, It's Like I'm Not Here, In Ha Mood, Rat Dance\n• Added optional Low-Health Animation Switch (Settings)\n• Health bar now properly updates on respawn", c3(255, 220, 100))
+addLogEntry("🆕 v2.2 - Injured Animation Sets", "Added new 'Injured' tab in Animation Customizer:\n• Choose from different full injured animation sets\n• Default, Default 2, Default 3, and Default 4 sets\n• Each set includes Idle, Idle Variant, Walk, and Run", c3(255, 220, 100))
 
 makeDraggable(updateLogFrame, updateLogTitle)
 
@@ -1373,7 +1379,7 @@ ulb.MouseButton1Click:Connect(function()
 end)
 
 -- ============================================================
--- STAMINA PANEL (unchanged)
+-- STAMINA PANEL
 -- ============================================================
 local staminaPanel = ins("Frame")
 staminaPanel.Name = "StaminaPanel"
@@ -1583,7 +1589,7 @@ staminaCustomBtn.MouseButton1Click:Connect(function()
 end)
 
 -- ============================================================
--- ANIMATION CUSTOMIZER PANEL (unchanged)
+-- ANIMATION CUSTOMIZER PANEL
 -- ============================================================
 local animPanel = ins("Frame")
 animPanel.Name = "AnimPanel"
@@ -1785,7 +1791,7 @@ animCustomBtn.MouseButton1Click:Connect(function()
 end)
 
 -- ============================================================
--- HEAD CAMERA PANEL (unchanged)
+-- HEAD CAMERA PANEL
 -- ============================================================
 local headCamPanel = ins("Frame")
 headCamPanel.Name = "HeadCamPanel"
@@ -1876,7 +1882,7 @@ headCamBtn.MouseButton1Click:Connect(function()
 end)
 
 -- ============================================================
--- STOP LARP BUTTON (unchanged)
+-- STOP LARP BUTTON
 -- ============================================================
 local xb = ins("ImageButton")
 xb.Size = ud2(0, 40, 0, 40)
@@ -1923,7 +1929,7 @@ local bn = sub("No", "No", ud2(0, 40, 0, 85), c3(60, 60, 60))
 local by = sub("Yes", "Yes", ud2(0, 160, 0, 85), c3(150, 0, 0))
 
 -- ============================================================
--- ANIMATION HELPER FUNCTIONS (unchanged)
+-- ANIMATION HELPER FUNCTIONS
 -- ============================================================
 local function stop_s(a)
 	for _, t in ipairs(a:GetPlayingAnimationTracks()) do
@@ -1988,7 +1994,7 @@ local function updateFaceAnimation(isEmoting, a)
 end
 
 -- ============================================================
--- UPD FUNCTION (unchanged)
+-- UPD FUNCTION
 -- ============================================================
 local function upd(c, h, a)
 	if not active or not c or not h or not a then return end
@@ -2195,7 +2201,7 @@ local function upd(c, h, a)
 end
 
 -- ============================================================
--- CLEAR CA (unchanged)
+-- CLEAR CA
 -- ============================================================
 local function clearCa()
 	stop_a()
@@ -2222,7 +2228,7 @@ local function clearCa()
 end
 
 -- ============================================================
--- EMOTE PLAY FUNCTIONS (unchanged)
+-- EMOTE PLAY FUNCTIONS
 -- ============================================================
 local function playEmoteWithVariations(animId, variations, interval, isCar)
 	local c = lp.Character
@@ -2368,7 +2374,7 @@ local function playSimpleEmote(animId, speed)
 end
 
 -- ============================================================
--- SPRINT FUNCTIONS (unchanged)
+-- SPRINT FUNCTIONS
 -- ============================================================
 local function stopSprinting()
 	ir = false
@@ -2420,7 +2426,7 @@ local function toggleShiftLock()
 end
 
 -- ============================================================
--- EMOTE BUTTONS (unchanged)
+-- EMOTE BUTTONS
 -- ============================================================
 local emoteButtons = {}
 
@@ -2491,7 +2497,7 @@ searchBar:GetPropertyChangedSignal("Text"):Connect(function()
 end)
 
 -- ============================================================
--- ADD ALL EMOTES (including all new ones)
+-- ADD ALL EMOTES
 -- ============================================================
 addEmoteBtn("California Girls", IDS.E1_ID)
 addEmoteBtn("Conga!", IDS.C_ID, congaVariations, 5, nil, true)
@@ -2610,7 +2616,6 @@ addEmoteBtn("Rat Dance", IDS.RAT_DANCE_ID)
 addEmoteBtn("Four Lokos", IDS.FOUR_LOKOS_ID)
 addEmoteBtn("Otsukare Summer", IDS.OTSUKARE_SUMMER_ID)
 addEmoteBtn("Lethal Dance", IDS.LETHAL_DANCE_ID)
--- New Emotes (v2.4)
 addEmoteBtn("Get Jiggy", IDS.GET_JIGGY_ID)
 addEmoteBtn("Aura Monster", IDS.AURA_MONSTER_ID)
 addEmoteBtn("Blue Top Rock", IDS.BLUE_TOP_ROCK_ID)
@@ -2619,10 +2624,7 @@ addEmoteBtn("Tiki Dance", IDS.TIKI_DANCE_ID)
 addEmoteBtn("Oshi No Ko", IDS.OSHI_NO_KO_ID)
 addEmoteBtn("MII Cheering", IDS.MII_CHEERING_ID)
 addEmoteBtn("Fact Attack", IDS.FACT_ATTACK_ID)
-addEmoteBtn("/e Dance 1", IDS.DANCE1_ID)
-addEmoteBtn("/e Dance 2", IDS.DANCE2_ID)
-addEmoteBtn("/e Dance 3", IDS.DANCE3_ID)
-addEmoteBtn("/e Dance 4", IDS.DANCE4_ID)
+addEmoteBtn("/e Dance", nil, eDanceVariations, 4, nil, false, false, false, true)
 addEmoteBtn("Snoop Dance", IDS.SNOOP_DANCE_ID)
 addEmoteBtn("Rakai", IDS.RAKAI_ID)
 addEmoteBtn("Hamster Dance", IDS.HAMSTER_DANCE_ID)
@@ -2764,7 +2766,7 @@ by.MouseButton1Click:Connect(function()
 end)
 
 -- ============================================================
--- MAIN SCRIPT (unchanged)
+-- MAIN SCRIPT
 -- ============================================================
 local animateConns = {}
 local charAddedConn
